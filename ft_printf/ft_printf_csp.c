@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_csp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sounchoi <sounchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: younkim <younkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 16:13:16 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/07/06 16:13:17 by sounchoi         ###   ########seoul.kr  */
+/*   Updated: 2022/07/06 17:32:52 by younkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ int	ft_c_printf(int num, int count)
 
 int	ft_s_printf(char *str, int count)
 {
+	if (str == NULL)
+	{
+		count += write(1, "(null)", 6);
+		return (count);
+	}
 	while (*str != 0)
 	{
 		count += write(1, str, 1);

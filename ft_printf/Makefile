@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sounchoi <sounchoi@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: younkim <younkim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/06 16:13:35 by sounchoi          #+#    #+#              #
-#    Updated: 2022/07/06 16:13:36 by sounchoi         ###   ########seoul.kr   #
+#    Updated: 2022/07/06 17:24:27 by younkim          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf.h
+NAME = libftprintf.a
 SRCS = ft_printf.c \
 ft_printf_csp.c \
 ft_printf_dux.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_dux.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sounchoi <sounchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: younkim <younkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 16:13:13 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/07/06 16:13:14 by sounchoi         ###   ########seoul.kr  */
+/*   Updated: 2022/07/06 17:40:58 by younkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_u_printf(unsigned int num, int count)
 	return (count);
 }
 
-int	ft_xX_printf(unsigned int num, char c, int count)
+int	ft_x_printf(unsigned int num, char c, int count)
 {
 	char	*hex;
 
