@@ -19,6 +19,6 @@ int main()
 		flag = get_next_line(fd);
 		printf("%s", flag);
 	}
-
+	
 	return (0);
 }

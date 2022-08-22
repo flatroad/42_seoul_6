@@ -52,6 +52,7 @@ char	*analyze_sb(char *save_buf)
 	size_t	len;
 	size_t	i;
 
+	i = 0;
 	len = ft_strlen(save_buf);
 	read_buf = (char *)ft_calloc(len + 1, 1);
 	if (read_buf == 0)
@@ -75,10 +76,10 @@ char	*out_put(char *read_buf)
 	idx = 0;
 	while (read_buf[len] != 0 && read_buf[len] != '\n')
 		len++;
-	if (len == 0)
-		return (0);
 	if (read_buf[len] == '\n')
 		len++;
+	if	(len == 0)
+		return (0);
 	out_line = ft_calloc(len + 1, 1);
 	if (out_line == 0)
 		return (0);
@@ -87,6 +88,7 @@ char	*out_put(char *read_buf)
 		out_line[idx] = read_buf[idx];
 		idx++;
 	}
+	printf("ㅇㅇㅇ %s\n", out_line);
 	return (out_line);
 }
 
@@ -100,8 +102,10 @@ char	*save_put(char *read_buf)
 	idx = 0;
 	while (read_buf[len] != 0 && read_buf[len] != '\n')
 		len++;
-	if (read_buf[len] == 0)
+	if (len == 0)
 		return (0);
+	if (read_buf[len] == '\n')
+		len++;
 	while (read_buf[len + idx] != 0)
 		idx++;
 	save_put = ft_calloc(idx + 1, 1);
