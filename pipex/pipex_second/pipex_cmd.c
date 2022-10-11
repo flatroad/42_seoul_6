@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_cmd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/11 23:37:48 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/10/11 23:39:04 by sounchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void	cmd_path(t_obj *pipex, char **argv)
@@ -5,7 +17,6 @@ void	cmd_path(t_obj *pipex, char **argv)
 	make_cmp_path1(pipex);
 	make_cmp_path2(pipex, argv);
 	make_cmp_path3(pipex);
-
 }
 
 void	make_cmp_path1(t_obj *pipex)
@@ -47,13 +58,12 @@ void	make_cmp_path2(t_obj *pipex, char **argv)
 
 void	make_cmp_path3(t_obj *pipex)
 {
-	int	i;
+	int		i;
+	char	*str;
 
 	i = 0;
 	while (i < pipex->cmd_count)
 	{
-		char	*str;
-
 		str = pipex->cmd_path[i][0];
 		pipex->cmd_path[i][0] = ft_strjoin("/", pipex->cmd_path[i][0]);
 		free(str);

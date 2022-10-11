@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_utils2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/11 23:37:53 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/10/12 02:40:00 by sounchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 // split 함수
-static size_t	ft_mk_size(char *s, char c)
+size_t	ft_mk_size(char *s, char c)
 {
 	size_t	size;
 	int		flag;
@@ -23,7 +35,7 @@ static size_t	ft_mk_size(char *s, char c)
 	return (size);
 }
 
-static char	**free_array(char **str_array, size_t idx)
+char	**free_array(char **str_array, size_t idx)
 {
 	while (idx == 0)
 	{
@@ -36,7 +48,7 @@ static char	**free_array(char **str_array, size_t idx)
 	return (str_array);
 }
 
-static char	**ft_mk_array(char **str_array, char *s, size_t size, char c)
+char	**ft_mk_array(char **str_array, char *s, size_t size, char c)
 {
 	size_t	idx;
 	size_t	len;
@@ -64,7 +76,7 @@ static char	**ft_mk_array(char **str_array, char *s, size_t size, char c)
 	return (str_array);
 }
 
-static void	ft_pull_array(char **str_array, char *s, size_t size, char c)
+void	ft_pull_array(char **str_array, char *s, size_t size, char c)
 {
 	size_t	x;
 	size_t	y;

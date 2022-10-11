@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/11 23:37:43 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/10/11 23:54:08 by sounchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 int	fd_doc(char *flag_str, t_obj *pipex, int start_fd)
@@ -15,7 +27,7 @@ int	fd_doc(char *flag_str, t_obj *pipex, int start_fd)
 	pipex->infile_fd = start_fd;
 	while (1)
 	{
-		write(1, "> ", 2);
+		write(1, "pipe heredoc> ", 14);
 		check = mk_doc(flag_str, pipex, len);
 		if (check == 1)
 			return (1);

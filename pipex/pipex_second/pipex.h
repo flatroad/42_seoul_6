@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/10/12 02:38:06 by sounchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_H
 # define PIPEX_H
 
@@ -36,19 +48,32 @@ void	cmd_path(t_obj *pipex, char **argv);
 void	make_cmp_path1(t_obj *pipex);
 void	make_cmp_path2(t_obj *pipex, char **argv);
 void	make_cmp_path3(t_obj *pipex);
+//get_pipe
+void	get_pipe(t_obj *pipex);
+void	make_pipe1(t_obj *pipex);
+void	make_pipe2(t_obj *pipex);
+//pipex_exec
+void	pipex_exec(t_obj *pipex);
+void	make_fd_pipe(t_obj *pipex);
+void	pipex_ch1(t_obj *pipex, int i, int idx);
+void	pipex_ch2(t_obj *pipex, int i, int idx);
+//close_pipe
+void	close_pipex(t_obj *pipex, int max_i);
 //pipex_utils1
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
 //pipex_utils2 (split)
-static size_t	ft_mk_size(char *s, char c);
-static char		**free_array(char **str_array, size_t idx);
-static char		**ft_mk_array(char **str_array, char *s, size_t size, char c);
-static void		ft_pull_array(char **str_array, char *s, size_t size, char c);
-char			**ft_split(char const *s, char c);
+size_t		ft_mk_size(char *s, char c);
+char		**free_array(char **str_array, size_t idx);
+char		**ft_mk_array(char **str_array, char *s, size_t size, char c);
+void		ft_pull_array(char **str_array, char *s, size_t size, char c);
+char		**ft_split(char const *s, char c);
 //close_file
 void	close_file(t_obj *pipex);
 void	rm_temp(t_obj *pipex);
+//close_pipe
+void	close_pipe(t_obj *pipex, int max_i);
 //get_next_line
 char	*get_next_line(int fd, int buf_size);
 char	*analyze(int fd, char *save_buf, int buf_size);
@@ -59,9 +84,13 @@ char	*save_put(char *read_buf);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
 char	*ft_strchr(const char *s, int c);
-//free_path
+//free_cmd_path
 void	free_envp (t_obj *pipex);
 void	free_cmd(t_obj *pipex);
 void	free_cmd_all (t_obj *pipex);
+//free_pipe_path
+void	free_pipe(t_obj *pipex, int max_i);
+//free_all
+void	free_all(t_obj *pipex);
 
 #endif

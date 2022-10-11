@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_file.c                                       :+:      :+:    :+:   */
+/*   free_pipe_path.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 23:37:33 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/12 00:01:22 by sounchoi         ###   ########.fr       */
+/*   Created: 2022/10/12 00:12:55 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/10/12 00:15:04 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	close_file(t_obj *pipex)
+void	free_pipe(t_obj *pipex, int max_i)
 {
-	close(pipex->infile_fd);
-	close(pipex->outfile_fd);
-	if (pipex->check_doc == 1)
+	int	i;
+
+	i = 0;
+	while (i < max_i)
 	{
-		if (unlink("./temp") == -1)
-			perror("temp file is alive... ");
+		free(pipex->fd[i]);
+		pipex->fd[i] = 0;
+		i++;
 	}
+	free(pipex->fd);
+	pipex->fd = 0;
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_check.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/11 23:37:45 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/10/12 02:39:27 by sounchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 // 아래의 함수는 pipex의 인파일 아웃파일 등을 입력합니다.
@@ -49,6 +61,7 @@ int	fd_infile(char **argv, t_obj *pipex)
 {
 	int	start_fd;
 
+	start_fd = 0;
 	if (pipex->check_doc == 1)
 	{
 		if (fd_doc(argv[2], pipex, start_fd) == 1)
@@ -80,6 +93,11 @@ int	fd_outfile(int argc, char **argv, t_obj *pipex)
 	{
 		perror("error_check4 ");
 		close(pipex->infile_fd);
+		if (pipex->check_doc == 1)
+		{
+			if(unlink("./temp") == -1)
+				perror("temp file is still alive ... ");
+		}
 		return (1);
 	}
 	else
