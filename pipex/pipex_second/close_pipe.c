@@ -11,7 +11,7 @@ void	close_pipe(t_obj *pipex, int max_i)
 	{
 		while(j < 2)
 		{
-			if(close(pipex->fd[i][j]) == -1)
+			if (close(pipex->fd[i][j]) == -1)
 			{
 				perror("pipe is not close... ");
 			}

@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:56 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/12 02:41:18 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/12 05:06:20 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char **argv, char **envp)
 	get_pipe(pipex);					//파이프 생성.	
 
 	pipex_exec(pipex);
-	while(wait(NULL) > 0)
 	close_pipe(pipex, pipex->cmd_count);
 	free_pipe(pipex, pipex->cmd_count);
 	free_envp(pipex);
@@ -33,6 +32,6 @@ int	main(int argc, char **argv, char **envp)
 	close_file(pipex);
 	free(pipex);
 	pipex = 0;
-	system("leaks a.out");
+	system("leaks pipex");
 	return (0);
 }

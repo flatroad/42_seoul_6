@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:45 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/12 02:39:27 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/12 03:37:20 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ int	fd_outfile(int argc, char **argv, t_obj *pipex)
 	int	end_fd;
 
 	if (pipex->check_doc == 1)
-		end_fd = open(argv[argc - 1], O_RDWR | O_CREAT | O_APPEND, 0644);	//heredoc일 경우 추가로
+		end_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);	//heredoc일 경우 추가로
 	else
-		end_fd = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);	//아닐경우 생성으로
+		end_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);	//아닐경우 생성으로
 	if (end_fd == -1)   // 쓰기 권한이 없으면 디나인이 출력됨.
 	{
 		perror("error_check4 ");
