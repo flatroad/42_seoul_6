@@ -20,7 +20,6 @@ void	pipex_exec(t_obj *pipex)
 	make_fd_pipe(pipex);
 	while (i < pipex->cmd_count)
 	{
-		printf("i  = %d\n", i);
 		pipex->pid = fork();
 		if (pipex->pid == -1)
 		{
@@ -36,11 +35,7 @@ void	pipex_exec(t_obj *pipex)
 		}
 	i++;
 	}
-	while(i != 0);
-	i--;
-	if(wait(NULL) > 0)
-		i--;
-	
+	wait(NULL);
 }
 
 void	make_fd_pipe(t_obj *pipex)
@@ -65,8 +60,10 @@ void	pipex_ch1(t_obj *pipex, int i, int idx)
 
 	if (dup2(pipex->infile_fd, 0) == -1)
 		exit(1);
+	close(pipex->infile_fd);
 	if (dup2(pipex->fd[i][1], 1) == -1)
 		exit(1);
+	close(pipex->fd[0][1]);
 	while (pipex->env_path[idx] != 0)
 	{
 		str = ft_strjoin(pipex->env_path[idx], pipex->cmd_path[i][0]);
@@ -76,6 +73,7 @@ void	pipex_ch1(t_obj *pipex, int i, int idx)
 			free(str);
 		else
 		{
+			write(2, "here 1\n", 7);
 			if (execve(str, pipex->cmd_path[i], NULL) == -1)
 			{
 				write(2, "\n123123\n", 9);
@@ -91,22 +89,25 @@ void	pipex_ch1(t_obj *pipex, int i, int idx)
 void	pipex_ch2(t_obj *pipex, int i, int idx)
 {
 	char	*str;
-	
+
 	if(dup2(pipex->fd[i - 1][0], 0) == -1)
 		write(2, "123\n", 4);
+	close(pipex->fd[i][0]);
 	if (i < pipex->cmd_count - 1)
 	{	
 		if(dup2(pipex->fd[i][1], 1) == -1)
 			write(2, "123\n", 4);
+		close(pipex->fd[i][1]);
 	}
 	else
 	{
 		if (dup2(pipex->outfile_fd, 1) == -1)
 			write(2, "123\n", 4);
+		close(pipex->outfile_fd);
 	}
+
 	while (pipex->env_path[idx] != 0)
 	{
-		
 		str = ft_strjoin(pipex->env_path[idx], pipex->cmd_path[i][0]);
 		if (str == 0)
 			exit(1);
@@ -114,8 +115,11 @@ void	pipex_ch2(t_obj *pipex, int i, int idx)
 			free(str);
 		else
 		{
+			write(2, "here 2\n", 7);
+			write(2, str, strlen(str));
 			if (execve(str, pipex->cmd_path[i], NULL) == -1)
 			{
+				write(2, "here 3\n", 7);
 				exit(1);
 			}
 		}

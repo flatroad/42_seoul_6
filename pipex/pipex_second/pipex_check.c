@@ -73,7 +73,7 @@ int	fd_infile(char **argv, t_obj *pipex)
 		if (start_fd == -1)
 		{
 			perror("error_check3 ");
-			return (0);
+			return (1);
 		}
 		else
 			pipex->infile_fd = start_fd;
@@ -83,13 +83,11 @@ int	fd_infile(char **argv, t_obj *pipex)
 
 int	fd_outfile(int argc, char **argv, t_obj *pipex)
 {
-	int	end_fd;
-
 	if (pipex->check_doc == 1)
-		end_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);	//heredoc일 경우 추가로
+		pipex->outfile_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);	//heredoc일 경우 추가로
 	else
-		end_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);	//아닐경우 생성으로
-	if (end_fd == -1)   // 쓰기 권한이 없으면 디나인이 출력됨.
+		pipex->outfile_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);	//아닐경우 생성으로
+	if (pipex->outfile_fd == -1)   // 쓰기 권한이 없으면 디나인이 출력됨.
 	{
 		perror("error_check4 ");
 		close(pipex->infile_fd);
@@ -100,7 +98,5 @@ int	fd_outfile(int argc, char **argv, t_obj *pipex)
 		}
 		return (1);
 	}
-	else
-		pipex->outfile_fd = end_fd;
 	return (0);
 }

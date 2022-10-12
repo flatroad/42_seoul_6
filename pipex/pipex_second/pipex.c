@@ -30,6 +30,5 @@ int	main(int argc, char **argv, char **envp)
 	close_file(pipex);
 	free(pipex);
 	pipex = 0;
-	system("leaks pipex");
 	return (0);
 }

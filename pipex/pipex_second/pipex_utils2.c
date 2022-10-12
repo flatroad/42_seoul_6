@@ -93,13 +93,10 @@ void	ft_pull_array(char **str_array, char *s, size_t size, char c)
 			s++;
 			y++;
 		}
-		printf("%s\n", str_array[x]);
-		printf("%p\n", str_array[x]);
 		str_array[x][y] = 0;
 		x++;
 		y = 0;
 	}
-	printf("%p\n", str_array[x]);
 	return ;
 }
 

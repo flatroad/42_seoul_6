@@ -42,7 +42,6 @@ void	make_cmp_path2(t_obj *pipex, char **argv)
 	while (i < pipex->cmd_count)
 	{
 		pipex->cmd_path[i] = ft_split(argv[pipex->cmd_start + i], ' ');
-		printf("%s | %s\n", pipex->cmd_path[i][0], pipex->cmd_path[i][1]);
 		if (pipex->cmd_path[i] == NULL)
 		{
 			perror("error_check7 ");

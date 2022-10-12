@@ -3,7 +3,6 @@ a
 b
 close_file.c
 close_file.o
-close_file_save.c
 close_pipe.c
 close_pipe.o
 envp_path.c
@@ -26,6 +25,7 @@ here_doc_cop.c
 infile
 outfile
 pipex
+pipex-tester
 pipex.c
 pipex.h
 pipex.o
@@ -39,5 +39,3 @@ pipex_utils1.c
 pipex_utils1.o
 pipex_utils2.c
 pipex_utils2.o
-saa
-temp
