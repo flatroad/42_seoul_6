@@ -63,10 +63,7 @@ void	pipex_ch1(t_obj *pipex, int i, int idx)
 	close(pipex->infile_fd);
 	if (dup2(pipex->fd[i][1], 1) == -1)
 		exit(1);
-	close(pipex->fd[0][1]);
-	close(pipex->fd[0][0]);
-	close(pipex->fd[1][0]);
-	close(pipex->fd[1][1]);
+	close_pipe(pipex, pipex->cmd_count);
 	while (pipex->env_path[idx] != 0)
 	{
 		str = ft_strjoin(pipex->env_path[idx], pipex->cmd_path[i][0]);
@@ -107,10 +104,7 @@ void	pipex_ch2(t_obj *pipex, int i, int idx)
 			write(2, "123\n", 4);
 	}
 	// close(pipex->fd[i][1]);
-	close(pipex->fd[0][1]);
-	close(pipex->fd[0][0]);
-	close(pipex->fd[1][0]);
-	close(pipex->fd[1][1]);
+	close_pipe(pipex, pipex->cmd_count);
 	close(pipex->outfile_fd);
 
 	while (pipex->env_path[idx] != 0)
