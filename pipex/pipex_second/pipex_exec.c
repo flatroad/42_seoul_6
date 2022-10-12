@@ -15,28 +15,31 @@
 void	pipex_exec(t_obj *pipex)
 {
 	int	i;
-	int		status;
 
 	i = 0;
-	status = 0;
 	make_fd_pipe(pipex);
 	while (i < pipex->cmd_count)
+	{
 		pipex->pid = fork();
-
-	if (pipex->pid == -1)
-	{
-		close_pipe(pipex, pipex->cmd_count);
-		free_all(pipex);
-	}
-	else if (pipex->pid == 0)
-	{
-		if (i == 0)
-			pipex_ch1(pipex, i, 0);
-		else
-			pipex_ch2(pipex, i, 0);
-	}
+		if (pipex->pid == -1)
+		{
+			close_pipe(pipex, pipex->cmd_count);
+			free_all(pipex);
+		}
+		else if (pipex->pid == 0)
+		{
+			if (i == 0)
+				pipex_ch1(pipex, i, 0);
+			else
+				pipex_ch2(pipex, i, 0);
+		}
 	i++;
-	while(wait(&status) > 0);
+	}
+	while(i != 0);
+	i--;
+	if(wait(NULL) > 0)
+		i--;
+	
 }
 
 void	make_fd_pipe(t_obj *pipex)
@@ -58,9 +61,12 @@ void	make_fd_pipe(t_obj *pipex)
 void	pipex_ch1(t_obj *pipex, int i, int idx)
 {
 	char	*str;
+	char	ptr[100];
 
 	if (dup2(pipex->infile_fd, 0) == -1)
 		exit(1);
+	read(0, ptr, 100);
+	printf("%s", ptr);
 	if (dup2(pipex->fd[i][1], 1) == -1)
 		exit(1);
 	while (pipex->env_path[idx] != 0)
@@ -87,7 +93,7 @@ void	pipex_ch1(t_obj *pipex, int i, int idx)
 void	pipex_ch2(t_obj *pipex, int i, int idx)
 {
 	char	*str;
-	
+
 	if(dup2(pipex->fd[i - 1][0], 0) == -1)
 		write(2, "123\n", 4);
 	if (i < pipex->cmd_count - 1)

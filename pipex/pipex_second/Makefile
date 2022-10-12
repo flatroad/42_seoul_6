@@ -30,9 +30,6 @@ $(NAME) : $(OBJS)
 
 all : $(NAME)
 
-bonus :
-	@make B_FLAG=1 all
-
 clean :
 	$(RM) $(OBJS)
 

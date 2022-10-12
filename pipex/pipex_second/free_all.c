@@ -9,6 +9,5 @@ void	free_all(t_obj *pipex)
 	close_file(pipex);
 	free(pipex);
 	pipex = NULL;
-	system("leaks a.out");
 	exit(1);
 }

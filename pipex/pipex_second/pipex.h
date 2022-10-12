@@ -31,6 +31,7 @@ typedef struct s_object_pipex {
 	char	***cmd_path;  //명령어 execve할 수 있도록 저장.
 	int		**fd;		  //다중 파이프라인.
 	pid_t	pid;		  //프로세스.
+	int		i;
 } t_obj;
 
 // pipex_check
@@ -39,8 +40,8 @@ int 	len_check (int argc, char **argv, t_obj *pipex);
 int 	fd_infile (char **argv, t_obj *pipex);
 int 	fd_outfile (int argc, char **argv, t_obj *pipex);
 //pipex_doc_check
-int	fd_doc(char *flag_str, t_obj *pipex, int start_fd);
-int	mk_doc(char *flag_str, t_obj *pipex, int len);
+int		fd_doc(char *flag_str, t_obj *pipex, int start_fd);
+int		mk_doc(char *flag_str, int start_fd, int len);
 //envp_path
 void	envp_path(char **envp, t_obj *pipex);
 //cmd_path

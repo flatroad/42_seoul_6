@@ -15,9 +15,7 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_obj	*pipex;
-	int		i;
 
-	i = 0;
 	pipex = (t_obj *)malloc(sizeof(t_obj) * 1);
 	pipex_check(argc, argv, pipex);	//인자값이 유효한지를 확인 
 	envp_path(envp, pipex);			// 환경변수 설정.	
