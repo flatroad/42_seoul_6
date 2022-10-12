@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 01:18:27 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/12 05:58:30 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/12 10:37:31 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	pipex_exec(t_obj *pipex)
 	make_fd_pipe(pipex);
 	while (i < pipex->cmd_count)
 	{
+		printf("i  = %d\n", i);
 		pipex->pid = fork();
 		if (pipex->pid == -1)
 		{
@@ -61,12 +62,9 @@ void	make_fd_pipe(t_obj *pipex)
 void	pipex_ch1(t_obj *pipex, int i, int idx)
 {
 	char	*str;
-	char	ptr[100];
 
 	if (dup2(pipex->infile_fd, 0) == -1)
 		exit(1);
-	read(0, ptr, 100);
-	printf("%s", ptr);
 	if (dup2(pipex->fd[i][1], 1) == -1)
 		exit(1);
 	while (pipex->env_path[idx] != 0)
@@ -78,7 +76,7 @@ void	pipex_ch1(t_obj *pipex, int i, int idx)
 			free(str);
 		else
 		{
-			if (execve(str, &pipex->cmd_path[i][0], NULL) == -1)
+			if (execve(str, pipex->cmd_path[i], NULL) == -1)
 			{
 				write(2, "\n123123\n", 9);
 				exit(1);
@@ -93,7 +91,7 @@ void	pipex_ch1(t_obj *pipex, int i, int idx)
 void	pipex_ch2(t_obj *pipex, int i, int idx)
 {
 	char	*str;
-
+	
 	if(dup2(pipex->fd[i - 1][0], 0) == -1)
 		write(2, "123\n", 4);
 	if (i < pipex->cmd_count - 1)

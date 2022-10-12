@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:53 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/12 02:40:00 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/12 10:39:25 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	**ft_mk_array(char **str_array, char *s, size_t size, char c)
 		}
 		idx++;
 	}
-	str_array[idx] = 0;
+	str_array[idx] = NULL;
 	return (str_array);
 }
 
@@ -93,10 +93,13 @@ void	ft_pull_array(char **str_array, char *s, size_t size, char c)
 			s++;
 			y++;
 		}
+		printf("%s\n", str_array[x]);
+		printf("%p\n", str_array[x]);
 		str_array[x][y] = 0;
 		x++;
 		y = 0;
 	}
+	printf("%p\n", str_array[x]);
 	return ;
 }
 
