@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:31 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/14 03:18:23 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/14 05:00:21 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pipex_envp(char **envp, t_obj *pipex)
 {
-	while (strncmp("PATH=", *envp, 5) != 0)
+	while (ft_strncmp("PATH=", *envp, 5) != 0)
 		envp++;
 	*envp = *envp + 5;
 	pipex->env_path = ft_split(*envp, ':');

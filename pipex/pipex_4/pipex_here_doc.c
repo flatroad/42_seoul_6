@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:43 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/14 04:18:47 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/14 05:00:46 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	mk_doc(char *flag_str, int start_fd, int len)
 		return (1);
 	}
 	len_line = ft_strlen(line);
-	if (strncmp(flag_str, line, len) == 0)
+	if (ft_strncmp(flag_str, line, len) == 0)
 	{
 		if (line[len] == '\n')
 		{

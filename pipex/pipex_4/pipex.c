@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:56 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/14 04:44:39 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/14 04:57:28 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,5 @@ int	main(int argc, char **argv, char **envp)
 	close_file(pipex);
 	free(pipex);
 	pipex = 0;
-	system("leaks pipex");
 	return (0);
 }
