@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 01:18:27 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/14 06:05:47 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/14 08:00:11 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	pipex_exec(t_obj *pipex, char **envp)
 {
 	int	i;
+	int	status;
 
 	i = 0;
 	mk_fd_pipe(pipex);
@@ -30,9 +31,12 @@ void	pipex_exec(t_obj *pipex, char **envp)
 		else if (pipex->pid == 0)
 			pipex_exec_ch(pipex, envp, i);
 		else
+		{
 			i++;
+		}
 	}
-	wait(NULL);
+	while (wait(&status) > 0)
+		;
 }
 
 void	mk_fd_pipe(t_obj *pipex)
