@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi(int *data, char *str)
 {
 	int		sign;
 	size_t	num;
@@ -8,10 +8,11 @@ int	ft_atoi(const char *str)
 
 	sign = 1;
 	num = 0;
-	while ((9 <= *str && *str <= 14) || *str == ' ')
-		str++;
-	if (i = 0 && ('-' == *str || '+' == *str))
+	i = 0;
+	while ('-' == *str || '+' == *str)
 	{
+		if(i == 1)
+			return (FALSE);
 		i = 1;
 		if (*str == '-')
 			sign = -sign;
@@ -22,6 +23,7 @@ int	ft_atoi(const char *str)
 		num = (num * 10) + (sign * (*str - 48));
 		str++;
 	}
+	while ()
 	return (num);
 }
 
@@ -32,6 +34,4 @@ int check(char *str, int num, )
 		num = (num * 10) + (sign * (*str - 48));
 		str++;
 	}
-	while ((9 <= *str && *str <= 14) || *str == ' ')
-		str++;
 }
