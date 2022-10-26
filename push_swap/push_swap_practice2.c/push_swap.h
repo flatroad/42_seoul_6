@@ -41,5 +41,7 @@ int 	error_check(char *str, t_stack *stk);
 int 	ft_atoi(char *str, int *data);
 int 	ft_atoi_n(char *str, int *data, int sign, size_t *num);
 int 	check_num(size_t *num, int sign);
+int		free_stk(t_stack *stk);
+int		push(t_stack *stk, int data);
 
 #endif
