@@ -33,7 +33,15 @@ void	init_order(t_list *list, int count)
 
 int	brute_exec(t_stack *a_stk, char **order, t_list *order_list)
 {
-	
+	if (order_list->count == 1)
+	 	return (TRUE);
+	if (order_list->count == 2)
+	{
+		if(a_stk->top->data < a_stk->top->prev->data)
+		{
+			
+		}
+	}
 
 	
 

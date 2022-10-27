@@ -6,3 +6,4 @@ int	empty_stack(t_stack *stk)
 		return (TRUE);
 	return (FALSE);
 }
+

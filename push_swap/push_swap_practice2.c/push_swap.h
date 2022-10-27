@@ -18,7 +18,7 @@ typedef struct s_list
 	char **start;
 	char **str;
 	int top;
-	int	count;
+	int	count; 
 	struct s_list *next;
 } t_list;
 
