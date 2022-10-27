@@ -12,7 +12,7 @@ typedef struct s_stack
 {
 	char **str;
 	int top;
-	struct s_stack *next; 
+	struct s_stack *next;
 } s_stack;
 
 void init(s_stack *s)

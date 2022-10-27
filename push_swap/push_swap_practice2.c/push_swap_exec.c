@@ -20,6 +20,11 @@ int	push_swap_exec(t_stack *a_stk, t_stack *b_stk, char **order, int count)
 	return (TRUE);
 }
 
+int	triangle_exec(a_stk, b_stk, order, order_list)
+{
+	
+}
+
 int	init_order(t_list *list, int count, char **order)
 {
 	list = (t_list *)malloc(sizeof(t_list) * 1);

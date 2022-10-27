@@ -1,49 +1,90 @@
 #include "push_swap.h"
 
-void pb(stack *A, stack *B)
+int	sa(t_stack *a_stk, t_list *order_list)
 {
-	node	*C = A->top;
+	int	memo;
 
-	A->top = A->top->next;	
-	C->next = B->top;
-	B->top = C;
-	write(1, "pb\n", 2);
+	memo = a_stk->top->data;
+	a_stk->top->data = a_stk->top->prev->data;
+	a_stk->top->prev->data = memo;
+	if (push_order(order_list, order_list->order[0]) == FALSE)
+		return (FALSE);
+	return (TRUE)
 }
 
-void pa(stack *A, stack *B)
+int	sb(t_stack *b_stk, t_list *order_list)
 {
-	node	*C = B->top;
+	int	memo;
 
-	B->top = B->top->next;
-	C->next = A->top;
-	A->top = C;
-	write(1, "pa\n", 2);
+	memo = b_stk->top->data;
+	b_stk->top->data = b_stk->top->prev->data;
+	b_stk->top->prev->data = memo;
+	if (push_order(order_list, order_list->order[1]) == FALSE)
+		return (FALSE);
+	return (TRUE)
 }
 
-void ra(stack *A)
+int	ss(t_stack *a_stk, t_stack *b_stk, t_list *order_list)
 {
-	node	*C = A->top->next;
-	node	*D = A->bottom->next;
-	A->top->next = D;
-	A->bottom->next = C;
+	int	memo;
 
-	node	*G;
-	G = A->top;
-	A->top = A->bottom;
-	A->bottom = G;
-	write(1, "ra\n", 2);
+	memo = a_stk->top->data;
+	a_stk->top->data = a_stk->top->prev->data;
+	a_stk->top->prev->data = memo;
+	memo = b_stk->top->data;
+	b_stk->top->data = b_stk->top->prev->data;
+	b_stk->top->prev->data = memo;
+	if (push_order(order_list, order_list->order[2]) == FALSE)
+		return (FALSE);
+	return (TRUE);
 }
 
-void rb(stack *B)
+int	pa(t_stack *a_stk, t_stack *b_stk, t_list *order_list)
 {
-	node	*C = B->top->next;
-	node	*D = B->bottom->next;
-	B->top->next = D;
-	B->bottom->next = C;
+	t_node	*memo;
 
-	node	*G;
-	G = B->top;
-	B->top = B->bottom;
-	B->bottom = G;
-	write(1, "ra\n", 2);
+	memo = a_stk->top;
+	a_stk->top = a_stk->top->prev;
+	a_stk->top->next = NULL;
+	if (empty_stack(b_stk) == TRUE)
+	{	
+		b_stk->bottom = memo;
+		b_stk->top = memo;
+		b_stk->top->prev = NULL;
+	}
+	else
+	{
+		b_stk->top->next = memo;
+		memo = b_stk->top;
+		b_stk->top = b_stk->top->next;
+		b_stk->top->prev = memo;
+	}
+	if (push_order(order_list, order_list->order[3]) == FALSE)
+		return (FALSE);
+	return (TRUE);
+}
+
+int	pb(t_stack *a_stk, t_stack *b_stk, t_list *order_list)
+{
+	t_node	*memo;
+
+	memo = b_stk->top;
+	b_stk->top = b_stk->top->prev;
+	b_stk->top->next = NULL;
+	if (empty_stack(a_stk) == TRUE)
+	{	
+		a_stk->bottom = memo;
+		a_stk->top = memo;
+		a_stk->top->prev = NULL;
+	}
+	else
+	{
+		a_stk->top->next = memo;
+		memo = a_stk->top;
+		a_stk->top = a_stk->top->next;
+		a_stk->top->prev = memo;
+	}
+	if (push_order(order_list, order_list->order[4]) == FALSE)
+		return (FALSE);
+	return (TRUE);
 }
