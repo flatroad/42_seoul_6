@@ -8,6 +8,8 @@
 
 #define TRUE 1
 #define FALSE 0
+#define INCR 3
+#define DECR 2
 #define MAX_INT 2147483647
 #define MIN_INT -2147483648
 
@@ -16,6 +18,7 @@ typedef struct s_list
 	char **start;
 	char **str;
 	int top;
+	int	count;
 	struct s_list *next;
 } t_list;
 

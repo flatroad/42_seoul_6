@@ -1,0 +1,33 @@
+#include "push_swap.h"
+
+int	sa(t_stack *a_stk, t_list *order_list, char **order)
+{
+	int	memo;
+
+	memo = a_stk->top->data;
+	a_stk->top->data = a_stk->top->prev->data;
+	a_stk->top->prev->data = memo;
+	if(push_order(order_list, order[0]) == FALSE)
+	{
+		free_order(order_list);
+		return (FALSE);
+	}
+	return (TRUE)
+}
+
+int	sb(t_stack *b_stk, t_list *order_list, char **order)
+{
+	int	memo;
+
+	memo = b_stk->top->data;
+	b_stk->top->data = b_stk->top->prev->data;
+	b_stk->top->prev->data = memo;
+	if(push_order(order_list, order[1]) == FALSE)
+	{
+		free_order(order_list);
+		return (FALSE);
+	}
+	return (TRUE)
+}
+
+int	ss(t_stack *b_stk, t_list *order_list, char **order)

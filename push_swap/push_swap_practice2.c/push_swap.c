@@ -16,7 +16,7 @@ int	push_swap(int argc, char **argv, char **order)
 			return (free_stk(&a_stk));
 		a_stk.idx = a_stk.idx + 1;
 	}
-	if(push_swap_exec(a_stk, b_stk, order, argc) == FALSE)
+	if(push_swap_exec(&a_stk, &b_stk, order, argc - 2) == FALSE)
 	{
 		free_stk(&a_stk);
 		free_stk(&b_stk);
