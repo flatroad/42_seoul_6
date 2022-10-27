@@ -16,6 +16,12 @@ int	push_swap(int argc, char **argv, char **order)
 			return (free_stk(&a_stk));
 		a_stk.idx = a_stk.idx + 1;
 	}
+	while(a_stk.top != NULL)
+	{
+		printf("a_stk.top->data %d, a_stk.top->check %d\n", a_stk.top->data, a_stk.top->check);
+		a_stk.top = a_stk.top->prev;
+	}
+	exit(0);
 	if(push_swap_exec(&a_stk, &b_stk, order, argc - 2) == FALSE)
 	{
 		free_stk(&a_stk);
@@ -51,5 +57,4 @@ int error_check(char *str, t_stack *stk)
 		return (FALSE);
 	return (TRUE);
 }
-
 

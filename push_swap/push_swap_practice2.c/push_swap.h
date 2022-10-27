@@ -15,10 +15,12 @@
 
 typedef struct s_list
 {
-	char **start;
-	char **str;
-	int top;
-	int	count; 
+	char	**start;
+	char	**str;
+	char	**order;
+	int 	top;
+	int		count; 
+	int		max;
 	struct s_list *next;
 } t_list;
 

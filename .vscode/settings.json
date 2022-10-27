@@ -4,6 +4,9 @@
 		"__undef_macros": "c",
 		"algorithm": "c",
 		"locale": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"chrono": "c",
+		"limits": "c",
+		"ratio": "c"
 	}
 }
