@@ -68,7 +68,7 @@ void	init_stack(t_stack *a_stk, t_stack *b_stk);
 int		init_list(t_list *command, int argc);
 
 //save_point2
-int	push_swap(t_stack a_stk, t_stack b_stk, t_utils utilz, t_list *command);
+int	push_swap(t_stack a_stk, t_stack b_stk, t_utils utilz, t_list command);
 void	ft_free(t_list **str);
 
 #endif
