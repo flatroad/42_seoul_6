@@ -46,7 +46,7 @@ typedef struct s_stack
 
 // save_point1
 int		main(int argc, char **argv);
-int		push_swap(t_stack a, t_stack b, int argc, t_list command);
+int		push_swap(t_stack *a, t_stack *b, int argc, t_list *command);
 
 void	free_all(t_stack *a, t_stack *b, t_list *command);
 void	free_stack(t_stack *stk);
@@ -64,5 +64,25 @@ int		push(t_stack *stk, int data);
 int		ft_atoi(char *str, int *data);
 int		ft_atoi_n(char *str, int *data, int sign, size_t *num);
 int		check_num(size_t *num, int sign);
+
+void	brute(t_stack *a, t_stack *b, int argc, t_list *command);
+void	brute_cas1(t_stack *stk, t_list *command, int i);
+void	brute_cas2(t_stack *stk, t_list *command, int i);
+int		fide_stk(t_node *stk, int i);
+
+int		sa(t_stack *a_stk, t_list *order_list);
+int		sb(t_stack *b_stk, t_list *order_list);
+int		ss(t_stack *a_stk, t_stack *b_stk, t_list *order_list);
+int		pa(t_stack *a_stk, t_stack *b_stk, t_list *order_list);
+int		pb(t_stack *a_stk, t_stack *b_stk, t_list *order_list);
+int		ra(t_stack *a_stk, t_list *order_list);
+int		rb(t_stack *b_stk, t_list *order_list);
+int		rr(t_stack *a_stk, t_stack *b_stk, t_list *order_list);
+int		rra(t_stack *a_stk, t_list *order_list);
+int		rrb(t_stack *b_stk, t_list *order_list);
+int		rrr(t_stack *a_stk, t_stack *b_stk, t_list *order_list);
+
+int		empty_stack(t_stack *stk);
+int		push_cmd(t_list *command, char *order);
 
 #endif

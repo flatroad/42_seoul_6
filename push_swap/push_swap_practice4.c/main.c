@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:40:17 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/29 02:26:53 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/29 04:52:37 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,13 @@ int	main(int argc, char **argv)
 	init_parse(&argc, &argv);
 	init_stack(&a_stk, &b_stk);
 	if (pull_a_stack(&a_stk, argc, argv) == FALSE || \
-	push_swap(a_stk, b_stk, argc, command) == FALSE)
+	push_swap(&a_stk, &b_stk, argc, &command) == FALSE)
 	{
 		free_all(&a_stk, &b_stk, &command);
 		write(2, "ERROR\n", 6);
 		return (1);
 	}
 	free_all(&a_stk, &b_stk, &command);
-	system("leaks a.out");
+	system("leaks push_swap");
 	return (0);
-}
-
-int	push_swap(t_stack a, t_stack b, int argc, t_list command)
-{
-	return (TRUE);
 }

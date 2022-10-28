@@ -4,7 +4,13 @@ free_box.c \
 init_box.c \
 main.c \
 pull_a_stack_utils.c \
-pull_a_stack.c
+pull_a_stack.c \
+promt_1.c \
+promt_2.c \
+promt_3.c \
+promt_4.c \
+promt_utils.c \
+push_swap.c
 
 OBJS = $(SRCS:.c=.o)
 CC = cc

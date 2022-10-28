@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 00:04:29 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/29 01:44:59 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/29 05:11:19 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int	init_cmd(t_list *command, int max)
 		cmd_ad = 0;
 		return (FALSE);
 	}
-	cmd_ad->cmd[max] = 0;
-	cmd_ad->cmd[0] = "ㅇㅕ기까지";
 	cmd_ad->max = max;
 	cmd_ad->next = NULL;
 	cmd_ad->top = -1;
