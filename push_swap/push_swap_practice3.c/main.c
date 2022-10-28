@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 05:52:02 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/28 09:28:47 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/28 23:45:12 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ int	init_list(t_list *command, int argc)
 
 int	init_cmd(t_cmd *list, int max)
 {
-	printf("%d\n", 123);
-	printf("%p\n", list);
 	list->cmd = (char **)malloc(sizeof(char *) * (max + 1));
 	if (list->cmd == NULL)
 		return (FALSE);
