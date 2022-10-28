@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 23:40:17 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/29 07:05:51 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/29 08:10:05 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	init_order(&order);
 	if (argc == 1)
 		return (0);
-	if (init_list(&command, argc, order) == FALSE)
+	if (init_list(&command, argc, &order) == FALSE)
 		return (1);
 	init_parse(&argc, &argv);
 	init_stack(&a_stk, &b_stk);
