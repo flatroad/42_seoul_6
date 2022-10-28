@@ -15,11 +15,6 @@ int	push_cmd(t_list *command, char *order)
 			return (FALSE);
 	}
 	command->cmd_ad->top++;
-	if (order == NULL)
-		return (0);
-	printf("%p\n", command->start->next);
 	command->cmd_ad->cmd[command->cmd_ad->top] = order;
-	printf("%p\n", command->start->next);
-	command->start->next = 0;
 	return (TRUE);
 }

@@ -6,16 +6,14 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 00:04:29 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/29 07:14:02 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/29 07:10:18 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	init_list(t_list *command, int argc)
+int	init_list(t_list *command, int argc, t_order *order)
 {
-	static char	*order[11] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra", "rrb", "rrr"};
-	
 	if (argc <= 10)
 		command->max = 100;
 	else if (argc <= 100)
@@ -28,6 +26,21 @@ int	init_list(t_list *command, int argc)
 	command->start->next = NULL;
 	command->order = order;
 	return (TRUE);
+}
+
+void	init_order(t_order *order)
+{
+	order->pa = "pa";
+	order->pb = "pb";
+	order->ra = "ra";
+	order->rb = "rb";
+	order->rr = "rr";
+	order->rra = "rra";
+	order->rrb = "rrb";
+	order->rrr = "rrr";
+	order->sa = "sa";
+	order->sb = "sb";
+	order->ss = "ss";
 }
 
 int	init_cmd(t_list *command, int max)
