@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 00:04:29 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/29 08:19:18 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/29 08:56:32 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	init_list(t_list *command, int argc, t_order *order)
 		command->max = 1000;
 	else
 		command->max = 10000;
-	if (init_cmd(command, command->max) == FALSE)
+	command->cmd_ad = init_cmd(command->max);
+	if (command->cmd_ad == NULL)
 		return (FALSE);
 	command->start = command->cmd_ad;
-	command->start->next = NULL;
 	command->order = order;
 	return (TRUE);
 }
@@ -43,7 +43,7 @@ void	init_order(t_order *order)
 	order->ss = "ss";
 }
 
-int	init_cmd(t_list *command, int max)
+t_cmd	*init_cmd(int max)
 {
 	t_cmd	*cmd_ad;
 
@@ -60,8 +60,7 @@ int	init_cmd(t_list *command, int max)
 	cmd_ad->max = max;
 	cmd_ad->next = NULL;
 	cmd_ad->top = -1;
-	command->cmd_ad = cmd_ad;
-	return (TRUE);
+	return (cmd_ad);
 }
 
 void	init_parse(int *argc, char ***argv)

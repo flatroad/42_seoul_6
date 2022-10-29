@@ -65,7 +65,7 @@ int	main(int argc, char **argv);
 //init
 int		init_list(t_list *command, int argc, t_order *order);
 void	init_order(t_order *order);
-int		init_cmd(t_list *command, int max);
+t_cmd	*init_cmd(int max);
 void	init_parse(int *argc, char ***argv);
 void	init_stack(t_stack *a_stk, t_stack *b_stk);
 
@@ -105,5 +105,6 @@ void	brute(t_stack *a, t_stack *b, int argc, t_list *command);
 void	brute_cas1(t_stack *stk, t_list *command, int i);
 void	brute_cas2(t_stack *stk, t_list *command, int i);
 int		fide_stk(t_node *stk, int i);
+void	brute_cas2b(t_stack *stk, t_list *command, int i, int flag);
 
 #endif

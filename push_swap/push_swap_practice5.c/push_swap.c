@@ -14,81 +14,17 @@ int	push_swap(t_stack *a, t_stack *b, int argc, t_list *command)
 	
 }
 
-void	brute(t_stack *a, t_stack *b, int argc, t_list *command)
+void	brute_cas3(t_stack *a_stk, t_stack *b_stk, t_list *command)
 {
-	if (argc == 1)
-		return ;
-	if (argc == 2)
-		brute_cas1(a, command, 0);
-	if (argc == 3)
-		brute_cas2(a, command, 0);
-	if (b != 0)
-		b = 0;
-}
+	int	i;
 
-void	brute_cas1(t_stack *stk, t_list *command, int i)
-{
-	if (i == 0)
+	i = 4;
+	pb(a_stk, b_stk, command);
+	pb(a_stk, b_stk, command);
+	brute_cas1(a_stk, command, 0);
+	brute_cas1(b_stk, command, 1);
+	while (i--)
 	{
-		if(stk->top->data < stk->top->prev->data)
-			sa(stk, command);
+		
 	}
-	else
-	{
-		if(stk->top->data > stk->top->prev->data)
-			sb(stk, command);
-	}
-}
-
-void	brute_cas2(t_stack *stk, t_list *command, int i)
-{
-	int flag;
-	
-	flag = fide_stk(stk->top, i);
-	if (i == 0)
-	{
-		if (flag == 1)
-		{
-			ra(stk, command);
-			brute_cas1(stk, command, i);
-		}
-		else if (flag== 2)
-		{
-			rra(stk, command);
-			brute_cas1(stk, command, i);
-		}
-		else
-			brute_cas1(stk, command, i);
-	}
-	// else
-	// 	brute_cas2b(stk, command, i, flag);
-}
-
-int	fide_stk(t_node *stk, int i)
-{
-	int	flag;
-	int	memo;
-
-	flag = 1;
-	if (i == 0)
-	{
-		while (stk->prev != NULL)
-		{
-			memo = stk->data;
-			stk = stk->prev;
-			if (stk->data < memo)
-				flag++;
-		}
-	}
-	else
-	{
-		while (stk->prev != NULL)
-		{
-			memo = stk->data;
-			stk = stk->prev;
-			if (stk->data > memo)
-				flag++;
-		}
-	}
-	return (flag);
 }
