@@ -7,6 +7,10 @@
 		"typeinfo": "c",
 		"chrono": "c",
 		"limits": "c",
-		"ratio": "c"
+		"ratio": "c",
+		"array": "c",
+		"vector": "c",
+		"string": "c",
+		"string_view": "c"
 	}
 }

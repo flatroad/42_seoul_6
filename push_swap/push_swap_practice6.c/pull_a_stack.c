@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 01:34:47 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/10/29 02:13:42 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/10/29 08:11:06 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	pull_a_stack(t_stack *stk, int argc, char **argv)
 {
 	while (stk->idx < argc)
 	{
-		printf("stk 주소 %p\n", stk->top);
 		if (error_check(argv[argc - (stk->idx + 1)], stk) == FALSE)
 			return (FALSE);
 		stk->idx = stk->idx + 1;
@@ -32,6 +31,8 @@ int	error_check(char *str, t_stack *stk)
 	if (ft_atoi(str, &data) == FALSE)
 		return (FALSE);
 	if (push(stk, data) == FALSE)
+		return (FALSE);
+	if (check_same(stk->top) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
@@ -58,6 +59,21 @@ int	push(t_stack *stk, int data)
 		node->prev = stk->top;
 		node->next = NULL;
 		stk->top = node;
+	}
+	return (TRUE);
+}
+
+int	check_same(t_node *node)
+{
+	int	memo;
+
+	memo = node->data;
+	node = node->prev;
+	while(node != NULL)
+	{
+		if (memo == node->data)
+			return (FALSE);
+		node = node->prev;
 	}
 	return (TRUE);
 }
