@@ -13,6 +13,14 @@
 #define MAX_INT 2147483647
 #define MIN_INT -2147483648
 
+typedef struct s_point
+{
+	int a_b;
+	int a_t;
+	int b_b;
+	int b_t;
+} t_point;
+
 typedef struct s_node
 {
 	int data;
@@ -40,6 +48,9 @@ int		pull_a_stack(t_stack *stk, int argc, char **argv);
 int		error_check(char *str, t_stack *stk);
 int		push(t_stack *stk, int data);
 int		check_same(t_node *node);
+// int	check_handle.c
+int	check_handle(int argc);
+int	rec(int argc, int sup);
 // pull_a_stack_utils.c
 int		ft_atoi(char *str, int *data);
 int		ft_atoi_n(char *str, int *data, int sign, size_t *num);
