@@ -106,8 +106,8 @@ void	init_error_queue(t_err_q *err_q);
 
 // init
 void	init_object(t_gm_obj *obj);
-t_queue	*init_queue(t_err_q err_q);
-t_obj_p	*init_obj_position(t_err_q err_q);
+t_queue	*init_queue(int i, t_err_q err_q);
+t_obj_p	*init_obj_position(int i, t_err_q err_q);
 
 //check_map
 t_gm_obj	check_map(int argc, char **argv, t_gm_obj obj);
