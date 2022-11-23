@@ -11,5 +11,6 @@ t_gm_obj	check_map(int argc, char **argv, t_gm_obj obj)
 	init_error_queue(&err_q);
 	check_file(argc, argv[1], err_f, &obj);
 	check_content(&obj, err_c);
+	check_possible(&obj, err_q);
 	return (obj);
 }

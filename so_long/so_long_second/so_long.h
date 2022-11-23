@@ -38,9 +38,10 @@ typedef struct s_queue
 
 typedef struct s_object_position
 {
+	int	row;
+	int	col;
 	int	way_in[2];
 	int	way_out[2];
-	t_queue	*foe_list;
 	t_queue *col_list;
 } t_obj_p;
 
@@ -98,12 +99,15 @@ typedef struct s_error_que
 // so_long
 void	so_long(int argc, char **argv);
 
-// init
+// init error
 void	init_error_file(t_err_f *err_f);
 void	init_error_content(t_err_c *err_c);
 void	init_error_queue(t_err_q *err_q);
+
+// init
 void	init_object(t_gm_obj *obj);
-void	init_queue(t_queue *que);
+t_queue	*init_queue(t_err_q err_q);
+t_obj_p	*init_obj_position(t_err_q err_q);
 
 //check_map
 t_gm_obj	check_map(int argc, char **argv, t_gm_obj obj);
@@ -120,10 +124,18 @@ void	check_obj_num(t_gm_obj *obj, t_err_c err_c);
 void	calc_num(t_gm_obj *obj, char c);
 void	check_content_error(t_gm_obj *obj, t_err_c err_c);
 
+//check_possible;
+void	check_possible(t_gm_obj *obj, t_err_q err_q);
+void	check_position(t_gm_obj *obj, t_obj_p *obj_p, t_err_q err_q);
+void	calc_position(char c, t_obj_p *obj_p, t_err_q err_q);
+
 // error_handle
 void	error_handle_file(int i, t_err_f err_f);
 void	error_handle_content(int i, t_err_c err_c);
+void	error_handle_queue(int i, t_err_q err_q);
 void	error_write(char *str, int num);
 
+// queue_box
+void push_queue(t_queue *que, t_err_q err_q, int i, int j);
 
 # endif

@@ -37,9 +37,16 @@ void	error_handle_content(int i, t_err_c err_c)
 		error_write(err_c.error6, err_c.erint6);
 }
 
-void	error_handle_queue(int i, t_err_c err_c)
+void	error_handle_queue(int i, t_err_q err_q)
 {
-
+	if (i == 1)
+		error_write(err_q.error1, err_q.erint1);
+	if (i == 2)
+		error_write(err_q.error2, err_q.erint2);
+	if (i == 3)
+		error_write(err_q.error3, err_q.erint3);
+	if (i == 4)
+		error_write(err_q.error4, err_q.erint4);
 }
 
 void	error_write(char *str, int num)

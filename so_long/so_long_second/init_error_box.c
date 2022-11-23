@@ -36,8 +36,8 @@ void	init_error_content(t_err_c *err_c)
 
 void	init_error_queue(t_err_q *err_q)
 {
-	err_q->error1 = "Error\nOutside blank space\n";
-	err_q->erint1 = 26;
+	err_q->error1 = "Error\nObj_p malloc fail\n";
+	err_q->erint1 = 25;
 	err_q->error2 = "Error\nCollection wrong\n";
 	err_q->erint2 = 24;
 	err_q->error3 = "Error\nWay_in wrong\n";

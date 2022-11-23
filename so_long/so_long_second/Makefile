@@ -6,12 +6,12 @@
 #    By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 13:49:19 by choinagi          #+#    #+#              #
-#    Updated: 2022/11/23 06:57:00 by sounchoi         ###   ########.fr        #
+#    Updated: 2022/11/23 08:44:31 by sounchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC				=	cc
-CFLAG			=	-Wall
+CFLAG			=	-g
 CFILES			=	check_content.c \
 					check_file.c \
 					check_map.c \
@@ -19,7 +19,9 @@ CFILES			=	check_content.c \
 					init_box.c \
 					init_error_box.c \
 					so_long.c \
-					main.c
+					main.c \
+					queue_box.c \
+					check_possible.c
 
 OBJS			=	$(CFILES:.c=.o)
 NAME			= 	so_long
