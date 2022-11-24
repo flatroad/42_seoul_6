@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:09:31 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/25 06:58:23 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/25 07:56:06 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # include "./libft/libft.h"
 
 # define TILE_SIZE 64
+# define KEY_ESC		53
+# define KEY_W			13
+# define KEY_A			0
+# define KEY_S			1
+# define KEY_D			2
 
 typedef struct s_game_object
 {
@@ -212,7 +217,8 @@ void		pop_queue(t_queue *que);
 // exec_game
 void		exec_game(t_gm_obj *obj);
 
-void	initial_map(t_mlx *mlx, char **map, t_err_m err_m);
+void		initial_map(t_mlx *mlx, char **map, t_err_m err_m);
+int			print_map(t_mlx *mlx, char c, int i, int j);
 
 
 #endif
