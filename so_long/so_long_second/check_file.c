@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_file.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/24 17:18:10 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/11/24 17:18:35 by sounchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	check_file(int argc, char *str, t_err_f err_f, t_gm_obj *obj)
@@ -54,12 +66,14 @@ void	check_line(t_gm_obj *obj, t_err_f err_f)
 	obj->x_max = ft_strlen(obj->map[obj->y_max]);
 	while (obj->map[obj->y_max + 1] != NULL)
 	{
-		if(obj->x_max != ft_strlen(obj->map[obj->y_max]))
+		if (obj->x_max != ft_strlen(obj->map[obj->y_max]))
 			error_handle_file(6, err_f);
 		obj->y_max++;
 	}
 	if (obj->x_max != ft_strlen(obj->map[obj->y_max]) + 1)
-			error_handle_file(6, err_f);
+		error_handle_file(6, err_f);
 	if (obj->y_max < 2)
 		error_handle_file(7, err_f);
+	if (obj->x_max - 1 <= 2)
+		error_handle_file(8, err_f);
 }

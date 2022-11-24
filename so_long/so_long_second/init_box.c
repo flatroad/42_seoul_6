@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_box.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/24 17:15:31 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/11/24 17:16:32 by sounchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	init_object(t_gm_obj *obj)
@@ -17,7 +29,8 @@ void	init_object(t_gm_obj *obj)
 
 t_queue	*init_queue(int i, t_err_q err_q)
 {
-	t_queue *que;
+	t_queue	*que;
+
 	que = (t_queue *)malloc(sizeof(t_queue) * 1);
 	if (que == NULL)
 		error_handle_queue(i, err_q);
@@ -29,7 +42,7 @@ t_queue	*init_queue(int i, t_err_q err_q)
 
 t_obj_p	*init_obj_position(int i, t_err_q err_q)
 {
-	t_obj_p *obj_p;
+	t_obj_p	*obj_p;
 
 	obj_p = (t_obj_p *)malloc(sizeof(t_obj_p) * 1);
 	if (obj_p == NULL)

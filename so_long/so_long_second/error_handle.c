@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_handle.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/24 17:16:39 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/11/24 17:16:40 by sounchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	error_handle_file(int i, t_err_f err_f)
@@ -18,7 +30,8 @@ void	error_handle_file(int i, t_err_f err_f)
 		error_write(err_f.error6, err_f.erint6);
 	if (i == 7)
 		error_write(err_f.error7, err_f.erint7);
-
+	if (i == 8)
+		error_write(err_f.error8, err_f.erint8);
 }
 
 void	error_handle_content(int i, t_err_c err_c)
@@ -35,6 +48,8 @@ void	error_handle_content(int i, t_err_c err_c)
 		error_write(err_c.error5, err_c.erint5);
 	if (i == 6)
 		error_write(err_c.error6, err_c.erint6);
+	if (i == 7)
+		error_write(err_c.error7, err_c.erint7);
 }
 
 void	error_handle_queue(int i, t_err_q err_q)

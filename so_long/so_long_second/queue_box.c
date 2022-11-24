@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   queue_box.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/24 17:14:43 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/11/24 17:14:55 by sounchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void push_queue(t_queue *que, t_err_q err_q, int i, int j)
+void	push_queue(t_queue *que, t_err_q err_q, int i, int j)
 {
 	t_node	*node;
 
@@ -24,7 +36,7 @@ void push_queue(t_queue *que, t_err_q err_q, int i, int j)
 	}
 }
 
-void pop_queue(t_queue *que)
+void	pop_queue(t_queue *que)
 {
 	t_node	*memo;
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_content.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/24 17:18:46 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/11/24 17:19:54 by sounchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	check_content(t_gm_obj *obj, t_err_c err_c)
@@ -9,8 +21,10 @@ void	check_content(t_gm_obj *obj, t_err_c err_c)
 
 void	check_wall(t_gm_obj *obj, t_err_c err_c)
 {
+	int	i;
+
+	i = 0;
 	obj->x_max--;
-	int	i = 0;
 	while (i < obj->x_max)
 	{
 		if (obj->map[0][i] != '1')
@@ -41,14 +55,14 @@ void	check_obj_num(t_gm_obj *obj, t_err_c err_c)
 		j = 0;
 		while (obj->map[i][j] != 0)
 		{
-			calc_num(obj, obj->map[i][j]);
+			calc_num(obj, obj->map[i][j], err_c);
 			j++;
 		}
 		i++;
 	}
 }
 
-void	calc_num(t_gm_obj *obj, char c)
+void	calc_num(t_gm_obj *obj, char c, t_err_c err_c)
 {
 	if (ft_charcmp(c, 'C') == 0)
 		obj->collection++;
@@ -63,7 +77,7 @@ void	calc_num(t_gm_obj *obj, char c)
 	else if (ft_charcmp(c, 'F') == 0)
 		obj->foe++;
 	else
-		return ;
+		error_handle_content(7, err_c);
 }
 
 void	check_content_error(t_gm_obj *obj, t_err_c err_c)

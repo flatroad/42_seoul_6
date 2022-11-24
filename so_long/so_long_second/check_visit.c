@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_visit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 17:17:45 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/24 17:18:00 by sounchoi         ###   ########.fr       */
+/*   Created: 2022/11/24 17:21:08 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/11/24 17:25:51 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_gm_obj	check_map(int argc, char **argv, t_gm_obj obj)
+void	check_visit(t_obj_p *obj_p, int **visit, t_err_q err_q)
 {
-	t_err_f	err_f;
-	t_err_c	err_c;
-	t_err_q	err_q;
+	check_out(obj_p, visit, err_q);
+}
 
-	init_error_file(&err_f);
-	init_error_content(&err_c);
-	init_error_queue(&err_q);
-	check_file(argc, argv[1], err_f, &obj);
-	check_content(&obj, err_c);
-	check_possible(&obj, err_q);
-	return (obj);
+void	check_inout(t_obj_p *obj_p, int **visit, t_err_q err_q)
+{
+	if (visit[obj_p->way_out[0]][obj_p->way_out[1]] != 1)
+		error_handle_queue(3, err_q);
 }
