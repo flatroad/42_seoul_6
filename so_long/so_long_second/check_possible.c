@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:16:49 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/24 18:07:18 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/25 02:57:00 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	check_possible(t_gm_obj *obj, t_err_q err_q)
 	if (visit == NULL)
 		error_handle_queue(2, err_q);
 	pull_visit(obj->map, obj_p, visit, err_q);
-	check_visit(obj_p, visit, err_q);
+	possible_visit(obj_p, visit, err_q);
+	free_visit(visit, obj->y_max + 1);
+	free(obj_p);
+	obj_p = NULL;
 }
 
 void	check_position(t_gm_obj *obj, t_obj_p *obj_p, t_err_q err_q)

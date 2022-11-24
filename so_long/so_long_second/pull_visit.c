@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:15:00 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/24 18:07:27 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/25 02:36:24 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	pull_visit(char **map, t_obj_p *obj_p, int **visit, t_err_q err_q)
 	push_queue (que, err_q, obj_p->way_in[0], obj_p->way_in[1]);
 	while (que->first != NULL)
 		exec_visit(que, err_q, visit, map);
+	que->last = NULL;
 	free(que);
 	que = 0;
 }

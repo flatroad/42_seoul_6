@@ -6,7 +6,7 @@
 #    By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 13:49:19 by choinagi          #+#    #+#              #
-#    Updated: 2022/11/24 18:07:26 by sounchoi         ###   ########.fr        #
+#    Updated: 2022/11/25 02:54:18 by sounchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ CFILES			=	check_content.c \
 					main.c \
 					queue_box.c \
 					check_possible.c \
-					pull_visit.c
+					pull_visit.c \
+					possible_visit.c \
+					free_box.c
 
 OBJS			=	$(CFILES:.c=.o)
 NAME			= 	so_long

@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:16:39 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/24 18:07:21 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/25 03:03:04 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	error_handle_queue(int i, t_err_q err_q)
 		error_write(err_q.error3, err_q.erint3);
 	if (i == 4)
 		error_write(err_q.error4, err_q.erint4);
+	if (i == 5)
+		error_write(err_q.error5, err_q.erint5);
 }
 
 void	error_write(char *str, int num)

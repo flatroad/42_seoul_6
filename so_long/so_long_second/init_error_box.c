@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:15:22 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/24 18:07:24 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/25 03:03:00 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ void	init_error_queue(t_err_q *err_q)
 	err_q->erint1 = 25;
 	err_q->error2 = "Error\nVisit malloc fail\n";
 	err_q->erint2 = 25;
-	err_q->error3 = "Error\nPush que fail\n";
-	err_q->erint3 = 21;
-	err_q->error4 = "Error\nWay_out wrong\n";
-	err_q->erint4 = 20;
+	err_q->error3 = "Error\nImpossibility game clear\n";
+	err_q->erint3 = 32;
+	err_q->error4 = "Error\nImpossibility game clear\n";
+	err_q->erint4 = 32;
+	err_q->error5 = "Error\nPush que fail\n";
+	err_q->erint5 = 21;
 }

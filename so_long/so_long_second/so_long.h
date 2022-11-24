@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:09:31 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/24 18:07:31 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/25 03:03:18 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ typedef struct s_error_que
 	int		erint3;
 	char	*error4;
 	int		erint4;
+	char	*error5;
+	int		erint5;
 }	t_err_q;
 
 // so_long
@@ -149,11 +151,19 @@ void		pull_visit(char **map, t_obj_p *obj_p, int **visit, t_err_q err_q);
 void		exec_visit(t_queue *que, t_err_q err_q, int **visit, char **map);
 int			check_visit(int **visit, char **map, int i, int j);
 
+// possible_visit
+void		possible_visit(t_obj_p *obj_p, int **visit, t_err_q err_q);
+void		check_posible_out(t_obj_p *obj_p, int **visit, t_err_q err_q);
+void		check_posible_collection(t_queue *que, int **visit, t_err_q err_q);
+
 // error_handle
 void		error_handle_file(int i, t_err_f err_f);
 void		error_handle_content(int i, t_err_c err_c);
 void		error_handle_queue(int i, t_err_q err_q);
 void		error_write(char *str, int num);
+
+// free_box
+void		free_visit(int **visit, int a);
 
 // queue_box
 void		push_queue(t_queue *que, t_err_q err_q, int i, int j);

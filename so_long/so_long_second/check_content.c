@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:18:46 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/24 18:07:14 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/25 02:45:45 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	check_obj_num(t_gm_obj *obj, t_err_c err_c)
 	while (obj->map[i] != NULL)
 	{
 		j = 0;
-		while (obj->map[i][j] != 0)
+		while (j != obj->x_max && obj->map[i][j] != 0)
 		{
 			calc_num(obj, obj->map[i][j], err_c);
 			j++;
@@ -77,7 +77,10 @@ void	calc_num(t_gm_obj *obj, char c, t_err_c err_c)
 	else if (ft_charcmp(c, 'F') == 0)
 		obj->foe++;
 	else
+	{
+		printf("c의 값은 : %d\n", c);
 		error_handle_content(7, err_c);
+	}
 }
 
 void	check_content_error(t_gm_obj *obj, t_err_c err_c)
