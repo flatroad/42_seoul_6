@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 06:12:25 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/26 08:03:37 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/26 08:10:30 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	key_hendle(int key_num, t_mlx *mlx, t_gm_obj *obj)
 	if (obj->way_out != 0)
 		return (0);
 	return (0);
+	if ()
 
 }
 
