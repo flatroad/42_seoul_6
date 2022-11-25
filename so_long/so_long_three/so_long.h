@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:09:31 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/25 07:56:06 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/26 07:59:10 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
 # include "./get_next_line/get_next_line.h"
 # include "./libft/libft.h"
 
-# define TILE_SIZE 64
-# define KEY_ESC		53
-# define KEY_W			13
-# define KEY_A			0
-# define KEY_S			1
-# define KEY_D			2
+# define TILE_SIZE 	64
+# define KEY_PRESS	2
+# define W			13
+# define A			0
+# define S			1
+# define D			2
+# define ESC 		53
 
 typedef struct s_game_object
 {
@@ -220,5 +221,7 @@ void		exec_game(t_gm_obj *obj);
 void		initial_map(t_mlx *mlx, char **map, t_err_m err_m);
 int			print_map(t_mlx *mlx, char c, int i, int j);
 
+int		key_hendle(int key_num, t_mlx *mlx, t_gm_obj *obj);
+void	esc_mlx(t_mlx *mlx);
 
 #endif
