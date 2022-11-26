@@ -221,7 +221,7 @@ static char *result[] = {
 "rX c #FAF5F1",
 "tX c #FDFAF5",
 "yX c #FCFBF6",
-"uX c #3F824F",
+"uX c #FFFEFFFF",
 /* pixels */
 "uXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuX                uXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuX",
 "uXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuX+ > 9 i l l a 1 @ uXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuXuX",

@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:15:31 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/25 06:11:27 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:24:36 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	init_object(t_gm_obj *obj)
 	obj->way_in = 0;
 	obj->way_out = 0;
 	obj->free_zone = 0;
-	obj->x_max = 0;
-	obj->y_max = 0;
+	obj->col_max = 0;
+	obj->row_max = 0;
+	obj->start_col = 0;
+	obj->start_row = 0;
 }
 
 t_queue	*init_queue(int i, t_err_q err_q)
@@ -55,4 +57,19 @@ t_obj_p	*init_obj_position(int i, t_err_q err_q)
 	obj_p->way_out[1] = 0;
 	obj_p->col_list = init_queue(2, err_q);
 	return (obj_p);
+}
+
+void	init_mlx(t_mlx *mlx)
+{
+	mlx->collect_img = NULL;
+	mlx->end_img = NULL;
+	mlx->out_img = NULL;
+	mlx->player_img = NULL;
+	mlx->player_house_img = NULL;
+	mlx->wall_img = NULL;
+	mlx->zero_img = NULL;
+	mlx->win_ptr = NULL;
+	mlx->mlx_ptr = NULL;
+	mlx->obj = NULL;
+	mlx->step = 0;
 }

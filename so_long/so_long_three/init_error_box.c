@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:15:22 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/25 07:18:27 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:28:50 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,4 @@ void	init_error_mlx(t_err_m *err_m)
 	err_m->erint3 = 32;
 	err_m->error4 = "Error\nInitial_map Fail";
 	err_m->erint4 = 32;
-	err_m->error5 = "Error\nPush que fail\n";
-	err_m->erint5 = 21;
 }

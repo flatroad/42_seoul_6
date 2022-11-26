@@ -6,7 +6,7 @@
 #    By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 13:49:19 by choinagi          #+#    #+#              #
-#    Updated: 2022/11/25 07:19:37 by sounchoi         ###   ########.fr        #
+#    Updated: 2022/11/26 13:22:30 by sounchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,9 @@ CFILES			=	check_content.c \
 					possible_visit.c \
 					free_box.c \
 					exec_game.c \
-					init_mlx.c \
-					initial_map.c
+					pull_mlx.c \
+					initial_map.c \
+					key_handle.c
 
 OBJS			=	$(CFILES:.c=.o)
 NAME			= 	so_long

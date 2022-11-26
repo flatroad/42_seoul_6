@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:18:46 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/25 02:45:45 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/26 12:48:53 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,21 @@ void	check_wall(t_gm_obj *obj, t_err_c err_c)
 	int	i;
 
 	i = 0;
-	obj->x_max--;
-	while (i < obj->x_max)
+	obj->row_max--;
+	while (i < obj->row_max)
 	{
 		if (obj->map[0][i] != '1')
 			error_handle_content(1, err_c);
-		if (obj->map[obj->y_max][i] != '1')
+		if (obj->map[obj->col_max][i] != '1')
 			error_handle_content(1, err_c);
 		i++;
 	}
 	i = 0;
-	while (i <= obj->y_max)
+	while (i <= obj->col_max)
 	{
 		if (obj->map[i][0] != '1')
 			error_handle_content(1, err_c);
-		if (obj->map[i][obj->x_max - 1] != '1')
+		if (obj->map[i][obj->row_max - 1] != '1')
 			error_handle_content(1, err_c);
 		i++;
 	}
@@ -53,7 +53,7 @@ void	check_obj_num(t_gm_obj *obj, t_err_c err_c)
 	while (obj->map[i] != NULL)
 	{
 		j = 0;
-		while (j != obj->x_max && obj->map[i][j] != 0)
+		while (j != obj->row_max && obj->map[i][j] != 0)
 		{
 			calc_num(obj, obj->map[i][j], err_c);
 			j++;
@@ -77,10 +77,7 @@ void	calc_num(t_gm_obj *obj, char c, t_err_c err_c)
 	else if (ft_charcmp(c, 'F') == 0)
 		obj->foe++;
 	else
-	{
-		printf("c의 값은 : %d\n", c);
 		error_handle_content(7, err_c);
-	}
 }
 
 void	check_content_error(t_gm_obj *obj, t_err_c err_c)

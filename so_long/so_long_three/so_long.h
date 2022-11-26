@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:09:31 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/26 07:59:10 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:52:09 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define S			1
 # define D			2
 # define ESC 		53
+# define X_BUTTON	17
 
 typedef struct s_game_object
 {
@@ -39,8 +40,10 @@ typedef struct s_game_object
 	int		player;
 	int		foe;
 	int		free_zone;
-	int		x_max;
-	int		y_max;
+	int		col_max;
+	int		row_max;
+	int		start_col;
+	int		start_row;
 }	t_gm_obj;
 
 typedef struct s_node
@@ -119,7 +122,7 @@ typedef struct s_error_que
 	int		erint5;
 }	t_err_q;
 
-typedef	struct s_error_mlx
+typedef struct s_error_mlx
 {
 	char	*error1;
 	int		erint1;
@@ -131,20 +134,22 @@ typedef	struct s_error_mlx
 	int		erint4;
 	char	*error5;
 	int		erint5;
-} t_err_m;
-
+}	t_err_m;
 
 typedef struct s_mlx
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*player_img;
-	void	*wall_img;
-	void	*zero_img;
-	void	*collect_img;
-	void	*out_img;
-	void	*end_img;
-} t_mlx;
+	t_gm_obj	*obj;
+	int			step;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*player_img;
+	void		*player_house_img;
+	void		*wall_img;
+	void		*zero_img;
+	void		*collect_img;
+	void		*out_img;
+	void		*end_img;
+}	t_mlx;
 
 // so_long
 void		so_long(int argc, char **argv);
@@ -161,11 +166,7 @@ void		init_error_mlx(t_err_m *err_m);
 void		init_object(t_gm_obj *obj);
 t_queue		*init_queue(int i, t_err_q err_q);
 t_obj_p		*init_obj_position(int i, t_err_q err_q);
-
-// init mlx
-void		init_mlx(t_mlx *mlx, t_gm_obj *obj,t_err_m err_m);
-void		init_mlx_images(t_mlx *mlx, t_gm_obj *obj, t_err_m err_m);
-int			print_map(t_mlx *mlx, char c, int i, int j);
+void		init_mlx(t_mlx *mlx);
 
 //check_map
 t_gm_obj	check_map(int argc, char **argv, t_gm_obj obj);
@@ -185,7 +186,7 @@ void		check_content_error(t_gm_obj *obj, t_err_c err_c);
 //check_possible
 void		check_possible(t_gm_obj *obj, t_err_q err_q);
 void		check_position(t_gm_obj *obj, t_obj_p *obj_p, t_err_q err_q);
-void		memo_position(char c, t_obj_p *obj_p, t_err_q err_q);
+void		memo_position(char c, t_obj_p *obj_p, t_err_q err_q, t_gm_obj *obj);
 int			**ft_mk_multi_arr(int a, int b);
 void		pull_arr_zore(int **arr, int a, int b);
 
@@ -217,11 +218,21 @@ void		pop_queue(t_queue *que);
 
 // exec_game
 void		exec_game(t_gm_obj *obj);
+int			esc_x(t_mlx *mlx);
 
+// initial_map
 void		initial_map(t_mlx *mlx, char **map, t_err_m err_m);
 int			print_map(t_mlx *mlx, char c, int i, int j);
 
-int		key_hendle(int key_num, t_mlx *mlx, t_gm_obj *obj);
-void	esc_mlx(t_mlx *mlx);
+// pull_mlx
+void		pull_mlx(t_mlx *mlx, t_gm_obj *obj, t_err_m err_m);
+void		pull_mlx_images(t_mlx *mlx, t_gm_obj *obj, t_err_m err_m);
+
+// key_handle
+int			key_hendle(int key_num, t_mlx *mlx);
+void		esc_mlx(t_mlx *mlx);
+int			check_move(char **map, t_gm_obj *obj, int col, int row);
+void		move(t_gm_obj *obj, t_mlx *mlx, int col, int row);
+void		exec_move(t_mlx *mlx, int col, int row, int flag);
 
 #endif

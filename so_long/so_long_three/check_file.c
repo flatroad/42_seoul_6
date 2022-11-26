@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:18:10 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/25 03:33:29 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/26 12:47:37 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,17 @@ void	read_file(t_gm_obj *obj, t_err_f err_f, int i, int idx)
 
 void	check_line(t_gm_obj *obj, t_err_f err_f)
 {
-	obj->x_max = ft_strlen(obj->map[obj->y_max]);
-	while (obj->map[obj->y_max + 1] != NULL)
+	obj->row_max = ft_strlen(obj->map[obj->col_max]);
+	while (obj->map[obj->col_max + 1] != NULL)
 	{
-		if (obj->x_max != ft_strlen(obj->map[obj->y_max]))
+		if (obj->row_max != ft_strlen(obj->map[obj->col_max]))
 			error_handle_file(6, err_f);
-		obj->y_max++;
+		obj->col_max++;
 	}
-	if (obj->x_max != ft_strlen(obj->map[obj->y_max]) + 1)
+	if (obj->row_max != ft_strlen(obj->map[obj->col_max]) + 1)
 		error_handle_file(6, err_f);
-	if (obj->y_max < 2)
+	if (obj->col_max < 2)
 		error_handle_file(7, err_f);
-	if (obj->x_max - 1 <= 2)
+	if (obj->row_max - 1 <= 2)
 		error_handle_file(8, err_f);
 }

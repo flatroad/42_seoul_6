@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:15:00 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/25 02:36:24 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/26 12:53:32 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@ void	exec_visit(t_queue *que, t_err_q err_q, int **visit, char **map)
 	}
 }
 
-int	check_visit(int **visit, char **map, int i, int j)
+int	check_visit(int **visit, char **map, int col, int row)
 {
-	if (visit[i][j] == 1)
+	if (visit[col][row] == 1)
 		return (0);
-	else if (map[i][j] == '1' || map[i][j] == 'F')
+	else if (map[col][row] == '1' || map[col][row] == 'F')
 	{
-		visit[i][j] = 1;
+		visit[col][row] = 1;
 		return (0);
 	}
 	else
 	{
-		visit[i][j] = 1;
+		visit[col][row] = 1;
 		return (1);
 	}
 }
