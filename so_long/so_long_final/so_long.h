@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:09:31 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/26 14:25:09 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:23:26 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,6 @@ typedef struct s_error_mlx
 	int		erint3;
 	char	*error4;
 	int		erint4;
-	char	*error5;
-	int		erint5;
 }	t_err_m;
 
 typedef struct s_mlx
@@ -226,7 +224,7 @@ int			print_map(t_mlx *mlx, char c, int i, int j);
 
 // pull_mlx
 void		pull_mlx(t_mlx *mlx, t_gm_obj *obj, t_err_m err_m);
-void		pull_mlx_images(t_mlx *mlx, t_gm_obj *obj, t_err_m err_m);
+void		pull_mlx_images(t_mlx *mlx, t_err_m err_m);
 
 // key_handle
 int			key_hendle(int key_num, t_mlx *mlx);

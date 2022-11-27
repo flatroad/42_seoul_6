@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 06:10:37 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/26 13:08:12 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:31:22 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	pull_mlx(t_mlx *mlx, t_gm_obj *obj, t_err_m err_m)
 {
-	int	width;
-	int	height;
-
 	mlx->obj = obj;
 	mlx->mlx_ptr = mlx_init();
 	if (mlx->mlx_ptr == NULL)
@@ -27,7 +24,7 @@ void	pull_mlx(t_mlx *mlx, t_gm_obj *obj, t_err_m err_m)
 		error_handle_mlx(2, err_m);
 }
 
-void	pull_mlx_images(t_mlx *mlx, t_gm_obj *obj, t_err_m err_m)
+void	pull_mlx_images(t_mlx *mlx, t_err_m err_m)
 {
 	int	width;
 	int	height;

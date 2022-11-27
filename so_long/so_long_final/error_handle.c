@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:16:39 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/26 14:21:36 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:27:00 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void	error_handle_mlx(int i, t_err_m err_m)
 		error_write(err_m.error3, err_m.erint3);
 	if (i == 4)
 		error_write(err_m.error4, err_m.erint4);
-	if (i == 5)
-		error_write(err_m.error5, err_m.erint5);
 }
 
 void	error_write(char *str, int num)

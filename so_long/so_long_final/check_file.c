@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:18:10 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/26 12:47:37 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:31:26 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ void	read_file(t_gm_obj *obj, t_err_f err_f, int i, int idx)
 
 void	check_line(t_gm_obj *obj, t_err_f err_f)
 {
-	obj->row_max = ft_strlen(obj->map[obj->col_max]);
+	obj->row_max = (int)ft_strlen(obj->map[obj->col_max]);
 	while (obj->map[obj->col_max + 1] != NULL)
 	{
-		if (obj->row_max != ft_strlen(obj->map[obj->col_max]))
+		if (obj->row_max != (int)ft_strlen(obj->map[obj->col_max]))
 			error_handle_file(6, err_f);
 		obj->col_max++;
 	}
-	if (obj->row_max != ft_strlen(obj->map[obj->col_max]) + 1)
+	if (obj->row_max != (int)ft_strlen(obj->map[obj->col_max]) + 1)
 		error_handle_file(6, err_f);
 	if (obj->col_max < 2)
 		error_handle_file(7, err_f);

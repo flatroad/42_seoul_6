@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:16:49 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/26 12:58:17 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:14:45 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	memo_position(char c, t_obj_p *obj_p, t_err_q err_q, t_gm_obj *obj)
 int	**ft_mk_multi_arr(int col, int row)
 {
 	int	i;
-	int	j;
 	int	**arr;
 
 	i = 0;

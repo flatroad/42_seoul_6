@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 06:12:25 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/26 14:21:37 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:18:17 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	exec_game(t_gm_obj *obj)
 	init_error_mlx(&err_m);
 	init_mlx(&mlx);
 	pull_mlx(&mlx, obj, err_m);
-	pull_mlx_images(&mlx, obj, err_m);
+	pull_mlx_images(&mlx, err_m);
 	initial_map(&mlx, obj->map, err_m);
 	obj->map[obj->start_col][obj->start_row] = '0';
 	mlx_hook(mlx.win_ptr, KEY_PRESS, 0, &key_hendle, &mlx);

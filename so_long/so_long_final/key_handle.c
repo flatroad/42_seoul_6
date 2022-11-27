@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 13:21:29 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/26 14:10:30 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:25:14 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	exec_move(t_mlx *mlx, int col, int row, int flag)
 		mlx->player_house_img, TILE_SIZE * row, TILE_SIZE * col);
 	mlx->step++;
 	str = ft_itoa(mlx->step);
-	write(1, str, ft_strlen(str));
+	write(1, str, (int)ft_strlen(str));
 	write(1, "\n", 1);
 	free(str);
 	str = 0;

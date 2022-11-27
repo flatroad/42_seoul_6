@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 17:15:00 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/11/26 12:53:32 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:15:02 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	pull_visit(char **map, t_obj_p *obj_p, int **visit, t_err_q err_q)
 {
-	int		count;
 	t_queue	*que;
 
 	que = init_queue(2, err_q);
