@@ -17,7 +17,7 @@ int main(){
 		exit(1);
 	}
 	printf("thread id %p \n",thread_id);
-	sleep(10);
+	system("leaks a.out");
 	return 0;
 }
 void *pthread_ex(void *arg)
@@ -28,5 +28,6 @@ void *pthread_ex(void *arg)
 		printf("thread.. %d\n",i);
 		i++;
 	}
+	system("leaks a.out");
 	return (0);
 }
