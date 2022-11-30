@@ -1,0 +1,44 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile(first)                                    :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/11/18 13:49:19 by sounchoi          #+#    #+#              #
+#    Updated: 2022/11/30 18:14:43 by sounchoi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+CC				=	cc
+CFLAG			=	-Wall
+CFILES			=	check_param.c \
+					error_handle.c \
+					init_box.c \
+					main.c \
+					philo.c
+
+NAME			= 	philo
+OBJS			=	$(CFILES:.c=.o)
+
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAG) $(OBJS) -o $@
+
+%.o: %.c
+	$(CC) $(CFLAG) -c $? -o $@
+
+all: $(NAME)
+
+clean:
+	rm -f $(OBJS)
+
+fclean:
+	make clean
+	rm -f $(NAME)
+
+re:
+	make fclean
+	make all
+
+.PHONY: all clean fclean re bonus

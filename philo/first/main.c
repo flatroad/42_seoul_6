@@ -2,6 +2,7 @@
 
 int	main(int argc, char **argv)
 {
-	philo (argc, argv);
+	if (philo (argc, argv) != SUSSESS)
+		return (1);
 	return (0);
 }
