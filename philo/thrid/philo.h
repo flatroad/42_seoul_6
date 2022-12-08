@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:53:42 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/08 20:06:52 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:00:51 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_part
 {
 	pthread_mutex_t	*fork_mx;
 	int				*bool_fork;
-	t_philo			*philo;
 }	t_part;
 
 // check_factor_utils
@@ -76,5 +75,10 @@ int		init_philo(t_philo *philo, t_inform *inform, t_part *part, int num);
 
 //free_mutex
 void	free_mutex(pthread_mutex_t *fork_mx, int num);
+
+//start_game
+int		start_game(t_philo *philo);
+void	*odd_case(void *atr);
+void	*even_case(void *atr);
 
 #endif
