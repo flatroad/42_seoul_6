@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:53:42 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/08 13:36:10 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:18:35 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <stdio.h>
+
+typedef struct s_part
+{
+	pthread_mutex_t	*fork_mx;
+	int				*bool_fork;
+}	t_part;
 
 typedef struct s_inform
 {
@@ -34,10 +40,10 @@ typedef struct s_philo
 {
 	int	idx;
 	int count;
-	int	fork_r;
-	int fork_l;
-	pthread_mutex_t	fork_mx_r;
-	pthread_mutex_t	fork_mx_l;
+	int	*fork_r;
+	int *fork_l;
+	pthread_mutex_t	*fork_mx_r;
+	pthread_mutex_t	*fork_mx_l;
 	t_inform		*inform;
 }	t_philo;
 
