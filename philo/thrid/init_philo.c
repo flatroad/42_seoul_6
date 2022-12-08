@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:31:08 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/08 17:31:33 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:06:54 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,56 @@
 
 int	init_part(t_inform *inform, t_part *part, int num)
 {
-	if (pull_bool_fork(num, part->bool_fork) == 1)
+	if (pull_bool_fork(num, part) == 1)
 		return (4);
-	if (pull_mutex(num, part->fork_mx) == 1)
+	if (init_mutex(inform) == 1)
 	{
 		free(part->bool_fork);
 		part->bool_fork = 0;
 		return (5);
 	}
+	if (pull_mutex(num, part) == 1)
+	{
+		pthread_mutex_destroy(&inform->print_mx);
+		pthread_mutex_destroy(&inform->time);
+		free(part->bool_fork);
+		part->bool_fork = 0;
+		return (6);
+	}
 	return (0);
 }
 
-int	pull_bool_fork(int num, int *bool_fork)
+int	pull_bool_fork(int num, t_part *part)
 {
 	int	i;
 
 	i = 0;
-	bool_fork = (int *)malloc(sizeof(int) * num);
-	if (bool_fork == NULL)
+	part->bool_fork = (int *)malloc(sizeof(int) * num);
+	if (part->bool_fork == NULL)
 		return (1);
 	while (i < num)
 	{
-		bool_fork[i] = 1;
+		part->bool_fork[i] = 1;
 		i++;
 	}
 	return (0);
 }
 
-int	pull_mutex(int num, pthread_mutex_t *fork_mx)
+int	pull_mutex(int num, t_part *part)
 {
 	int	i;
 
 	i = 0;
-	fork_mx = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * num);
-	if (fork_mx == NULL)
+	part->fork_mx = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * num);
+	if (part->fork_mx == NULL)
 		return (1);
 	while (i < num)
 	{
-		if (pthread_mutex_init(&fork_mx[i], NULL) != 0)
+		if (pthread_mutex_init(&part->fork_mx[i], NULL) != 0)
 		{
-			free_mutex(fork_mx, i);
-			free(fork_mx);
-			fork_mx = 0;
+			free_mutex(part->fork_mx, i);
+			free(part->fork_mx);
+			part->fork_mx = 0;
 			return (1);
 		}
 		i++;
@@ -63,14 +71,33 @@ int	pull_mutex(int num, pthread_mutex_t *fork_mx)
 	return (0);
 }
 
-void	free_mutex(pthread_mutex_t *fork_mx, int num)
+int	init_mutex(t_inform *inform)
+{
+	if (pthread_mutex_init(&inform->print_mx, NULL) != 0)
+		return (1);
+	if (pthread_mutex_init(&inform->time, NULL) != 0)
+	{
+		pthread_mutex_destroy(&inform->print_mx);
+		return (1);
+	}
+	return (0);
+}
+
+int	init_philo(t_philo *philo, t_inform *inform, t_part *part, int num)
 {
 	int	i;
 
 	i = 0;
 	while (i < num)
 	{
-		pthread_mutex_destroy(&fork_mx[i]);
+		philo[i].count = 0;
+		philo[i].idx = i;
+		philo[i].fork_l = &part->bool_fork[i];
+		philo[i].fork_r = &part->bool_fork[(i + 1) % num];
+		philo[i].fork_mx_l = &part->fork_mx[i];
+		philo[i].fork_mx_r = &part->fork_mx[(i + 1) % num];
+		philo[i].inform = inform;
 		i++;
 	}
+	return (0);
 }
