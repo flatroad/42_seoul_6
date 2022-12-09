@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: younkim <younkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: choinagi <choinagi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:53:42 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/09 19:23:58 by younkim          ###   ########seoul.kr  */
+/*   Updated: 2022/12/10 02:49:06 by choinagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct s_inform
 {
-	int				*block;
+	int				block;
 	int				mode;
 	int				number_of_philosophers;
 	int				time_to_die;
@@ -31,7 +31,7 @@ typedef struct s_inform
 	int				check_print;
 	pthread_mutex_t	print_mx;
 	pthread_mutex_t	time;
-	struct timeval	s_time;
+	long long s_time;
 }	t_inform;
 
 typedef struct s_philo
@@ -82,6 +82,5 @@ void	free_mutex(pthread_mutex_t *fork_mx, int num);
 //start_game
 int		start_game(t_philo *philo);
 void	*odd_case(void *atr);
-void	*even_case(void *atr);
 
 #endif

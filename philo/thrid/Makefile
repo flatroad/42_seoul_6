@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+         #
+#    By: choinagi <choinagi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 13:49:19 by sounchoi          #+#    #+#              #
-#    Updated: 2022/12/08 21:00:51 by sounchoi         ###   ########.fr        #
+#    Updated: 2022/12/10 01:22:35 by choinagi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC				=	cc
-CFLAG			=	-Wall
+CFLAG			=	-Wall -Wextra -Werror -g
 CFILES			=	check_factor_utils.c \
 					check_factor.c \
 					main.c \
