@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_factor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: younkim <younkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:51:20 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/08 13:36:12 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:34:53 by younkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,15 @@ int	is_num(int argc, char **argv)
 
 int	is_int(int argc, char **argv, t_inform *inform)
 {
-	int	i;
-
-	i = 1;
 	inform->mode = argc;
-	inform->number_of_philosophers = ft_atoi(argv[i]);
-	inform->time_to_die = ft_atoi(argv[i + 1]);
-	inform->time_to_eat = ft_atoi(argv[i + 2]);
-	inform->time_to_sleep = ft_atoi(argv[i + 3]);
+	inform->number_of_philosophers = ft_atoi(argv[1]);
+	inform->time_to_die = ft_atoi(argv[2]);
+	inform->time_to_eat = ft_atoi(argv[3]);
+	inform->time_to_sleep = ft_atoi(argv[4]);
 	inform->number_of_times_each_philosopher_must_eat = -2;
 	if (inform->mode == 6)
 		inform->number_of_times_each_philosopher_must_eat = \
-		ft_atoi(argv[i + 4]);
+		ft_atoi(argv[5]);
 	if (inform->number_of_philosophers == -1 || \
 	inform->number_of_times_each_philosopher_must_eat == -1 || \
 	inform->time_to_die == -1 || inform->time_to_eat == -1 || \

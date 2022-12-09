@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: choinagi <choinagi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:52:52 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/08 20:06:52 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/10 02:49:07 by choinagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	check_init(t_inform *inform, t_part *part, t_philo *philo, int num)
 		free_mutex(part->fork_mx, num);
 		pthread_mutex_destroy(&inform->print_mx);
 		pthread_mutex_destroy(&inform->time);
-		free(&part->bool_fork);
+		free(part->bool_fork);
 		part->bool_fork = 0;
 		return (err);
 	}

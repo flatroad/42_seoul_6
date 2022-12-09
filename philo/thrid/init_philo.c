@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: choinagi <choinagi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:31:08 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/08 20:06:54 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/10 02:17:41 by choinagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	init_philo(t_philo *philo, t_inform *inform, t_part *part, int num)
 	while (i < num)
 	{
 		philo[i].count = 0;
-		philo[i].idx = i;
+		philo[i].idx = i + 1;
 		philo[i].fork_l = &part->bool_fork[i];
 		philo[i].fork_r = &part->bool_fork[(i + 1) % num];
 		philo[i].fork_mx_l = &part->fork_mx[i];

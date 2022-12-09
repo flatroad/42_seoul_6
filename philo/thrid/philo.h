@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: choinagi <choinagi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:53:42 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/09 18:25:12 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/10 02:49:06 by choinagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,22 @@
 
 typedef struct s_inform
 {
-	int				*block;
+	int				block;
 	int				mode;
 	int				number_of_philosophers;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_times_each_philosopher_must_eat;
+	int				check_print;
 	pthread_mutex_t	print_mx;
 	pthread_mutex_t	time;
-	struct timeval	s_time;
+	long long s_time;
 }	t_inform;
 
 typedef struct s_philo
 {
-	int				time;
+	pthread_t id;
 	int				idx;
 	int				count;
 	int				*fork_r;
@@ -43,7 +44,6 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_mx_r;
 	pthread_mutex_t	*fork_mx_l;
 	t_inform		*inform;
-	struct timeval	s_time;
 }	t_philo;
 
 typedef struct s_part
@@ -82,6 +82,5 @@ void	free_mutex(pthread_mutex_t *fork_mx, int num);
 //start_game
 int		start_game(t_philo *philo);
 void	*odd_case(void *atr);
-void	*even_case(void *atr);
 
 #endif
