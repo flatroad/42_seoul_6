@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: younkim <younkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:53:42 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/09 18:25:12 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:23:58 by younkim          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_inform
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_times_each_philosopher_must_eat;
+	int				check_print;
 	pthread_mutex_t	print_mx;
 	pthread_mutex_t	time;
 	struct timeval	s_time;
@@ -35,7 +36,7 @@ typedef struct s_inform
 
 typedef struct s_philo
 {
-	int				time;
+	pthread_t id;
 	int				idx;
 	int				count;
 	int				*fork_r;
@@ -43,7 +44,6 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_mx_r;
 	pthread_mutex_t	*fork_mx_l;
 	t_inform		*inform;
-	struct timeval	s_time;
 }	t_philo;
 
 typedef struct s_part
