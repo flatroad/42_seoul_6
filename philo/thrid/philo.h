@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:53:42 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/08 21:00:51 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:25:12 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ typedef struct s_inform
 	int				number_of_times_each_philosopher_must_eat;
 	pthread_mutex_t	print_mx;
 	pthread_mutex_t	time;
+	struct timeval	s_time;
 }	t_inform;
 
 typedef struct s_philo
 {
+	int				time;
 	int				idx;
 	int				count;
 	int				*fork_r;
@@ -41,6 +43,7 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_mx_r;
 	pthread_mutex_t	*fork_mx_l;
 	t_inform		*inform;
+	struct timeval	s_time;
 }	t_philo;
 
 typedef struct s_part
