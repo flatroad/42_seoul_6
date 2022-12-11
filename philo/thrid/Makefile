@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: choinagi <choinagi@student.42.fr>          +#+  +:+       +#+         #
+#    By: sounchoi <sounchoi>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 13:49:19 by sounchoi          #+#    #+#              #
-#    Updated: 2022/12/10 01:22:35 by choinagi         ###   ########.fr        #
+#    Updated: 2022/12/11 19:33:24 by sounchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC				=	cc
-CFLAG			=	-Wall -Wextra -Werror -g
+CFLAG			=	-Wall -Wextra -Werror
 CFILES			=	check_factor_utils.c \
 					check_factor.c \
 					main.c \
@@ -19,7 +19,9 @@ CFILES			=	check_factor_utils.c \
 					philo.c \
 					init_philo.c \
 					free_box.c \
-					start_game.c
+					start_game.c \
+					start_game_state.c \
+					start_game_utils.c
 
 NAME			= 	philo
 OBJS			=	$(CFILES:.c=.o)

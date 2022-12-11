@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choinagi <choinagi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sounchoi <sounchoi>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:53:42 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/10 02:49:06 by choinagi         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:37:55 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,12 @@ typedef struct s_inform
 	int				number_of_times_each_philosopher_must_eat;
 	int				check_print;
 	pthread_mutex_t	print_mx;
-	pthread_mutex_t	time;
-	long long s_time;
+	long long		s_time;
 }	t_inform;
 
 typedef struct s_philo
 {
-	pthread_t id;
+	pthread_t		id;
 	int				idx;
 	int				count;
 	int				*fork_r;
@@ -52,35 +51,49 @@ typedef struct s_part
 	int				*bool_fork;
 }	t_part;
 
+//start_game_cutils
+long long	get_time(void);
+int			mutex_print(t_philo *arr, char *s, long long c_t);
+int			check_time(t_philo *arr, long long s_t);
+
 // check_factor_utils
-size_t	ft_strlen(const char *s);
-int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
+size_t		ft_strlen(const char *s);
+int			ft_isdigit(int c);
+int			ft_atoi(const char *str);
 
 // check_factor
-int		check_factor(int argc, char **argv, t_inform *inform);
-int		is_num(int argc, char **argv);
-int		is_int(int argc, char **argv, t_inform *inform);
+int			check_factor(int argc, char **argv, t_inform *inform);
+int			is_num(int argc, char **argv);
+int			is_int(int argc, char **argv, t_inform *inform);
 
 // error_handle
-int		error_handle(int i);
-void	error_write(char *str);
+int			error_handle(int i);
+void		error_write(char *str);
 
 // philo
-int		philo(int argc, char **argv);
-int		check_init(t_inform *inform, t_part *part, t_philo *philo, int num);
+int			philo(int argc, char **argv);
+int			check_init(t_inform *inform, t_part *part, t_philo *philo, int num);
 //init_philo
-int		init_part(t_inform *inform, t_part *part, int num);
-int		pull_bool_fork(int num, t_part *part);
-int		pull_mutex(int num, t_part *part);
-int		init_mutex(t_inform *inform);
-int		init_philo(t_philo *philo, t_inform *inform, t_part *part, int num);
+int			init_part(t_inform *inform, t_part *part, int num);
+int			pull_bool_fork(int num, t_part *part);
+int			pull_mutex(int num, t_part *part);
+int			init_mutex(t_inform *inform);
+int			init_philo(t_philo *philo, t_inform *inform, t_part *part, int num);
 
 //free_mutex
-void	free_mutex(pthread_mutex_t *fork_mx, int num);
+void		free_mutex(pthread_mutex_t *fork_mx, int num);
+void		free_pthread(t_philo *philo, int num);
+void		free_all(t_philo *philo, t_part *part, t_inform *inform);
 
 //start_game
-int		start_game(t_philo *philo);
-void	*odd_case(void *atr);
+int			start_game(t_philo *philo);
+void		*live_or_die(void *atr);
+
+//start_game_state
+void		*live_or_die(void *atr);
+int			pickup(t_philo *arr, long long s_t);
+int			pickup_check(t_philo *arr);
+int			eating(t_philo *arr, long long *s_t);
+int			sleeping(t_philo *arr, long long s_t);
 
 #endif

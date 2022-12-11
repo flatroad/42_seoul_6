@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choinagi <choinagi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sounchoi <sounchoi>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:31:08 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/10 02:17:41 by choinagi         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:39:06 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	init_part(t_inform *inform, t_part *part, int num)
 	if (pull_mutex(num, part) == 1)
 	{
 		pthread_mutex_destroy(&inform->print_mx);
-		pthread_mutex_destroy(&inform->time);
+		free(part->fork_mx);
 		free(part->bool_fork);
 		part->bool_fork = 0;
 		return (6);
@@ -75,11 +75,6 @@ int	init_mutex(t_inform *inform)
 {
 	if (pthread_mutex_init(&inform->print_mx, NULL) != 0)
 		return (1);
-	if (pthread_mutex_init(&inform->time, NULL) != 0)
-	{
-		pthread_mutex_destroy(&inform->print_mx);
-		return (1);
-	}
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choinagi <choinagi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sounchoi <sounchoi>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:52:52 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/10 02:49:07 by choinagi         ###   ########.fr       */
+/*   Updated: 2022/12/11 19:38:26 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	philo(int argc, char **argv)
 	if (err != 0)
 		return (error_handle(err));
 	err = start_game(philo);
+	free_all(philo, &part, &inform);
 	if (err != 0)
 		return (error_handle(err));
 	return (0);
@@ -47,7 +48,7 @@ int	check_init(t_inform *inform, t_part *part, t_philo *philo, int num)
 	{
 		free_mutex(part->fork_mx, num);
 		pthread_mutex_destroy(&inform->print_mx);
-		pthread_mutex_destroy(&inform->time);
+		free(part->fork_mx);
 		free(part->bool_fork);
 		part->bool_fork = 0;
 		return (err);
