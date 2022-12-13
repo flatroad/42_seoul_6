@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_factor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: younkim <younkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:51:20 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/09 18:34:53 by younkim          ###   ########seoul.kr  */
+/*   Updated: 2022/12/13 11:14:06 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ int	check_factor(int argc, char **argv, t_inform *inform)
 		return (2);
 	if (is_int(argc, argv, inform) != 0)
 		return (3);
+	if (inform->number_of_philosophers == 0)
+		return (8);
+	if (inform->number_of_times_each_philosopher_must_eat == 0)
+		return (9);
 	return (0);
 }
 

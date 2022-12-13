@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choinagi <choinagi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:31:56 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/11 17:12:33 by choinagi         ###   ########.fr       */
+/*   Updated: 2022/12/13 10:55:29 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,13 @@ int	error_handle(int i)
 	if (i == 5)
 		error_write("Error\ninform_mutex is wrong\n");
 	if (i == 6)
-		error_write("Error\nfork_mx is wrong");
+		error_write("Error\nfork_mx is wrong\n");
 	if (i == 7)
-		error_write("Error\npthread creat fail");
+		error_write("Error\npthread creat fail\n");
+	if (i == 8)
+		error_write("Error\nphilo is a zero\n");
+	if (i == 9)
+		error_write("Error\nwhat does it mean to eat 0 times?\n");
 	return (1);
 }
 
