@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:53:42 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/13 11:15:31 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/13 22:01:21 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_part
 
 //start_game_cutils
 long long	get_time(void);
-int			mutex_print(t_philo *arr, char *s, long long c_t);
+int			mutex_print(t_philo *arr, char *s_philo);
 int			check_time(t_philo *arr, long long s_t);
 
 // check_factor_utils

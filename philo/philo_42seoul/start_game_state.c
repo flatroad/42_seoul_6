@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 19:06:11 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/13 19:55:31 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/13 22:12:21 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	pickup_check(t_philo *arr)
 		pthread_mutex_lock(arr->fork_mx_r);
 		if (*arr->fork_r != arr->idx)
 		{
-			mutex_print(arr, "has taken a fork", get_time());
+			mutex_print(arr, "has taken a fork");
 			pthread_mutex_unlock(arr->fork_mx_r);
 			return (1);
 		}
@@ -72,7 +72,7 @@ int	pickup_check(t_philo *arr)
 int	eating(t_philo *arr, long long *s_t)
 {
 	*s_t = get_time();
-	if (mutex_print(arr, "is eating", *s_t))
+	if (mutex_print(arr, "is eating"))
 		return (0);
 	if (++arr->count == arr->inform->number_of_times_each_philosopher_must_eat)
 	{
@@ -100,7 +100,7 @@ int	sleeping(t_philo *arr, long long s_t)
 	long long	c_t;
 
 	c_t = get_time();
-	if (mutex_print(arr, "is sleeping", c_t))
+	if (mutex_print(arr, "is sleeping"))
 		return (0);
 	while (get_time() - c_t <= arr->inform->time_to_sleep)
 	{
@@ -108,7 +108,7 @@ int	sleeping(t_philo *arr, long long s_t)
 			return (0);
 		usleep(300);
 	}
-	if (mutex_print(arr, "is thinking", get_time()))
+	if (mutex_print(arr, "is thinking"))
 		return (0);
 	usleep(400);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 19:14:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/13 19:57:14 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/13 22:10:45 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ long long	get_time(void)
 	return (time);
 }
 
-int	mutex_print(t_philo *arr, char *s, long long c_t)
+int	mutex_print(t_philo *arr, char *s)
 {
 	pthread_mutex_lock(&arr->inform->print_mx);
 	if (!((arr->inform->block)))
-		printf("%lld [%3d] %s\n", c_t - arr->inform->s_time, arr->idx, s);
+		printf("%lld [%3d] %s\n", get_time() - arr->inform->s_time, arr->idx, s);
 	else
 	{
 		pthread_mutex_unlock(&arr->inform->print_mx);
@@ -47,7 +47,8 @@ int	check_time(t_philo *arr, long long s_t)
 		if (!(arr->inform->block))
 		{
 			(arr->inform->block) = arr->idx;
-			printf("%lld [%3d] died\n", c_t - arr->inform->s_time, arr->idx);
+			printf("%lld [%3d] died\n", get_time() - \
+			arr->inform->s_time, arr->idx);
 		}
 		pthread_mutex_unlock(&arr->inform->print_mx);
 		return (1);
