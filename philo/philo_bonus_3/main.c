@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_game_utils.c                                 :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 19:14:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/15 08:19:17 by sounchoi         ###   ########.fr       */
+/*   Created: 2022/12/08 07:53:05 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/12/15 04:16:01 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-long long	get_time(void)
+int	main(int argc, char **argv)
 {
-	struct timeval	s_t;
-	long long		time;
-
-	gettimeofday(&s_t, NULL);
-	time = s_t.tv_sec * 1000 + s_t.tv_usec / 1000;
-	return (time);
-}
-
-void	sem_print(t_philo philo, char *s, int i)
-{
-	sem_wait(philo.inform->sem_pr);
-	printf("%lld [%3d] %s\n", get_time() - philo.inform->s_time, philo.idx, s);
-	if (i == 1)
+	if (philo_bonus(argc, argv) != 0)
 	{
-		sem_post(philo.inform->dead);
-		sleep(1);
-		return ;
+		return (1);
 	}
-	sem_post(philo.inform->sem_pr);
+	return (0);
 }

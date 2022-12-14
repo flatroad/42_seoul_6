@@ -5,111 +5,63 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 19:06:11 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/14 19:42:30 by sounchoi         ###   ########.fr       */
+/*   Created: 2022/12/15 08:11:09 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/12/15 08:25:32 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
-void	*live_or_die(void *atr)
+int	live_or_die(t_philo philo)
 {
-	t_philo		*arr;
-	long long	s_t;
-
-	arr = (t_philo *)atr;
-	pthread_mutex_lock(&arr->inform->print_mx);
-	while (arr->inform->block)
-		;
-	pthread_mutex_unlock(&arr->inform->print_mx);
-	if (arr->idx % 2 == 0)
-		usleep(1000);
-	pickup(arr, arr->inform->s_time);
+	philo.r_time = &philo.inform->put_t;
+	pthread_create(&philo.id, NULL, moniter, &philo);
 	while (1)
 	{
-		if (!(eating(arr, &s_t) && sleeping(arr, s_t) && pickup(arr, s_t)))
-			break ;
-	}
-	return (NULL);
-}
-
-int	pickup(t_philo *arr, long long s_t)
-{
-	while (1)
-	{
-		if (pickup_check(arr) == 1)
-			return (1);
-		if (check_time(arr, s_t))
-			break ;
-		usleep(300);
-	}
-	return (0);
-}
-
-int	pickup_check(t_philo *arr)
-{
-	pthread_mutex_lock(arr->fork_mx_l);
-	if (*arr->fork_l != arr->idx)
-	{
-		pthread_mutex_unlock(arr->fork_mx_l);
-		pthread_mutex_lock(arr->fork_mx_r);
-		if (*arr->fork_r != arr->idx)
-		{
-			mutex_print(arr, "has taken a fork");
-			pthread_mutex_unlock(arr->fork_mx_r);
-			return (1);
-		}
-		else
-		{
-			pthread_mutex_unlock(arr->fork_mx_r);
-			pthread_mutex_lock(arr->fork_mx_l);
-		}
-	}
-	pthread_mutex_unlock(arr->fork_mx_l);
-	return (0);
-}
-
-int	eating(t_philo *arr, long long *s_t)
-{
-	*s_t = get_time();
-	if (mutex_print(arr, "is eating"))
-		return (0);
-	if (++arr->count == arr->inform->number_of_times_each_philosopher_must_eat)
-	{
-		pthread_mutex_lock(arr->fork_mx_l);
-		pthread_mutex_lock(arr->fork_mx_r);
-		*(arr->fork_l) = arr->idx;
-		*(arr->fork_r) = arr->idx;
-		pthread_mutex_unlock(arr->fork_mx_l);
-		pthread_mutex_unlock(arr->fork_mx_r);
-		return (0);
-	}
-	while (get_time() - *s_t <= arr->inform->time_to_eat)
-		usleep(100);
-	pthread_mutex_lock(arr->fork_mx_l);
-	pthread_mutex_lock(arr->fork_mx_r);
-	*(arr->fork_l) = arr->idx;
-	*(arr->fork_r) = arr->idx;
-	pthread_mutex_unlock(arr->fork_mx_l);
-	pthread_mutex_unlock(arr->fork_mx_r);
-	return (1);
-}
-
-int	sleeping(t_philo *arr, long long s_t)
-{
-	long long	c_t;
-
-	c_t = get_time();
-	if (mutex_print(arr, "is sleeping"))
-		return (0);
-	while (get_time() - c_t <= arr->inform->time_to_sleep)
-	{
-		if (check_time(arr, s_t))
+		pick_up(philo);
+		if (eating(philo) == 1)
 			return (0);
-		usleep(300);
+		++philo.count;
+		sleeping(philo);
 	}
-	if (mutex_print(arr, "is thinking"))
-		return (0);
-	usleep(400);
-	return (1);
+	return (0);
+}
+
+void	pick_up(t_philo philo)
+{
+	sem_wait(philo.inform->fork);
+	sem_wait(philo.inform->fork);
+	sem_print(philo, "has fork", 0);
+}
+
+int	eating(t_philo philo)
+{
+	sem_wait(philo.time);
+	printf("%p\n", philo.time);
+	*philo.r_time = get_time();
+	sem_post(philo.time);
+	sem_print(philo, "is eating", 0);
+	if (++(philo.count) == \
+	philo.inform->number_of_times_each_philosopher_must_eat)
+	{
+		sem_post(philo.inform->fork);
+		sem_post(philo.inform->fork);
+		return (1);
+	}
+	while (get_time() - *philo.r_time < philo.inform->time_to_eat)
+		usleep(300);
+	sem_post(philo.inform->fork);
+	sem_post(philo.inform->fork);
+	return (0);
+}
+
+void	sleeping(t_philo philo)
+{
+	long long	x;
+
+	x = get_time();
+	sem_print(philo, "is sleep", 0);
+	while (get_time() - x < philo.inform->time_to_sleep)
+		usleep(300);
+	sem_print(philo, "is thinking", 0);
 }

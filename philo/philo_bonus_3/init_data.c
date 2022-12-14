@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/15 08:05:42 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/15 08:05:48 by sounchoi         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "philo_bonus.h"
 
 int	init_data(t_philo *philo, t_inform *inform, int num)
@@ -37,9 +25,6 @@ int	init_philo(t_philo *philo, int num, t_inform *inform)
 	i = 0;
 	while (i < num)
 	{
-		philo[i].time = sem_open("sem_time", O_CREAT, 0644, 1);
-		if (philo[i].time == SEM_FAILED)
-			return (1);
 		philo[i].count = 0;
 		philo[i].idx = (i + 1);
 		philo[i].inform = inform;

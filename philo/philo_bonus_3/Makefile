@@ -6,7 +6,7 @@
 #    By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 13:49:19 by sounchoi          #+#    #+#              #
-#    Updated: 2022/12/15 07:41:42 by sounchoi         ###   ########.fr        #
+#    Updated: 2022/12/15 06:31:15 by sounchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,11 @@ CFILES			=	check_factor_utils.c \
 					philo_bonus.c \
 					init_data.c \
 					free_box.c \
-					moniter.c \
 					start_game.c \
 					start_game_state.c \
 					start_game_utils.c
 
-NAME			= 	philo_bonus
+NAME			= 	philo_bouns
 OBJS			=	$(CFILES:.c=.o)
 
 

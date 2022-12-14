@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 19:14:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/15 08:19:17 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/14 19:53:50 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ long long	get_time(void)
 void	sem_print(t_philo philo, char *s, int i)
 {
 	sem_wait(philo.inform->sem_pr);
-	printf("%lld [%3d] %s\n", get_time() - philo.inform->s_time, philo.idx, s);
+	printf("%lld [%3d] %s\n", get_time() - philo.inform->time, philo.idx, s);
 	if (i == 1)
 	{
 		sem_post(philo.inform->dead);
-		sleep(1);
 		return ;
 	}
 	sem_post(philo.inform->sem_pr);

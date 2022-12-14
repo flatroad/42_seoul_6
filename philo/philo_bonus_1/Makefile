@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+         #
+#    By: sounchoi <sounchoi>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 13:49:19 by sounchoi          #+#    #+#              #
-#    Updated: 2022/12/15 07:41:42 by sounchoi         ###   ########.fr        #
+#    Updated: 2022/12/11 19:33:24 by sounchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,14 @@ CFILES			=	check_factor_utils.c \
 					check_factor.c \
 					main.c \
 					error_handle.c \
-					philo_bonus.c \
-					init_data.c \
+					philo.c \
+					init_philo.c \
 					free_box.c \
-					moniter.c \
 					start_game.c \
 					start_game_state.c \
 					start_game_utils.c
 
-NAME			= 	philo_bonus
+NAME			= 	philo
 OBJS			=	$(CFILES:.c=.o)
 
 

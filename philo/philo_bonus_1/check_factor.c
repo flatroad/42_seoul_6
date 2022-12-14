@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:51:20 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/15 01:55:27 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/14 13:06:58 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	check_factor(int argc, char **argv, t_inform *inform)
 	if (is_int(argc, argv, inform) != 0)
 		return (3);
 	if (inform->number_of_philosophers == 0)
-		return (4);
+		return (8);
 	if (inform->number_of_times_each_philosopher_must_eat == 0)
-		return (5);
+		return (9);
 	return (0);
 }
 
@@ -55,12 +55,13 @@ int	is_num(int argc, char **argv)
 
 int	is_int(int argc, char **argv, t_inform *inform)
 {
+	inform->mode = argc;
 	inform->number_of_philosophers = ft_atoi(argv[1]);
 	inform->time_to_die = ft_atoi(argv[2]);
 	inform->time_to_eat = ft_atoi(argv[3]);
 	inform->time_to_sleep = ft_atoi(argv[4]);
 	inform->number_of_times_each_philosopher_must_eat = -2;
-	if (argc == 6)
+	if (inform->mode == 6)
 		inform->number_of_times_each_philosopher_must_eat = \
 		ft_atoi(argv[5]);
 	if (inform->number_of_philosophers == -1 || \

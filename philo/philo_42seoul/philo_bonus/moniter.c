@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_game_utils.c                                 :+:      :+:    :+:   */
+/*   moniter.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 19:14:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/15 08:19:17 by sounchoi         ###   ########.fr       */
+/*   Created: 2022/12/15 08:11:01 by sounchoi          #+#    #+#             */
+/*   Updated: 2022/12/15 08:11:01 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-long long	get_time(void)
+void	*moniter(void *atr)
 {
-	struct timeval	s_t;
-	long long		time;
+	t_philo	philo;
 
-	gettimeofday(&s_t, NULL);
-	time = s_t.tv_sec * 1000 + s_t.tv_usec / 1000;
-	return (time);
-}
-
-void	sem_print(t_philo philo, char *s, int i)
-{
-	sem_wait(philo.inform->sem_pr);
-	printf("%lld [%3d] %s\n", get_time() - philo.inform->s_time, philo.idx, s);
-	if (i == 1)
+	philo = *(t_philo *)atr;
+	while (1)
 	{
-		sem_post(philo.inform->dead);
-		sleep(1);
-		return ;
+		sem_wait(philo.time);
+		if (get_time() - *philo.r_time > philo.inform->time_to_die)
+		{
+			sem_print(philo, "is dead", 1);
+			break ;
+		}
+		sem_post(philo.time);
+		usleep(100);
 	}
-	sem_post(philo.inform->sem_pr);
+	exit(0);
 }
