@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 07:53:42 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/14 16:30:50 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/14 19:20:10 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ typedef struct s_inform
 	// 세마포어 print
 	sem_t			*sem_pr;
 	// 마지막을 막는 세마포어.
-	sem_t			*finish;
+	sem_t			*dead;
+	// 먹는 횟수
+	sem_t			*pull;
+	// 시간
+	long long		time;
 }	t_inform;
 
 typedef struct s_philo
@@ -51,7 +55,15 @@ typedef struct s_philo
 	int				idx;
 	// 밥 먹은 횟수.
 	int				count;
+	// inform
+	t_inform		*inform;
 }	t_philo;
+
+typedef struct s_dead
+{
+	t_inform	*inform;
+	t_philo		*philo;
+}	t_dead;
 
 //start_game_cutils
 long long	get_time(void);
@@ -77,7 +89,7 @@ int			philo(int argc, char **argv);
 
 //init_data
 int			init_data(t_philo *philo, t_inform *inform, int num);
-void		init_philo(t_philo *philo, int num);
+void		init_philo(t_philo *philo, t_inform *inform, int num);
 int			init_sem(t_inform *inform, int num);
 
 

@@ -1,0 +1,42 @@
+#include "philo_bonus.h"
+
+void	count_check(sem_t *pull, int num, t_inform *inform, t_philo *philo)
+{
+	int i;
+	t_count	x;
+
+	i = 0;
+	while (i < num)
+	{
+		sem_wait(pull);
+		i++;
+	}
+	x.count = pull;
+	x.num = num;
+	x.inform = inform;
+	x.philo  = philo;
+	pthread_t *fin;
+	pthread_create(fin, 0, is_pull, (void *)&x);
+}
+
+void	*is_pull(void *param)
+{
+	int		i;
+	t_count *x;
+
+	i = 0;
+	x = (t_count *)param;
+	while (i < x->num)
+	{
+		sem_wait(x->count);
+		i++;
+	}
+	i = 0;
+	while (i < x->num)
+	{
+		sem_post(x->count);
+		i++;
+	}
+	free_all(x->inform, x->philo);
+	exit(0);
+}
