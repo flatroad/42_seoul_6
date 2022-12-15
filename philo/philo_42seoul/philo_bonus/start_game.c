@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:06:22 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/15 08:17:56 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/15 09:20:58 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	start_game(t_philo *philo, t_inform *inform, int num)
 
 	sem_wait(inform->dead);
 	wait_pid(inform, num);
-	pthread_create(&dead, NULL, is_dead, inform);
+	pthread_create(&dead, NULL, is_dead, philo);
 	if (start_fork(philo, inform, num) == 1)
 	{
 		free_all(philo);
@@ -26,8 +26,6 @@ int	start_game(t_philo *philo, t_inform *inform, int num)
 		exit(0);
 	}
 	wait_pid(inform, num);
-	free_all(philo);
-	free(philo);
 	exit(0);
 }
 
@@ -45,11 +43,17 @@ void	wait_pid(t_inform *inform, int num)
 
 void	*is_dead(void *atr)
 {
-	t_inform	*inform;
+	int		i;
+	t_philo	*philo;
 
-	inform = (t_inform *)atr;
-	sem_wait(inform->dead);
-	kill(0, SIGINT);
+	i = 0;
+	philo = (t_philo *)atr;
+	sem_wait(philo->inform->dead);
+	while (i < philo->inform->number_of_philosophers)
+	{
+		kill(philo[i].pid, SIGINT);
+		i++;
+	}
 	exit(0);
 }
 

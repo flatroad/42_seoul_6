@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 08:11:09 by sounchoi          #+#    #+#             */
-/*   Updated: 2022/12/15 08:25:32 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/12/15 09:21:00 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	pick_up(t_philo philo)
 int	eating(t_philo philo)
 {
 	sem_wait(philo.time);
-	printf("%p\n", philo.time);
 	*philo.r_time = get_time();
 	sem_post(philo.time);
 	sem_print(philo, "is eating", 0);
