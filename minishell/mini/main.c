@@ -1,5 +1,11 @@
 #include "minishell.h"
 
+void	minishell(char **envp);
+char	**mk_path(char **envp);
+void	set_mini(t_tool tool);
+void	mk_cmd(char *str, t_tool tool);
+char	**ft_split(char const *s, char c);
+
 int	main(int argc, char **argv, char **envp)
 {
 	if (argc != 1)
@@ -15,16 +21,47 @@ void	minishell(char **envp)
 {
 	t_tool tool;
 
-	tool.envp = mk_envp(envp);
+	tool.envp = envp;
 	tool.path = mk_path(envp);
 
-	start_mini(&tool);
+	set_mini(tool);
 }
 
-void	start_mini(t_tool *tool)
+char	**mk_path(char **envp)
+{
+	char	**path;
+
+	while (strncmp("PATH=", *envp, 5) != 0)
+		envp++;
+	*envp = *envp + 5;
+	path = ft_split(*envp, ':');
+	if (path == NULL)
+	{
+		perror("envp_path error1 ");
+		exit(1);
+	}
+	return (path);
+}
+
+void	set_mini(t_tool tool)
 {
 	char	*str;
 
-	str = readline("prompt > ");
-	add_history(str);
+	while (1)
+	{
+		str = readline("prompt > ");
+		add_history(str);
+		mk_cmd(str, tool);
+		
+	}
+}
+
+void	mk_cmd(char *str, t_tool tool)
+{
+	t_token	*token;
+	int	i;
+
+	i = 0;
+	if (str[i] == c)
+
 }

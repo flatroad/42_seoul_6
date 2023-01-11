@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/01/11 16:17:43 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/01/11 18:10:43 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <errno.h>
 # include <stdio.h>
 # include <stdio.h>
+# include <string.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 
