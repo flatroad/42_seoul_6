@@ -62,6 +62,9 @@ void	mk_cmd(char *str, t_tool tool)
 	int	i;
 
 	i = 0;
-	if (str[i] == c)
+	if (is_str(str[i], token) == 1)
+	{
+		
+	}
 
 }
