@@ -62,9 +62,37 @@ void	mk_cmd(char *str, t_tool tool)
 	int	i;
 
 	i = 0;
-	if (is_str(str[i], token) == 1)
+	while (*str == 0)
 	{
-		
+		is_str(str[i], token, str);
 	}
 
+}
+
+char	*is_str(char c, t_token *token, char *str)
+{
+	char *s;
+	int i;
+	
+	i = 0;
+	if (!(c == '<' || c == '>' || c == '|' || c == '&' ||\
+	c == ' ' || c == '*' || c == '$' || c == '\'' || c == '\"'))
+		is_redi(c, token, str);
+	while (str[i] != (c == '<' || c == '>' || c == '|' || c == '&' ||\
+	c == ' ' || c == '*' || c == '$' || c == '\'' || c == '\"'))
+		i++;
+	s = ft_substr(str, 0, i);
+
+	
+}
+
+void	mk_token(void)
+{
+	t_token	*token;
+
+	token = (t_token *)malloc(sizeof(t_token) * 1);
+	token->next = 0;
+	token->order = 0;
+	token->type_num = 0;
+	token->value = 0;
 }
