@@ -1,4 +1,5 @@
 #include "minishell.h"
+#include "./libft/libft.h"
 
 void	minishell(char **envp);
 char	**mk_path(char **envp);
