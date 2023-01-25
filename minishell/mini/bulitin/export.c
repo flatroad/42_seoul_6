@@ -9,13 +9,17 @@ t_envp_list	*not_exp_null(char *str);
 t_envp_list	*is_pair(char *str, int	i);
 t_envp_list	*is_single(char	*str);
 void	out_export(t_refer_env *refer_env);
+void	free_exp(t_envp_list *exp);
+int		error_check(t_envp_list *exp);
+void	output_exp(t_envp_list *exp, t_refer_env *refer_env);
+void	error_pr(t_envp_list *exp);
 
 int main()
 {
 	char **str;
 
 	str = malloc(sizeof(char *) * 4);
-	str[0] = "a=b";
+	str[0] = "=a==b";
 	str[1] = "a=";
 	str[2] = "adf";
 	str[3] = NULL;
@@ -36,7 +40,7 @@ int	export(char **exp_str, t_refer_env *refer_env)
 	exp = make_exp(exp_str);
 	if (exp == NULL)
 		return (1);
-	output_exp(exp);
+	output_exp(exp, refer_env);
 	while (exp != NULL)
 	{
 		printf("key %s\n", exp->key);
@@ -44,6 +48,72 @@ int	export(char **exp_str, t_refer_env *refer_env)
 		exp = exp->next;
 	}
 	return (0);
+}
+
+void	output_exp(t_envp_list *exp, t_refer_env *refer_env)
+{
+	t_envp_list *memo;
+
+	memo = exp;
+	while(memo != NULL)
+	{
+		if(error_check(memo) == 1)
+		{
+			memo = memo->next;
+			continue ;
+		}
+		same_check(exp, refer_env);
+		memo = memo->next;
+	}
+}
+
+void	same_check(t_envp_list *exp, t_refer_env *refer_env)
+{
+	t_envp_list *memo;
+	int			i;
+	char		*dp;
+
+	memo = refer_env->envp;
+	while (memo != NULL)
+	{
+		i = ft_strlen(memo->key);
+		if (i < ft_strlen(exp->key))
+			i = ft_strlen(exp->key);
+		if (ft_strncmp(memo->key, exp->key, i) != 0)
+			memo = memo->next;
+		else
+		{
+			dp = memo->value;
+			memo->value = exp->value;
+			free(dp);
+			return ;
+		}
+	}
+	
+}
+
+int	error_check(t_envp_list *exp)
+{
+	int	i;
+
+	i = 0;
+	if (exp->key == NULL || ft_isdigit(exp->key[i]) == 1)
+	{
+		error_pr(exp);
+		return (1);
+	}
+	return (0);
+}
+
+void	error_pr(t_envp_list *exp)
+{
+	write(2, "Error, ", 8);
+	if (exp->key != NULL)
+		write(2, exp->key, ft_strlen(exp->key));
+	write(2, "=", 2);
+	if (exp->value != NULL)
+		write(2, exp->value, ft_strlen(exp->value));
+	write(2, " not a valid identifier\n", 24);
 }
 
 t_envp_list	*make_exp(char **exp_str)
@@ -122,9 +192,14 @@ t_envp_list	*is_pair(char *str, int	i)
 	exp = (t_envp_list *)malloc(sizeof(t_envp_list) * 1);
 	if (exp == NULL)
 		return (NULL);
-	exp->key = ft_substr(str, 0, i);
-	if (exp->key == NULL)
-		return (NULL);
+	if (i == 0)
+		exp->key = NULL;
+	else
+	{
+		exp->key = ft_substr(str, 0, i);
+		if (exp->key == NULL)
+			return (NULL);
+	}
 	if (strlen(str + i + 1) == 0)
 	{
 		exp->value = malloc(sizeof(char) * 1);
@@ -160,7 +235,7 @@ void	out_export(t_refer_env *refer_env)
 	memo = refer_env->envp;
 	while (memo != NULL)
 	{
-		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		ft_putstr_fd(memo->key, 1);
 		if (memo->value != NULL)
 		{
