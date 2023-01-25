@@ -19,13 +19,15 @@ void	mk_cmd(char *str, t_tool tool)
 }
 
 void	mk_token(char *sv, t_token *token, char **str, t_tool tool)
-{	
-	if (!(**str == '<' || **str == '>' || **str == '|'))
-		is_cmd(sv, token, str, tool);
-	else
-		not_cmd(sv, token, str, tool);
+{
+	while (**str != 0)
+	{
+		if (!(**str == '<' || **str == '>' || **str == '|'))
+			is_cmd(sv, token, str, tool);
+		else
+			not_cmd(sv, token, str, tool);
+	}
 }
-
 
 void	is_cmd(char *sv, t_token *token, char **str, t_tool tool)
 {
@@ -73,10 +75,42 @@ void	is_env(char *sv, t_token *token, char **str, t_tool tool)
 	int		i;
 
 	i = 0;
-	while (**str != ' ' || **str != 0)
+	while (**str != ' ' || **str != 0 || **str != '\"' || **str != '\'')
 		i++;
+	if (i == 0)
+	{
+		if(*(*str + 1) == ' ' || *(*str + 1) == 0)
+			
+	}
 	env_sv = ft_substr(*str, 0, i);
-	check_env(sv, env_sv);
+	check_env(&sv, env_sv, tool);
+}
+
+void	check_env(char **sv, char *env_sv, t_tool tool)
+{
+	int		i;
+	int		len;
+	char	*memo;
+
+	i = 0;
+	len = ft_strlen(env_sv);
+	while (tool.envp[i] != NULL)
+	{
+		if (ft_strnstr(tool.envp[i], env_sv, len) == NULL)
+			i++;
+		else 
+		{
+			if (tool.envp[i] + len + 1 == '=')
+			{
+				memo = *sv;
+				*sv = ft_strjoin(*sv, (tool.envp[i] + len + 2))
+				free(memo);
+				return ;
+			}
+			else
+				 i++;
+		}
+	}
 }
 
 void	check_add_token(char *sv, t_token *token, char **str, t_tool tool)
