@@ -48,7 +48,7 @@ void	is_space(char *sv, t_token *token, char **str, t_tool tool)
 
 void	not_space(char *sv, t_token *token, char **str, t_tool tool)
 {
-	if (**str == '&' && (**str + 1) == '&')
+	if (**str == '&' && *(*str + 1) == '&')
 		is_and(sv, token, str, tool);
 	else
 		not_and(sv, token, str, tool);
