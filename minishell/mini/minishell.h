@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/01/25 23:32:16 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:04:13 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@
 
 typedef	struct s_path_list
 {
-	char		*value;
-	t_path_list	*next;
+	char				*value;
+	struct s_path_list	*next;
 }	t_path_list;
 
 typedef	struct s_envp_list
 {
-	char		*key;
-	char		*value;
-	t_envp_list	*next;
+	char				*key;
+	char				*value;
+	struct s_envp_list	*next;
 }	t_envp_list;
 
 typedef struct s_refer_env
