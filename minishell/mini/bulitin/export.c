@@ -41,6 +41,7 @@ int	export(char **exp_str, t_refer_env *refer_env)
 	if (exp == NULL)
 		return (1);
 	output_exp(exp, refer_env);
+	free_exp(exp);
 	while (exp != NULL)
 	{
 		printf("key %s\n", exp->key);
@@ -67,7 +68,7 @@ void	output_exp(t_envp_list *exp, t_refer_env *refer_env)
 	}
 }
 
-void	same_check(t_envp_list *exp, t_refer_env *refer_env)
+int	same_check(t_envp_list *exp, t_refer_env *refer_env)
 {
 	t_envp_list *memo;
 	int			i;
@@ -89,7 +90,33 @@ void	same_check(t_envp_list *exp, t_refer_env *refer_env)
 			return ;
 		}
 	}
-	
+	memo->next = change_refer(exp);
+	if (memo->next == NULL)
+		return (NULL);
+}
+
+t_envp_list	*change_refer(t_envp_list *exp)
+{
+	t_envp_list	*envp;
+
+	envp = (t_envp_list *)malloc(sizeof(t_envp_list) * 1);
+	if (envp == NULL)
+		return (NULL);
+	envp->key = ft_substr(exp->key, 0, strlen(exp->key));
+	if (envp->key == NULL)
+	{
+		free(envp);
+		return (NULL);
+	}
+	envp->value = ft_substr(exp->value, 0, strlen(exp->value));
+	if (envp->value == NULL)
+	{
+		free(envp->key);
+		free(envp);
+		return (NULL);
+	}
+	envp->next = NULL;
+	return (envp);
 }
 
 int	error_check(t_envp_list *exp)
@@ -240,7 +267,9 @@ void	out_export(t_refer_env *refer_env)
 		if (memo->value != NULL)
 		{
 			ft_putstr_fd("=", 1);
+			ft_putstr_fd("\"", 1);
 			ft_putendl_fd(memo->value, 1);
+			ft_putstr_fd("\"", 1);
 		}
 		memo = memo->next;
 	}
