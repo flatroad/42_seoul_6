@@ -41,7 +41,6 @@ t_refer_env	*make_refer_env(char **envp)
 	if (envp == NULL)
 		return (refer_env);
 	refer_env->path = make_path(envp);
-	printf("%d\n", 123);
 	if (refer_env->path == NULL)
 	{	
 		free_envp(1, refer_env->envp);
@@ -51,7 +50,9 @@ t_refer_env	*make_refer_env(char **envp)
 	{
 		printf("key %s\n", refer_env->envp->key);
 		printf("value %s\n", refer_env->envp->value);
+		printf("------------------------------------\n");
 		printf("path %s\n", refer_env->path->value);
+		printf("------------------------------------\n");
 		refer_env->envp = refer_env->envp->next;
 		refer_env->path = refer_env->path->next;
 	}
@@ -106,27 +107,6 @@ t_envp_list	*add_envp_list(char *str)
 }
 
 
-t_path_list *make_path(char **envp)
-{
-	char		**path;
-	t_path_list	*path_list;
-
-	path = ft_split(*envp, ':');
-	if (path == NULL)
-	{
-		write(2, "Error, path split fail..", 25);
-		return (NULL);
-	}
-
-	path_list = make_path_list(path);
-	if (path_list == NULL)
-	{
-		free_envp_path(path);
-		return (NULL);
-	}
-	return (path_list);
-}
-
 char	**check_envp(char **envp)
 {
 	while (strncmp("PATH=", *envp, 5) != 0 && envp != NULL)
@@ -138,6 +118,26 @@ char	**check_envp(char **envp)
 		*envp = *envp + 5;
 		return (envp);
 	}
+}
+
+t_path_list *make_path(char **envp)
+{
+	char		**path;
+	t_path_list	*path_list;
+
+	path = ft_split(*envp, ':');
+	if (path == NULL)
+	{
+		write(2, "Error, path split fail..", 25);
+		return (NULL);
+	}
+	path_list = make_path_list(path);
+	if (path_list == NULL)
+	{
+		free_envp_path(path);
+		return (NULL);
+	}
+	return (path_list);
 }
 
 t_path_list	*make_path_list(char **path)

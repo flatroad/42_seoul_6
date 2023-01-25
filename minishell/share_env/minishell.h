@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/01/26 00:04:13 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:26:00 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ typedef	struct s_path_list
 {
 	char				*value;
 	struct s_path_list	*next;
-}	t_path_list;
+}	t_path_list;  //실행경로
 
 typedef	struct s_envp_list
 {
 	char				*key;
 	char				*value;
 	struct s_envp_list	*next;
-}	t_envp_list;
+}	t_envp_list;  //환경변수
 
 typedef struct s_refer_env
 {
-	t_path_list	*path;
-	t_envp_list	*envp;
+	t_path_list	*path; //-> 실행경로
+	t_envp_list	*envp; //-> 환경변수
 }	t_refer_env;
 
 
