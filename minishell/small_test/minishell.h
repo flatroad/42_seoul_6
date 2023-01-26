@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/01/26 16:58:47 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/01/27 06:56:37 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct	s_token
 	struct s_token *next;
 }	t_token;
 
+// make_refer_env.c
 t_refer_env	*make_refer_env(char **envp);
 t_envp_list	*make_envp(char **envp);
 t_envp_list	*add_envp_list(char *str);
@@ -73,17 +74,26 @@ void		free_envp_path(char	**path);
 int	env(t_refer_env *refer_env);
 // export
 int	export(char **exp_str, t_refer_env *refer_env);
+// free_error_Export.c
+void	free_exp(t_envp_list *exp);
+void	error_pr(t_envp_list *exp);
+//make_exp_export_sub.c
+t_envp_list	*is_pair(char *str, int	i);
+t_envp_list	*is_single(char	*str);
+int	make_key(char **key, char *str, int i);
+int	make_value(char **value, char *str, int i);
+//make_exp_export.c
 t_envp_list	*make_exp(char **exp_str);
 t_envp_list	*check_exp_str(char *str);
 t_envp_list	*is_exp_null(void);
 t_envp_list	*not_exp_null(char *str);
-t_envp_list	*is_pair(char *str, int	i);
-t_envp_list	*is_single(char	*str);
-void		out_export(t_refer_env *refer_env);
-void		free_exp(t_envp_list *exp);
-int			error_check(t_envp_list *exp);
-void		output_exp(t_envp_list *exp, t_refer_env *refer_env);
-void		error_pr(t_envp_list *exp);
+//out_export.c
+void	out_export(t_refer_env *refer_env);
+//output_exp_export.c
+int	output_exp(t_envp_list *exp, t_refer_env *refer_env);
+int	error_check(t_envp_list *exp);
+int	push_export(t_envp_list *exp, t_refer_env *refer_env);
+int	same_check(t_envp_list *memo, t_envp_list *exp);
 t_envp_list	*change_refer(t_envp_list *exp);
-int			same_check(t_envp_list *exp, t_refer_env *refer_env);
+
 #endif
