@@ -14,8 +14,9 @@ void	out_export(t_refer_env *refer_env)
 		{
 			ft_putstr_fd("=", 1);
 			ft_putstr_fd("\"", 1);
-			ft_putendl_fd(memo->value, 1);
+			ft_putstr_fd(memo->value, 1);
 			ft_putstr_fd("\"", 1);
+			ft_putstr_fd("\n", 1);
 		}
 		memo = memo->next;
 	}

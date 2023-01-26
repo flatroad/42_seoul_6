@@ -13,7 +13,7 @@ int	output_exp(t_envp_list *exp, t_refer_env *refer_env)
 			memo = memo->next;
 			continue ;
 		}
-		if(push_export(exp, refer_env) == 1)
+		if(push_export(memo, refer_env) == 1)
 			return (1);
 		memo = memo->next;
 	}
@@ -45,7 +45,11 @@ int	push_export(t_envp_list *exp, t_refer_env *refer_env)
 		if (i == 0)
 			return (0);
 		else if (i == 1)
+		{
+			if (memo->next == NULL)
+				break ;
 			memo = memo->next;
+		}
 		else
 			return (1);
 	}
@@ -86,12 +90,17 @@ t_envp_list	*change_refer(t_envp_list *exp)
 		free(envp);
 		return (NULL);
 	}
-	envp->value = ft_strdup(exp->value);
-	if (envp->value == NULL)
+	if (exp->value == NULL)
+		envp->value = NULL;
+	else
 	{
-		free(envp->key);
-		free(envp);
-		return (NULL);
+		envp->value = ft_strdup(exp->value);
+		if (envp->value == NULL)
+		{
+			free(envp->key);
+			free(envp);
+			return (NULL);
+		}
 	}
 	envp->next = NULL;
 	return (envp);

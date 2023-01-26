@@ -12,6 +12,14 @@ int	main(int argc, char **argv, char **envp)
 	refer_env = make_refer_env(envp);
 	if (refer_env == NULL)
 		return (1);
+	char	**str;
+
+	str = (char **)malloc(sizeof(char *) * 3);
+	str[0] = "a=b";
+	str[1] = "adfa";
+	str[2] = NULL;
+	export(str, refer_env);
 	export(NULL, refer_env);
+	env(refer_env);
 	return (0);
 }
