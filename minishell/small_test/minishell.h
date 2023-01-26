@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/01/27 06:56:37 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/01/27 08:09:48 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_envp_list	*not_exp_null(char *str);
 void	out_export(t_refer_env *refer_env);
 //output_exp_export.c
 int	output_exp(t_envp_list *exp, t_refer_env *refer_env);
-int	error_check(t_envp_list *exp);
+int	error_check(char *str);
 int	push_export(t_envp_list *exp, t_refer_env *refer_env);
 int	same_check(t_envp_list *memo, t_envp_list *exp);
 t_envp_list	*change_refer(t_envp_list *exp);

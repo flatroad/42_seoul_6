@@ -14,12 +14,14 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	char	**str;
 
-	str = (char **)malloc(sizeof(char *) * 3);
+	str = (char **)malloc(sizeof(char *) * 5);
 	str[0] = "a=b";
 	str[1] = "adfa";
-	str[2] = NULL;
+	str[2] = "a = b";
+	str[3] = "=12312";
+	str[4] = NULL;
 	export(str, refer_env);
 	export(NULL, refer_env);
-	env(refer_env);
+	// env(refer_env);
 	return (0);
 }

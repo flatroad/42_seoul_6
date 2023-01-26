@@ -8,8 +8,9 @@ int	output_exp(t_envp_list *exp, t_refer_env *refer_env)
 	memo = exp;
 	while(memo != NULL)
 	{
-		if(error_check(memo) == 1)
+		if(error_check(memo->key) == 1)
 		{
+			error_pr(memo);
 			memo = memo->next;
 			continue ;
 		}
@@ -20,15 +21,22 @@ int	output_exp(t_envp_list *exp, t_refer_env *refer_env)
 	return (0);
 }
 
-int	error_check(t_envp_list *exp)
+int	error_check(char *str)
 {
 	int	i;
+	int	len;
 
-	i = 0;
-	if (exp->key == NULL || ft_isdigit(exp->key[i]) == 1)
-	{
-		error_pr(exp);
+	i = 1;
+	if (str == NULL)
 		return (1);
+	len = ft_strlen(str);
+	if (ft_isdigit(str[0]) == 1 || str[0] == ' ')
+		return (1);
+	while (i < len)
+	{
+		if (str[i] == ' ')
+			return (1);
+		i++;
 	}
 	return (0);
 }
