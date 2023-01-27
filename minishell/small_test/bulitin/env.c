@@ -17,5 +17,5 @@ int	env(t_refer_env *refer_env)
 		}
 		memo = memo->next;
 	}
-	return (1);
+	return (0);
 }

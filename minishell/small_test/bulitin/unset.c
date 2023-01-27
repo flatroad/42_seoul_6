@@ -5,31 +5,61 @@ int	unset(char **str, t_refer_env *refer_env)
 {
 	int	i;
 	
+	i = 0;
 	while (str[i] != NULL)
 	{
-		check_unset(str[i], refer_env->envp);
+		check_unset(str[i], refer_env);
+		i++;
 	}
+	return (0);
 }
 
-void	check_unset(char *str, t_envp_list *envp)
+void	check_unset(char *str, t_refer_env *refer_env)
 {
-	int	len;
 	t_envp_list	*memo;
-	t_envp_list	*free_memo;
+	t_envp_list	*before_memo;
 
-	memo = envp;
-	len = ft_strlen(str);
-	if (strncmp(str, memo->key, len) == 0)
+	memo = refer_env->envp;
+	before_memo = NULL;
+	if (str == NULL)
+		return ;
+	while (memo != NULL)
 	{
-		if(memo->key[len] == 0)
-		{
-			free_memo = memo;
-			memo = memo->next;
-			free(free_memo->key);
-			free(free_memo->value);
-			free(free_memo);
-		}
-
+		if (same_check_unset(memo->key, str) == 0)
+			delete_str_unset(refer_env, memo, before_memo);
+		before_memo = memo;
+		memo = memo->next;
 	}
 
+}
+
+int	same_check_unset(char *s1, char *s2)
+{
+	int	len;
+
+	len = ft_strlen(s1);
+	if (len != ft_strlen(s2))
+		return (1);
+	if (strncmp(s1, s2, len) != 0)
+		return (1);
+	return (0);
+}
+
+void	delete_str_unset(t_refer_env *refer_env, t_envp_list *memo, \
+t_envp_list *before_memo)
+{
+	if (before_memo == NULL)
+	{
+		free(memo->key);
+		free(memo->value);
+		refer_env->envp = memo->next;
+		free(memo);
+	}
+	else
+	{
+		free(memo->key);
+		free(memo->value);
+		before_memo->next = memo->next;
+		free(memo);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sounchoi <sounchoi>                        +#+  +:+       +#+        */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/01/27 08:09:48 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/01/27 23:35:43 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,11 @@ int	error_check(char *str);
 int	push_export(t_envp_list *exp, t_refer_env *refer_env);
 int	same_check(t_envp_list *memo, t_envp_list *exp);
 t_envp_list	*change_refer(t_envp_list *exp);
+//unset.c
+int		unset(char **str, t_refer_env *refer_env);
+void	check_unset(char *str, t_refer_env *refer_env);
+int		same_check_unset(char *s1, char *s2);
+void	delete_str_unset(t_refer_env *refer_env, t_envp_list *memo, \
+t_envp_list *before_memo);
 
 #endif
