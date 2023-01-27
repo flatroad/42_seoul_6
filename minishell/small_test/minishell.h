@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/01/28 01:20:02 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/01/28 03:56:06 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <errno.h>
+# include <dirent.h>
 
 typedef	struct s_path_list
 {
