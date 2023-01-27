@@ -109,6 +109,7 @@ t_path_list *make_path(char **envp)
 		free_envp_path(path);
 		return (NULL);
 	}
+	free(path);
 	return (path_list);
 }
 

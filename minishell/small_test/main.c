@@ -21,11 +21,12 @@ int	main(int argc, char **argv, char **envp)
 	str[3] = "=12312";
 	str[4] = NULL;
 	char	**s = (char **)malloc(sizeof(char *) * 3);
-	s[0] = "a";
-	s[1] = "adfa";
+	s[0] = "-nnnnn";
+	s[1] = "-n";
 	s[2] = NULL;
-	export(str, refer_env);
-	unset(s, refer_env);
-	export(NULL, refer_env);
+	// export(str, refer_env);
+	// unset(s, refer_env);
+	// export(NULL, refer_env);
+	echo(s);
 	return (0);
 }

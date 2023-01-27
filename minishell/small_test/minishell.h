@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/01/27 23:35:43 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/01/28 01:20:02 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <string.h>
 # include <readline/history.h>
 # include <readline/readline.h>
+# include <errno.h>
 
 typedef	struct s_path_list
 {
@@ -101,5 +102,13 @@ void	check_unset(char *str, t_refer_env *refer_env);
 int		same_check_unset(char *s1, char *s2);
 void	delete_str_unset(t_refer_env *refer_env, t_envp_list *memo, \
 t_envp_list *before_memo);
+// pwd
+int	pwd(void);
+// echo
+int		echo(char **str);
+void	group_echo(char **str);
+int		check_option_echo(char *str);
+void	is_op_echo(char	**str);
+void	not_op_echo(char **str, int option);
 
 #endif
