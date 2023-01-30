@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/01/28 03:56:06 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/01/31 06:42:11 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,24 @@
 # include <readline/readline.h>
 # include <errno.h>
 # include <dirent.h>
+
+enum	e_token_type
+{
+	UNKNOWN = 0,	
+	OR = 1,
+	AND = 2,		
+	PIPE = 3,		
+	CMD = 4,		
+	OPTION = 5,		
+	DQUOTE = 6,		
+	QUOTE = 7,		
+	RDIR_IN = 8,	
+	RDIR_OUT = 9,	
+	RDIR_APD = 10,
+	HERE_DOC = 11,
+	PARENS = 12,
+	READ_FILE = 13,
+};
 
 typedef	struct s_path_list
 {
@@ -44,6 +62,11 @@ typedef struct s_refer_env
 	t_envp_list	*envp; //-> 환경변수
 }	t_refer_env;
 
+typedef	struct s_wc_list
+{
+	char				*str;
+	struct s_wc_list	*next;
+}	t_wc_list;
 
 typedef struct s_obj
 {
@@ -51,13 +74,22 @@ typedef struct s_obj
 	char	**cmd;
 }	t_obj;
 
-typedef struct	s_token
+typedef struct	s_token_so
 {
 	int	type_num;
 	int	value;
 	int	order;
 	struct s_token *next;
+}	t_token_so;
+
+typedef struct s_token
+{
+	enum e_token_type	type;
+	int					hd_num;
+	char				*content;
+	struct s_token		*next;
 }	t_token;
+
 
 // make_refer_env.c
 t_refer_env	*make_refer_env(char **envp);
@@ -109,7 +141,40 @@ int	pwd(void);
 int		echo(char **str);
 void	group_echo(char **str);
 int		check_option_echo(char *str);
-void	is_op_echo(char	**str);
-void	not_op_echo(char **str, int option);
+void	is_op_echo(char	**str, int i);
+void	not_op_echo(char **str);
+//wildcard
+t_wc_list	*wildcard(char *str, t_token *token);
+t_wc_list	*make_pwd_file_list(char *path, int *check);
+t_wc_list	*readdir_all(DIR *dir_ptr, int *check);
+t_wc_list	*make_file_list(char *str, t_wc_list *memo, int *check);
+t_wc_list	*make_token_file_list(t_token *token, t_wc_list *pwd_file_list, \
+int *check, char path[]);
+t_wc_list	*make_wildcard_list(t_wc_list *all_file_list, char *str, int *check);
+int		check_wc_list(char *s1, char *s2);
+int	star_case(char *s1, int *i, char *s2, int *j);
+int	other_case(char *s1, int *i, char *s2, int *j);
+t_wc_list	*add_wc_list(char *str, int *check);
+t_wc_list	*free_wc_list(t_wc_list *list);
+t_wc_list	*error_wl_card(char *str, int *check);
+char		*error_wl_card_char(char *str, int *check);
+struct dirent	*set_file(struct dirent	*file, DIR *dir_ptr);
+int	check_case(char *s1, int *i, char *s2, int *j);
+t_wc_list	*make_wildcard_list_sub(t_wc_list *all_file_list, char *str, \
+int *check, t_wc_list	*wc_start);
+t_wc_list	*append_list(t_wc_list *pwd_file_list, char *str, int *check);
+t_wc_list	*append_list_sub(t_wc_list *pwd_file_list, char *str, int *check);
+t_wc_list	*append_list_sub2(t_wc_list *pwd_file_list, char *str, int *check);
+int	check_aski(char *s1, char *s2);
+t_wc_list	*add_token_file_list(char *str, int *check);
+t_wc_list	*make_token_file_list_sub(t_token *memo, t_wc_list *all_file_list, \
+int *check, char path[]);
+char	*check_path(char *str, char path[], int	*check);
+char	*check_path_str(char path[], char *str, char *new_str, int *check);
+t_wc_list	*order_list(t_wc_list *pwd_file_list);
+t_wc_list	*set_fisrt(t_wc_list *list);
+t_wc_list	*set_other(t_wc_list *list);
 
 #endif
+
+

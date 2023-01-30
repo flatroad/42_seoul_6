@@ -13,14 +13,21 @@ int	echo(char **str)
 void	group_echo(char **str)
 {
 	int	option;
+	int	i;
 
+	i = 0;
 	option = 2;
-	if (str[0][0] == '-')
-		option = check_option_echo(str[0]);
-	if (option == 1)
-		is_op_echo(str);
+	while (str[i][0] == '-')
+	{
+		option = check_option_echo(str[i]);
+		if (option == 0)
+			break ;
+		i++;
+	}
+	if (i != 0)
+		is_op_echo(str, i);
 	else
-		not_op_echo(str, option);
+		not_op_echo(str);
 }
 
 int	check_option_echo(char *str)
@@ -40,14 +47,11 @@ int	check_option_echo(char *str)
 		return (0);
 	if (len == i)
 		return (1);
-	return (2);
+	return (0);
 }
 
-void	is_op_echo(char	**str)
+void	is_op_echo(char	**str, int i)
 {
-	int	i;
-
-	i = 1;
 	while (str[i] != NULL)
 	{
 		ft_putstr_fd(str[i], 1);
@@ -57,13 +61,11 @@ void	is_op_echo(char	**str)
 	}
 }
 
-void	not_op_echo(char **str, int option)
+void	not_op_echo(char **str)
 {
 	int	i;
 
 	i = 0;
-	if (option == 0)
-		i = 1;
 	while (str[i] != NULL)
 	{
 		ft_putstr_fd(str[i], 1);
