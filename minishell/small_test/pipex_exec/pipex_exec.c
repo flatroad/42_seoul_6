@@ -1,9 +1,8 @@
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-int	pipex_exec(t_tree *tree, t_envp_list *ev_list)
+int	pipex_exec(t_exec *ewc, t_envp_list *ev_list)
 {
-	
+	signal(SIGINT, )
 }
 
-t_redirect	*redirect_exec()

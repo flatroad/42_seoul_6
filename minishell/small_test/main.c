@@ -4,36 +4,79 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_refer_env *refer_env;
-	t_wc_list	*list;
-	t_token	*token;
+	t_bundle	*mini;
+	t_exec		*exec;
+	char	*str;
 
-	token = malloc(sizeof(t_token) * 1);
-	token->content = "A";
-	token->type = 13;
-	token->next = malloc(sizeof(t_token) * 1);
-	token->next->content = "AAAAA";
-	token->next->type = 13;
-	token->next->next = NULL;
 	if (argc != 1)
 	{
 		write(2, "ERROR\nAn incorrect execution\n", 30);
-		return (1); 
+		exit(1);
 	}
 	refer_env = make_refer_env(envp);
 	if (refer_env == NULL)
-		return (1);
-
-	list = wildcard("*", token);
-	while (list != NULL)
+		exit(1);
+	while (1)
 	{
-		printf("%s\n", list->str);
-		list = list->next;
-	}
-	cd("/Applications", refer_env);
-	while (refer_env->envp != NULL)
-	{
-		printf("%s = %s\n", refer_env->envp->key, refer_env->envp->value);
-		refer_env->envp = refer_env->envp->next;
+		signal(SIGINT, handle_signal);
+		signal(SIGQUIT, handle_signal);
+		str = readline("minishell-$ ");
+		ft_parser(str, refer_env, mini, exec);
+		ft_execve(exec, refer_env);
+		free_all(mini);
 	}
 	return (0);
+}
+
+void	ft_execve(t_exec *exec, t_refer_env *refer_env)
+{
+	t_exec	*exec_proxy;
+
+	exec_proxy = exec;
+	if (exec_proxy == NULL)
+		return ;
+	else if (exec_proxy->check != 0)
+		error_handle_exec(exec);
+	else
+	{
+		while (exec_proxy != NULL)
+		{
+			pipe(exec->fd);
+			exec->infile = dup(0);
+			exec->outfile = dup(1);
+			exec_start(exec, refer_env);
+			free_exec(exec_proxy);
+			exec_proxy = exec_proxy->next;
+		}
+	}
+}
+
+void	exec_start(t_exec *exec, t_refer_env *refer_env)
+{
+	
+}
+
+int	check_bulitin(t_exec *exec)
+{
+	int		len;
+	char	*str;
+
+	str = exec->cmd[0];
+	len = ft_strlen(str);
+	if (strncmp(str, "echo", len) == 0)
+		return (1);
+	else if (strncmp(str, "cd", len) == 0)
+		return (2);
+	else if (strncmp(str, "export", len) == 0)
+		return (3);
+	else if (strncmp(str, "env", len) == 0)
+		return (4);
+	else if (strncmp(str, "pwd", len) == 0)
+		return (5);
+	else if (strncmp(str, "unset", len) == 0)
+		return (6);
+	else if (strncmp(str, "exit", len) == 0)
+		return (7);
+	else
+		return (0);
 }

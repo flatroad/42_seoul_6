@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/01/31 09:50:20 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/02/01 02:51:11 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,6 @@ typedef	struct s_wc_list
 	struct s_wc_list	*next;
 }	t_wc_list;
 
-typedef struct s_obj
-{
-	int		**fd;
-	char	**cmd;
-}	t_obj;
-
-typedef struct	s_token_so
-{
-	int	type_num;
-	int	value;
-	int	order;
-	struct s_token *next;
-}	t_token_so;
-
 typedef struct s_token
 {
 	enum e_token_type	type;
@@ -90,12 +76,39 @@ typedef struct s_token
 	struct s_token		*next;
 }	t_token;
 
-typedef struct s_redirect
+typedef struct s_redi
 {
 	int	infile;
 	int	outfile;
-}	t_redirect;
+	struct s_redi	*next;
+}	t_redi;
 
+typedef struct s_cmd
+{
+	char	*str;
+	struct s_cmd	*next;
+}	t_cmd;
+
+typedef struct s_bundle
+{
+	t_cmd	*cmd;
+	t_redi	*redi;
+	pid_t	id;
+	struct s_bundle *next;
+} t_bundle;
+
+typedef struct s_exec
+{
+	char	**cmd;
+	int		infile;
+	int		outfile;
+	int		fd[2];
+	int		check;
+	int		id;
+	struct s_exec	*next;
+}	t_exec;
+
+int	global_sig;
 
 // make_refer_env.c
 t_refer_env	*make_refer_env(char **envp);
@@ -191,6 +204,8 @@ int	change_dir(char *home, t_refer_env *refer_env);
 int	error_cd(char *s);
 int	stay_pwd(t_refer_env *refer_env, char *path);
 int	go_to_str(t_refer_env *refer_env, char *str, char *path);
+
+void	handle_signal(int sig);
 #endif
 
 
