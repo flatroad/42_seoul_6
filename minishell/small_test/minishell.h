@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/01/31 06:42:11 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/01/31 09:50:20 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,12 @@ typedef struct s_token
 	char				*content;
 	struct s_token		*next;
 }	t_token;
+
+typedef struct s_redirect
+{
+	int	infile;
+	int	outfile;
+}	t_redirect;
 
 
 // make_refer_env.c
@@ -174,7 +180,17 @@ char	*check_path_str(char path[], char *str, char *new_str, int *check);
 t_wc_list	*order_list(t_wc_list *pwd_file_list);
 t_wc_list	*set_fisrt(t_wc_list *list);
 t_wc_list	*set_other(t_wc_list *list);
-
+int			ft_strncmp_wildcard(const char *s1, const char *s2, size_t n);
+// cd
+int	cd(char *str, t_refer_env *refer_env);
+int	go_to_home(t_refer_env *refer_env, char *path);
+int	modify_envp(t_refer_env *refer_env, char *path, char *s);
+int	change_pwd(t_envp_list *list, char *s, int i, int *count);
+int	change_oldpwd(t_envp_list *list, char *s, int i, int *count);
+int	change_dir(char *home, t_refer_env *refer_env);
+int	error_cd(char *s);
+int	stay_pwd(t_refer_env *refer_env, char *path);
+int	go_to_str(t_refer_env *refer_env, char *str, char *path);
 #endif
 
 

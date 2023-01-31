@@ -72,7 +72,7 @@ int	check_aski(char *s1, char *s2)
 	max_len = len_s1;
 	if (len_s1 < len_s2)
 		max_len = len_s2;
-	ans = ft_strncmp(s1, s2, max_len);
+	ans = ft_strncmp_wildcard(s1, s2, max_len);
 	if (ans > 0)
 		return (1);
 	if (ans == 0)
@@ -80,16 +80,18 @@ int	check_aski(char *s1, char *s2)
 	return (0);
 }
 
-t_wc_list	*add_token_file_list(char *str, int *check)
+int	ft_strncmp_wildcard(const char *s1, const char *s2, size_t n)
 {
-	t_wc_list	*new_list;
+	size_t	len;
 
-	new_list = (t_wc_list *)malloc(sizeof(t_wc_list) * 1);
-	if (new_list == NULL)
-		return (error_wl_card(strerror(errno), check));
-	new_list->str = ft_strdup(str);
-	if (new_list->str == NULL)
-		return (error_wl_card(strerror(errno), check));
-	new_list->next = NULL;
-	return (new_list);
+	len = 0;
+	while (len < n)
+	{
+		if (ft_tolower(s1[len]) != ft_tolower(s2[len]))
+			return ((unsigned char)s1[len] - (unsigned char)s2[len]);
+		if (s1[len] == 0 && s2[len] == 0)
+			return (0);
+		len++;
+	}
+	return (0);
 }

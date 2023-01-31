@@ -29,5 +29,11 @@ int	main(int argc, char **argv, char **envp)
 		printf("%s\n", list->str);
 		list = list->next;
 	}
+	cd("libft", refer_env);
+	while (refer_env->envp != NULL)
+	{
+		printf("%s = %s\n", refer_env->envp->key, refer_env->envp->value);
+		refer_env->envp = refer_env->envp->next;
+	}
 	return (0);
 }

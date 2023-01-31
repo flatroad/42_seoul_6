@@ -94,3 +94,17 @@ char	*check_path_str(char path[], char *str, char *new_str, int *check)
 	}
 	return (NULL);
 }
+
+t_wc_list	*add_token_file_list(char *str, int *check)
+{
+	t_wc_list	*new_list;
+
+	new_list = (t_wc_list *)malloc(sizeof(t_wc_list) * 1);
+	if (new_list == NULL)
+		return (error_wl_card(strerror(errno), check));
+	new_list->str = ft_strdup(str);
+	if (new_list->str == NULL)
+		return (error_wl_card(strerror(errno), check));
+	new_list->next = NULL;
+	return (new_list);
+}
