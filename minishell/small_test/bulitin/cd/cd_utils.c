@@ -62,11 +62,11 @@ int	change_oldpwd(t_envp_list *list, char *s, int i, int *count)
 	return (0);
 }
 
-int	change_dir(char *home, t_refer_env *refer_env)
+int	change_dir(char *str, t_refer_env *refer_env)
 {
 	int	ans;
 
-	ans = chdir(home);
+	ans = chdir(str);
 	if (ans != 0)
 		return (error_cd(strerror(errno)));
 	return (0);

@@ -55,16 +55,15 @@ int	stay_pwd(t_refer_env *refer_env, char *path)
 	return (0);
 }
 
-int	go_to_str(t_refer_env *refer_env, char *str, char *path)
+int	go_to_str(t_refer_env *refer_env, char *str, char *old_path)
 {
-	char	*ch_str;
+	char	path[1024];
 
-	ch_str = change_str(str, path, refer_env);
 	if(change_dir(str, refer_env) == 1)
 		return (1);
-	if (modify_envp(refer_env, path, str) == 1)
+	if(getcwd(path, 1024) == NULL)
+		return (error_cd(strerror(errno)));
+	if (modify_envp(refer_env, old_path, path) == 1)
 		return (1);
 	return (0);
 }
-
-char	*change_str(char *str, refer_env *refer_env, char *path)
