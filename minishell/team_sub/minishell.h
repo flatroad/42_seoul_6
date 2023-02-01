@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/02/01 14:10:08 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/02/02 08:07:01 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ typedef struct s_station
 	t_fork		*fok;
 	t_envp_list	*env_list;
 	t_path_list	*path_list;
-	pid_t		pid;
 	int			check;
 }	t_station;
 
