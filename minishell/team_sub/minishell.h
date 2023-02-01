@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/02/01 10:08:42 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/02/01 10:51:41 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,9 @@ void		free_envp(int flag, t_envp_list *start);
 void		free_path(int flag, t_path_list *path);
 void		free_envp_path(char	**path);
 // env
-int	env(t_refer_env *refer_env);
+int	env(t_envp_list *envp);
 // export
-int	export(char **exp_str, t_refer_env *refer_env);
+int	export(char **exp_str, t_envp_list *envp);
 // free_error_Export.c
 void	free_exp(t_envp_list *exp);
 void	error_pr(t_envp_list *exp);
@@ -144,18 +144,18 @@ t_envp_list	*check_exp_str(char *str);
 t_envp_list	*is_exp_null(void);
 t_envp_list	*not_exp_null(char *str);
 //out_export.c
-void	out_export(t_refer_env *refer_env);
+void	out_export(t_envp_list *envp);
 //output_exp_export.c
-int	output_exp(t_envp_list *exp, t_refer_env *refer_env);
+int	output_exp(t_envp_list *exp, t_envp_list *envp);
 int	error_check(char *str);
-int	push_export(t_envp_list *exp, t_refer_env *refer_env);
+int	push_export(t_envp_list *exp, t_envp_list *envp);
 int	same_check(t_envp_list *memo, t_envp_list *exp);
 t_envp_list	*change_refer(t_envp_list *exp);
 //unset.c
-int		unset(char **str, t_refer_env *refer_env);
-void	check_unset(char *str, t_refer_env *refer_env);
+int		unset(char **str, t_envp_list *envp);
+void	check_unset(char *str, t_envp_list *envp);
 int		same_check_unset(char *s1, char *s2);
-void	delete_str_unset(t_refer_env *refer_env, t_envp_list *memo, \
+void	delete_str_unset(t_envp_list **envp, t_envp_list *memo, \
 t_envp_list *before_memo);
 // pwd
 int	pwd(void);
@@ -165,6 +165,16 @@ void	group_echo(char **str);
 int		check_option_echo(char *str);
 void	is_op_echo(char	**str, int i);
 void	not_op_echo(char **str);
+// cd
+int	cd(char *str, t_envp_list *envp);
+int	go_to_home(t_envp_list *envp, char *path);
+int	modify_envp(t_envp_list *envp, char *path, char *s);
+int	change_pwd(t_envp_list *list, char *s, int i, int *count);
+int	change_oldpwd(t_envp_list *list, char *s, int i, int *count);
+int	change_dir(char *str);
+int	error_cd(char *s);
+int	stay_pwd(t_envp_list *envp, char *path);
+int	go_to_str(t_envp_list *envp, char *str, char *path);
 //wildcard
 t_wc_list	*wildcard(char *str, t_token *token);
 t_wc_list	*make_pwd_file_list(char *path, int *check);
@@ -197,16 +207,6 @@ t_wc_list	*order_list(t_wc_list *pwd_file_list);
 t_wc_list	*set_fisrt(t_wc_list *list);
 t_wc_list	*set_other(t_wc_list *list);
 int			ft_strncmp_wildcard(const char *s1, const char *s2, size_t n);
-// cd
-int	cd(char *str, t_refer_env *refer_env);
-int	go_to_home(t_refer_env *refer_env, char *path);
-int	modify_envp(t_refer_env *refer_env, char *path, char *s);
-int	change_pwd(t_envp_list *list, char *s, int i, int *count);
-int	change_oldpwd(t_envp_list *list, char *s, int i, int *count);
-int	change_dir(char *home, t_refer_env *refer_env);
-int	error_cd(char *s);
-int	stay_pwd(t_refer_env *refer_env, char *path);
-int	go_to_str(t_refer_env *refer_env, char *str, char *path);
 
 t_station *test_tran(t_refer_env *refer_env);
 void	exec_st(t_refer_env *refer_env);

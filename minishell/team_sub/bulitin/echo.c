@@ -3,7 +3,7 @@
 
 int	echo(char **str)
 {
-	if (str == NULL)
+	if (str[1] == NULL)
 		write(1, "\n", 2);
 	else
 		group_echo(str);
@@ -15,9 +15,9 @@ void	group_echo(char **str)
 	int	option;
 	int	i;
 
-	i = 0;
+	i = 1;
 	option = 2;
-	while (str[i][0] == '-')
+	while (str[i] != NULL && str[i][0] == '-')
 	{
 		option = check_option_echo(str[i]);
 		if (option == 0)
@@ -36,7 +36,6 @@ int	check_option_echo(char *str)
 	int	i;
 
 	len = ft_strlen(str);
-	i = 1;
 	while (str[i] != 0)
 	{
 		if (str[i] != 'n')
@@ -52,6 +51,7 @@ int	check_option_echo(char *str)
 
 void	is_op_echo(char	**str, int i)
 {
+	i++;
 	while (str[i] != NULL)
 	{
 		ft_putstr_fd(str[i], 1);
@@ -65,7 +65,7 @@ void	not_op_echo(char **str)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (str[i] != NULL)
 	{
 		ft_putstr_fd(str[i], 1);

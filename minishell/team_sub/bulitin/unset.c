@@ -1,32 +1,32 @@
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-int	unset(char **str, t_refer_env *refer_env)
+int	unset(char **str, t_envp_list *envp)
 {
 	int	i;
 	
 	i = 0;
 	while (str[i] != NULL)
 	{
-		check_unset(str[i], refer_env);
+		check_unset(str[i], envp);
 		i++;
 	}
 	return (0);
 }
 
-void	check_unset(char *str, t_refer_env *refer_env)
+void	check_unset(char *str, t_envp_list *envp)
 {
 	t_envp_list	*memo;
 	t_envp_list	*before_memo;
 
-	memo = refer_env->envp;
+	memo = envp;
 	before_memo = NULL;
 	if (str == NULL)
 		return ;
 	while (memo != NULL)
 	{
 		if (same_check_unset(memo->key, str) == 0)
-			delete_str_unset(refer_env, memo, before_memo);
+			delete_str_unset(&envp, memo, before_memo);
 		before_memo = memo;
 		memo = memo->next;
 	}
@@ -45,14 +45,14 @@ int	same_check_unset(char *s1, char *s2)
 	return (0);
 }
 
-void	delete_str_unset(t_refer_env *refer_env, t_envp_list *memo, \
+void	delete_str_unset(t_envp_list **envp, t_envp_list *memo, \
 t_envp_list *before_memo)
 {
 	if (before_memo == NULL)
 	{
 		free(memo->key);
 		free(memo->value);
-		refer_env->envp = memo->next;
+		*envp = memo->next;
 		free(memo);
 	}
 	else

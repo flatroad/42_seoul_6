@@ -1,11 +1,11 @@
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-int	env(t_refer_env *refer_env)
+int	env(t_envp_list *envp)
 {
 	t_envp_list	*memo;
 
-	memo = refer_env->envp;
+	memo = envp;
 	while(memo != NULL)
 	{
 		if (memo->value != NULL)

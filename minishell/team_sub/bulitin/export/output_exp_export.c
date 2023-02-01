@@ -1,7 +1,7 @@
 #include "../../minishell.h"
 #include "../../libft/libft.h"
 
-int	output_exp(t_envp_list *exp, t_refer_env *refer_env)
+int	output_exp(t_envp_list *exp, t_envp_list *envp)
 {
 	t_envp_list *memo;
 
@@ -14,7 +14,7 @@ int	output_exp(t_envp_list *exp, t_refer_env *refer_env)
 			memo = memo->next;
 			continue ;
 		}
-		if(push_export(memo, refer_env) == 1)
+		if(push_export(memo, envp) == 1)
 			return (1);
 		memo = memo->next;
 	}
@@ -41,12 +41,12 @@ int	error_check(char *str)
 	return (0);
 }
 
-int	push_export(t_envp_list *exp, t_refer_env *refer_env)
+int	push_export(t_envp_list *exp, t_envp_list *envp)
 {
 	t_envp_list *memo;
 	int			i;
 
-	memo = refer_env->envp;
+	memo = envp;
 	while (memo != NULL)
 	{
 		i = same_check(memo, exp);

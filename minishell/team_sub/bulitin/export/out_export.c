@@ -1,11 +1,11 @@
 #include "../../minishell.h"
 #include "../../libft/libft.h"
 
-void	out_export(t_refer_env *refer_env)
+void	out_export(t_envp_list *envp)
 {
 	t_envp_list *memo;
 
-	memo = refer_env->envp;
+	memo = envp;
 	while (memo != NULL)
 	{
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);

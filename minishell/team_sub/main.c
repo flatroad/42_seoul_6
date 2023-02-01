@@ -38,16 +38,17 @@ t_station *test_tran(t_refer_env *refer_env)
 	t_station *stt;
 	char	**str;
 
-	str = (char **)malloc(sizeof(char *) * 2);
-	str[0] = "ls";
+	str = (char **)malloc(sizeof(char *) * 3);
+	str[0] = "echo";
 	str[1] = NULL;
+	str[2] = NULL;
 	stt = (t_station *)malloc(sizeof(t_station) * 1);
 	stt->env_list = refer_env->envp;
 	stt->path_list = refer_env->path;
 	stt->fok = (t_fork *)malloc(sizeof(t_fork) * 1);
 	stt->fok->full_cmd = str;
 	stt->fok->full_path = "/bin/ls";
-	stt->fok->infile = 0;
+	stt->fok->infile = open("abc", O_RDONLY, 0644);
 	stt->fok->outfile = 1;
 	stt->fok->next = NULL;
 	stt->pid = 0;
