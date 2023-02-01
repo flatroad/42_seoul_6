@@ -1,13 +1,13 @@
 #include "../../minishell.h"
 #include "../../libft/libft.h"
 
-int	modify_envp(t_refer_env *refer_env, char *path, char *s)
+int	modify_envp(t_envp_list *envp, char *path, char *s)
 {
 	t_envp_list	*list;
 	int			i;
 	int			count;
 
-	list = refer_env->envp;
+	list = envp;
 	i = 0;
 	count = 0;
 	while (list != NULL)
@@ -62,7 +62,7 @@ int	change_oldpwd(t_envp_list *list, char *s, int i, int *count)
 	return (0);
 }
 
-int	change_dir(char *str, t_refer_env *refer_env)
+int	change_dir(char *str)
 {
 	int	ans;
 

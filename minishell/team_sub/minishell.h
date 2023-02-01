@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/02/01 02:51:11 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/02/01 10:08:42 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,37 +76,40 @@ typedef struct s_token
 	struct s_token		*next;
 }	t_token;
 
-typedef struct s_redi
+typedef struct s_mini
 {
-	int	infile;
-	int	outfile;
-	struct s_redi	*next;
-}	t_redi;
-
-typedef struct s_cmd
-{
-	char	*str;
-	struct s_cmd	*next;
-}	t_cmd;
-
-typedef struct s_bundle
-{
-	t_cmd	*cmd;
-	t_redi	*redi;
-	pid_t	id;
-	struct s_bundle *next;
-} t_bundle;
-
-typedef struct s_exec
-{
-	char	**cmd;
+	char	**full_cmd;
+	char	*full_path;
 	int		infile;
 	int		outfile;
-	int		fd[2];
-	int		check;
-	int		id;
-	struct s_exec	*next;
-}	t_exec;
+	// struct s_mini *next;
+}			t_mini;
+
+// typedef struct s_prompt
+// {
+// 	t_list	*cmds;
+// 	// t_mini	*cmds;
+// 	char	**envp;
+// 	pid_t	pid;
+// }			t_prompt;
+
+typedef struct s_fork
+{
+	char			**full_cmd;
+	char			*full_path;
+	int				infile;
+	int				outfile;
+	struct s_fork	*next;
+}	t_fork;
+
+typedef struct s_station
+{
+	t_fork		*fok;
+	t_envp_list	*env_list;
+	t_path_list	*path_list;
+	pid_t		pid;
+	int			check;
+}	t_station;
 
 int	global_sig;
 
@@ -205,7 +208,20 @@ int	error_cd(char *s);
 int	stay_pwd(t_refer_env *refer_env, char *path);
 int	go_to_str(t_refer_env *refer_env, char *str, char *path);
 
-void	handle_signal(int sig);
+t_station *test_tran(t_refer_env *refer_env);
+void	exec_st(t_refer_env *refer_env);
+
+int	single_cmd(t_station *stt);
+int	exec_single_cmd(t_station *stt);
+int	single_fork(t_station *stt, char *path, char **cmd);
+int	single_bulitin(t_station *stt, int check);
+int	set_dup(t_station *stt);
+
+int	error_handle(char *str, t_station *stt);
+int	error_fork(char *str, t_station *stt);
+
+int	check_bulitin(t_fork *fok);
+
 #endif
 
 

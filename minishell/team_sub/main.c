@@ -4,9 +4,8 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_refer_env *refer_env;
-	t_bundle	*mini;
-	t_exec		*exec;
-	char	*str;
+	// t_prompt	*exec;
+	char		*str;
 
 	if (argc != 1)
 	{
@@ -16,52 +15,52 @@ int	main(int argc, char **argv, char **envp)
 	refer_env = make_refer_env(envp);
 	if (refer_env == NULL)
 		exit(1);
-	while (1)
-	{
-		signal(SIGINT, handle_signal);
-		signal(SIGQUIT, handle_signal);
-		str = readline("minishell-$ ");
-		ft_parser(str, refer_env, mini, exec);
-		ft_execve(exec, refer_env);
-		free_all(mini);
-	}
+	exec_st(refer_env);
 	return (0);
 }
 
-void	ft_execve(t_exec *exec, t_refer_env *refer_env)
+void	exec_st(t_refer_env *refer_env)
 {
-	t_exec	*exec_proxy;
+	t_station	*stt;
 
-	exec_proxy = exec;
-	if (exec_proxy == NULL)
+	// stt = trans_stt(exec);
+	stt = test_tran(refer_env);
+	if (stt == NULL)
 		return ;
-	else if (exec_proxy->check != 0)
-		error_handle_exec(exec);
-	else
-	{
-		while (exec_proxy != NULL)
-		{
-			pipe(exec->fd);
-			exec->infile = dup(0);
-			exec->outfile = dup(1);
-			exec_start(exec, refer_env);
-			free_exec(exec_proxy);
-			exec_proxy = exec_proxy->next;
-		}
-	}
+	if (stt->fok->next == NULL)
+		single_cmd(stt);
+	// else
+	// 	muti_cmd(stt);
 }
 
-void	exec_start(t_exec *exec, t_refer_env *refer_env)
+t_station *test_tran(t_refer_env *refer_env)
 {
-	
+	t_station *stt;
+	char	**str;
+
+	str = (char **)malloc(sizeof(char *) * 2);
+	str[0] = "ls";
+	str[1] = NULL;
+	stt = (t_station *)malloc(sizeof(t_station) * 1);
+	stt->env_list = refer_env->envp;
+	stt->path_list = refer_env->path;
+	stt->fok = (t_fork *)malloc(sizeof(t_fork) * 1);
+	stt->fok->full_cmd = str;
+	stt->fok->full_path = "/bin/ls";
+	stt->fok->infile = 0;
+	stt->fok->outfile = 1;
+	stt->fok->next = NULL;
+	stt->pid = 0;
+
+	return (stt);
 }
 
-int	check_bulitin(t_exec *exec)
+int	check_bulitin(t_fork *fok)
 {
 	int		len;
 	char	*str;
 
-	str = exec->cmd[0];
+	str = fok->full_cmd[0];
 	len = ft_strlen(str);
 	if (strncmp(str, "echo", len) == 0)
 		return (1);

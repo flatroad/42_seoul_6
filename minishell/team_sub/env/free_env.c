@@ -1,5 +1,5 @@
-#include "minishell.h"
-#include "./libft/libft.h"
+#include "../minishell.h"
+#include "../libft/libft.h"
 
 t_refer_env	*free_refer_env(int flag, t_refer_env *refer_env)
 {
