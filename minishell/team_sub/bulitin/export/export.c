@@ -5,7 +5,7 @@ int	export(char **exp_str, t_envp_list *envp)
 {
 	t_envp_list *exp;
 
-	if (exp_str == NULL)
+	if (exp_str[1] == NULL)
 	{
 		out_export(envp);
 		return (0);

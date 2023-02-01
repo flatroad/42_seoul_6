@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 23:37:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/02/01 10:51:41 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/02/01 14:10:08 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,11 @@ typedef struct s_mini
 	char	*full_path;
 	int		infile;
 	int		outfile;
-	// struct s_mini *next;
 }			t_mini;
 
 // typedef struct s_prompt
 // {
 // 	t_list	*cmds;
-// 	// t_mini	*cmds;
 // 	char	**envp;
 // 	pid_t	pid;
 // }			t_prompt;
@@ -97,6 +95,7 @@ typedef struct s_fork
 {
 	char			**full_cmd;
 	char			*full_path;
+	int				check;
 	int				infile;
 	int				outfile;
 	struct s_fork	*next;

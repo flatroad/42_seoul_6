@@ -24,7 +24,7 @@ void	group_echo(char **str)
 			break ;
 		i++;
 	}
-	if (i != 0)
+	if (i != 1)
 		is_op_echo(str, i);
 	else
 		not_op_echo(str);
@@ -36,6 +36,7 @@ int	check_option_echo(char *str)
 	int	i;
 
 	len = ft_strlen(str);
+	i = 1;
 	while (str[i] != 0)
 	{
 		if (str[i] != 'n')
@@ -51,7 +52,6 @@ int	check_option_echo(char *str)
 
 void	is_op_echo(char	**str, int i)
 {
-	i++;
 	while (str[i] != NULL)
 	{
 		ft_putstr_fd(str[i], 1);

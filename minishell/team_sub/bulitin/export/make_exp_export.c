@@ -7,8 +7,8 @@ t_envp_list	*make_exp(char **exp_str)
 	t_envp_list	*exp;
 	t_envp_list	*memo;
 
-	i = 1;
-	memo = check_exp_str(exp_str[0]);
+	i = 2;
+	memo = check_exp_str(exp_str[1]);
 	if (memo == NULL)
 		return (NULL);
 	exp = memo;

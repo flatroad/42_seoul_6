@@ -5,7 +5,7 @@ int	unset(char **str, t_envp_list *envp)
 {
 	int	i;
 	
-	i = 0;
+	i = 1;
 	while (str[i] != NULL)
 	{
 		check_unset(str[i], envp);
