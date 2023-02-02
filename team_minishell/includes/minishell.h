@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 20:16:38 by junsyun           #+#    #+#             */
-/*   Updated: 2023/02/02 21:40:29 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/02/03 00:24:27 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ int	exec_single_cmd(t_station *stt);
 int	set_dup(t_station *stt);
 	// trans_fok.c
 t_station	*trans_stt(t_prompt *exec_ptr, t_refer_env *refer_env);
+t_station	*make_fok(t_list *memo, t_station *stt);
 t_station	*free_fork(t_station *stt);
 t_fork	*add_fork(t_mini *mini);
 

@@ -10,6 +10,7 @@ void	export(char **exp_str, t_envp_list *envp)
 	{
 		out_export(envp);
 		g_status = 0;
+		return ;
 	}
 	exp = make_exp(exp_str);
 	if (exp == NULL)

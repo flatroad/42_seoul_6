@@ -43,7 +43,7 @@ void	start_multi_fork(t_fork *fok, t_station *stt, int pip[2], int i)
 	else if (pid == 0)
 		check_multi_case(fok, stt, pip, i);
 	close(pip[1]);
-	if (i == 0 && fok->next->infile != 0)
+	if (i == 0 && fok->next->infile == 0)
 		fok->next->infile = pip[0];
 	else
 		close(pip[0]);

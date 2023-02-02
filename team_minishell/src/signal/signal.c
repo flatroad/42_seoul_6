@@ -10,5 +10,6 @@ void	sigint_set_readline(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 1);
 		rl_redisplay();
+		g_status = 127;
 	}
 }

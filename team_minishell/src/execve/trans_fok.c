@@ -4,7 +4,6 @@ t_station	*trans_stt(t_prompt *exec_ptr, t_refer_env *refer_env)
 {
 	t_station	*stt;
 	t_list		*memo;
-	t_fork		*fokl;
 
 	stt = (t_station *)malloc(sizeof(t_station) * 1);
 	if (stt == NULL)
@@ -12,14 +11,31 @@ t_station	*trans_stt(t_prompt *exec_ptr, t_refer_env *refer_env)
 	stt->env_list = refer_env->envp;
 	stt->path_list = refer_env->path;
 	memo = exec_ptr->cmds;
+	stt = make_fok(memo, stt);
+	if (stt == NULL)
+		return (NULL);
+	return (stt);
+}
+
+t_station	*make_fok(t_list *memo, t_station *stt)
+{
+	t_fork	*fok;
+
+	fok = NULL;
+	if (memo != NULL)
+	{
+		fok = add_fork((t_mini *)memo->content);
+		if (fok == NULL)
+			return (NULL);
+		memo = memo->next;
+	}
+	stt->fok = fok;
 	while (memo != NULL)
 	{
-		fokl = add_fork((t_mini *)memo->content);
-		if (fokl == NULL)
+		fok->next = add_fork((t_mini *)memo->content);
+		if (fok->next == NULL)
 			return (free_fork(stt));
-		if (stt->fok == NULL)
-			stt->fok = fokl;
-		fokl = fokl->next;
+		fok = fok->next;
 		memo = memo->next;
 	}
 	return (stt);
@@ -43,7 +59,7 @@ t_fork	*add_fork(t_mini *mini)
 {
 	t_fork	*fok;
 
-	fok = (t_fork *)malloc(sizeof(fok) * 1);
+	fok = (t_fork *)malloc(sizeof(t_fork) * 1);
 	if (fok == NULL)
 		return (NULL);
 	fok->full_cmd = mini->full_cmd;
