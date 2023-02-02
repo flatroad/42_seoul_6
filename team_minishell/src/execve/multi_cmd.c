@@ -10,7 +10,6 @@ int	multi_cmd(t_station *stt)
 		start_multi_cmd(obj, stt);
 		obj = obj->next;
 	}
-	free_fork(stt);
 	return (0);
 }
 

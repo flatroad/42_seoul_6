@@ -76,10 +76,20 @@ int	same_check(t_envp_list *memo, t_envp_list *exp)
 		return (1);
 	if (ft_strncmp(memo->key, exp->key, i) != 0)
 		return (1);
-	sv = ft_strdup(exp->value);
-	if (sv == NULL)
-		return (2);
-	free(memo->value);
+	if (exp->value == NULL)
+	{
+		free(memo->value);
+		memo->value = NULL;
+		return (0);
+	}
+	else
+	{
+		sv = ft_strdup(exp->value);
+		if (sv == NULL)
+			return (2);
+	}
+	if (memo->value != NULL)
+		free(memo->value);
 	memo->value = sv;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 20:16:38 by junsyun           #+#    #+#             */
-/*   Updated: 2023/02/03 00:24:27 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/02/03 03:04:00 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ t_station	*test_tran(t_refer_env *refer_env);
 	//export	free_error_export.c
 	void	free_exp(t_envp_list *exp);
 	void	error_pr(t_envp_list *exp);
+	void	exec_free(t_station	*stt);
 	//export	make_exp_export_sub.c
 	t_envp_list	*is_pair(char *str, int i);
 	t_envp_list	*is_single(char	*str);

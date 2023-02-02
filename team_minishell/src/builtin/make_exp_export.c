@@ -11,7 +11,7 @@ t_envp_list	*make_exp(char **exp_str)
 	if (memo == NULL)
 		return (NULL);
 	exp = memo;
-	while (exp_str[i] != 0)
+	while (exp_str[i] != NULL)
 	{
 		memo->next = check_exp_str(exp_str[i]);
 		if (memo->next == NULL)

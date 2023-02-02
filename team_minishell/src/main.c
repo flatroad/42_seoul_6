@@ -65,7 +65,6 @@ static t_prompt	init_prompt(char **argv, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	char				*str;
 	char				*out;
 	t_prompt			prompt;
 	t_refer_env			*refer_env;
@@ -81,12 +80,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		signal(SIGINT, sigint_set_readline);
 		signal(SIGQUIT, SIG_IGN);
-		str = get_prompt(prompt);
-		if (str)
-			out = readline(str);
-		else
-			out = readline("guest@minishell $ ");
-		free(str);
+		out = readline("guest@minishell $ ");
 		if (!check_args(out, &prompt, refer_env))
 			break ;
 	}

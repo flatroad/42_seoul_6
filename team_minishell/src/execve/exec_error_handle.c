@@ -53,3 +53,17 @@ int	sglcmd_error_handle(int cas, t_fork *fok)
 	g_status = 1;
 	return (0);
 }
+
+void	exec_free(t_station	*stt)
+{
+	t_fork	*memo;
+
+	while (stt->fok != NULL)
+	{
+		memo = stt->fok;
+		free(stt->fok->full_path);
+		stt->fok = stt->fok->next;
+		free(memo);
+	}
+	free(stt);
+}

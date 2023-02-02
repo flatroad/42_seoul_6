@@ -38,7 +38,7 @@ SIG				= signal
 
 ENV				= environ check_envp free_env make_envp make_path make_refer_env
 
-PROMPT			= prompt custom_cmd
+PROMPT			= custom_cmd
 
 UTILS			= ft_strchars_i	\
 				ft_strchr_i

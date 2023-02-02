@@ -15,4 +15,5 @@ void	exec_st(t_prompt *exec, t_refer_env *refer_env)
 		single_cmd(stt);
 	else
 		multi_cmd(stt);
+	exec_free(stt);
 }

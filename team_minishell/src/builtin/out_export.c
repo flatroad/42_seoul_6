@@ -17,6 +17,8 @@ void	out_export(t_envp_list *envp)
 			ft_putstr_fd("\"", 1);
 			ft_putstr_fd("\n", 1);
 		}
+		else
+			ft_putchar_fd('\n', 1);
 		memo = memo->next;
 	}
 }
