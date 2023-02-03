@@ -3,9 +3,7 @@
 void	exec_st(t_prompt *exec, t_refer_env *refer_env)
 {
 	t_station	*stt;
-	int	i;
 
-	i = 0;
 	stt = trans_stt(exec, refer_env);
 	if (stt == NULL)
 		execst_error_handle(0);

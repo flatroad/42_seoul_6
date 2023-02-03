@@ -15,6 +15,9 @@ int	single_bulitin(t_station *stt, int check)
 	else if (check == 6)
 		unset(stt->fok->full_cmd, stt->env_list);
 	else if (check == 7)
-		exit(0);
+	{
+		ft_putendl_fd("exit", 2);
+		new_exit(stt->fok->full_cmd);
+	}
 	return (0);
 }

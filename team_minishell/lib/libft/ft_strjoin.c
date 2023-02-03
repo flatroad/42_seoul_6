@@ -3,32 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junsyun <junsyun@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 02:15:07 by junsyun           #+#    #+#             */
-/*   Updated: 2023/02/02 19:51:05 by junsyun          ###   ########.fr       */
+/*   Updated: 2023/02/03 09:04:23 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*ans;
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
-	if (!s1 || !s1)
+	if (!s1 && !s2)
 		return (NULL);
 	ans = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!ans)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (s1[i])
+	while (s1 && s1[i])
 		ans[j++] = s1[i++];
 	i = 0;
-	while (s2[i])
+	while (s2 && s2[i])
 		ans[j++] = s2[i++];
 	ans[j] = 0;
 	return (ans);

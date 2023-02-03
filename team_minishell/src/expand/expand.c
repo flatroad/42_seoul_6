@@ -47,7 +47,11 @@ static char	*get_substr_var(char *str, int i, t_prompt *prompt)
 	if (!var && str[i] == '$')
 		var = ft_itoa(prompt->pid);
 	else if (!var && str[i] == '?')
+	{
 		var = ft_itoa(g_status);
+		if (g_status == 2)
+			var = ft_itoa(130);
+	}
 	path = ft_strjoin(aux, var);
 	free(aux);
 	aux = ft_strjoin(path, &str[i + pos]);

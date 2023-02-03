@@ -23,10 +23,10 @@ int	mulcmd_error_handle(int cas, t_fork *fok)
 	else if (cas == 3)
 		ft_putstr_fd("fork fail: ", 2);
 	else if (cas == 4)
-		ft_putstr_fd("fork fail: ", 2);
+		ft_putstr_fd("dup2 fail: ", 2);
 	else if (cas == 5)
 		ft_putstr_fd("execve is fail: ", 2);
-	if (fok->full_cmd == NULL)
+	if (fok->full_cmd != NULL)
 		ft_putstr_fd(fok->full_cmd[0], 2);
 	ft_putchar_fd('\n', 2);
 	g_status = 1;
@@ -47,7 +47,7 @@ int	sglcmd_error_handle(int cas, t_fork *fok)
 		ft_putstr_fd("dup2 fail: ", 2);
 	else if (cas == 5)
 		ft_putstr_fd("execve is fail: ", 2);
-	if (fok->full_cmd == NULL)
+	if (fok->full_cmd != NULL)
 		ft_putstr_fd(fok->full_cmd[0], 2);
 	ft_putchar_fd('\n', 2);
 	g_status = 1;

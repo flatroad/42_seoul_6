@@ -22,6 +22,6 @@ int	multi_bulitin(t_station *stt, t_fork *fok, int cas)
 	else if (cas == 6)
 		unset(fok->full_cmd, stt->env_list);
 	else if (cas == 7)
-		exit(0);
+		new_exit(fok->full_cmd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 20:16:38 by junsyun           #+#    #+#             */
-/*   Updated: 2023/02/03 03:04:00 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/02/03 09:08:41 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,16 @@
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-
 # include "../lib/libft/libft.h"
-# include "const.h"
+
+# define READ_END 0
+# define WRITE_END 1
+
+# define SUCCESS	1
+# define FAIL		0
+# define TRUE		1
+# define FALSE		0
+# define ERROR		-1
 
 typedef	struct s_path_list
 {
@@ -243,6 +250,10 @@ t_station	*test_tran(t_refer_env *refer_env);
 	void	unset(char **str, t_envp_list *envp);
 	void	check_unset(char *str, t_envp_list *envp);
 	int		same_check_unset(char *s1, char *s2);
-	void	delete_str_unset(t_envp_list **envp, t_envp_list *memo, t_envp_list *before_memo);                                                                                                                                                                                                                                     
+	void	delete_str_unset(t_envp_list **envp, t_envp_list *memo, t_envp_list *before_memo);
+	// new_exit.c
+	void	new_exit(char **str);
+	int	all_num_check(char *str);
+	void	new_exit_handle(int i, char *str);                                                                                                                                                                                                                           
 
 #endif

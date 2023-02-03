@@ -14,7 +14,7 @@ LIBFT			= libft/libft.a
 
 MAIN			= main
 
-BUILTIN			= echo env export pwd unset \
+BUILTIN			= echo env export pwd unset new_exit\
 				cd cd_utils \
 				export free_error_export make_exp_export \
 				make_exp_export_sub out_export output_exp_export
@@ -38,8 +38,6 @@ SIG				= signal
 
 ENV				= environ check_envp free_env make_envp make_path make_refer_env
 
-PROMPT			= custom_cmd
-
 UTILS			= ft_strchars_i	\
 				ft_strchr_i
 
@@ -52,7 +50,6 @@ SRCS 			= $(addsuffix .c, $(addprefix src/, $(MAIN))) \
 					$(addsuffix .c, $(addprefix src/execve/, $(EXEC))) \
 					$(addsuffix .c, $(addprefix src/expand/, $(EXPAND))) \
 					$(addsuffix .c, $(addprefix src/builtin/, $(BUILTIN)))	\
-					$(addsuffix .c, $(addprefix src/prompt/, $(PROMPT)))	\
 					$(addsuffix .c, $(addprefix src/utils/, $(UTILS)))		\
 					$(addsuffix .c, $(addprefix src/environ/, $(ENV)))
 					
