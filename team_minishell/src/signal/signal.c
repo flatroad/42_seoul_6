@@ -1,4 +1,5 @@
 #include "../../includes/minishell.h"
+#include <ioctl.h>
 
 int	g_status;
 
@@ -18,8 +19,10 @@ void	sig_exec(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_status = 128 + SIGINT;
-		ft_putstr_fd("\n", STDOUT_FILENO);
+		g_status = 130;
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		rl_replace_line("", 0);
+		rl_on_new_line();
 	}
 	if (sig == SIGQUIT)
 	{
