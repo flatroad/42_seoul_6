@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern int	g_status;
+
 int	execst_error_handle(int cas)
 {
 	if (cas == 0)

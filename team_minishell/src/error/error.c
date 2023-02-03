@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern int	g_status;
+
 void	*ft_perror(int err_type, char *param, int err)
 {
 	g_status = err;

@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern int	g_status;
+
 void	sigint_set_readline(int sig)
 {
 	if (sig == SIGINT)

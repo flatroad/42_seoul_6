@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern int	g_status;
+
 void	exec_multi_bul(t_fork *fok, t_station *stt, int cas)
 {
 	multi_bulitin(stt, fok, cas);

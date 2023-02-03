@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern int	g_status;
+
 int	modify_envp(t_envp_list *envp, char *path, char *s)
 {
 	t_envp_list	*list;

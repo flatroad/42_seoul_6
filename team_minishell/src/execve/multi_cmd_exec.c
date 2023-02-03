@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern int	g_status;
+
 void	exec_multi_cmd(t_fork *fok)
 {
 	execve(&fok->full_path[0], fok->full_cmd, NULL);

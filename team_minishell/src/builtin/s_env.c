@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern int	g_status;
+
 void	s_env(t_envp_list *envp, int fd)
 {
 	t_envp_list	*memo;

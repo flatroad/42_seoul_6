@@ -1,13 +1,13 @@
 #include "../includes/minishell.h"
 
-// extern int	g_status;
+extern int	g_status;
 
 int	main(int argc, char **argv, char **envp)
 {
 	char				*out;
 	t_prompt			prompt;
 	t_ref_env			*refer_env;
-
+	
 	if (argc != 1 || argv[1] != NULL)
 	{
 		write(2, "try again your minishell\n", 26);

@@ -6,11 +6,13 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 21:59:06 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/02/03 22:02:25 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/02/03 22:33:34 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern int	g_status;
 
 char	*ft_get_env_key(char *str, int i, char *key, t_prompt *prompt)
 {

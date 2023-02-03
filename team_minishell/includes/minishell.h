@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 20:16:38 by junsyun           #+#    #+#             */
-/*   Updated: 2023/02/03 22:00:43 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/02/03 22:38:25 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@
 # define TRUE		1
 # define FALSE		0
 # define ERROR		-1
-
-extern int	g_status;
 
 typedef	struct s_path_list
 {

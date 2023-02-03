@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern int	g_status;
+
 void	unset(char **str, t_envp_list *envp)
 {
 	int	i;

@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern int	g_status;
+
 void	single_fork(t_station *stt, char *path, char **cmd, int pip[2])
 {
 	if (set_dup(stt, pip) != 0)

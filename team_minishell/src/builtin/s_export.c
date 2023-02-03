@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern int	g_status;
+
 void	s_export(char **exp_str, t_envp_list *envp, int fd)
 {
 	t_envp_list	*exp;

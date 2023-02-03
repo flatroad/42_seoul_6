@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern int	g_status;
+
 void	cd(char *str, t_envp_list *envp)
 {
 	int		flag;
