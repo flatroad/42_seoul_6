@@ -38,6 +38,7 @@ static char	*get_substr_var(char *str, int i, t_prompt *prompt)
 	char	*path;
 	char	*var;
 
+	printf("%s\n", str);
 	pos = ft_strchars_i(&str[i], "|\"\'$?>< ") + (ft_strchr("$?", str[i]) != 0);
 	if (pos == -1)
 		pos = ft_strlen(str) - 1;
@@ -48,9 +49,10 @@ static char	*get_substr_var(char *str, int i, t_prompt *prompt)
 		var = ft_itoa(prompt->pid);
 	else if (!var && str[i] == '?')
 	{
-		var = ft_itoa(g_status);
 		if (g_status == 2)
 			var = ft_itoa(130);
+		else
+			var = ft_itoa(g_status);
 	}
 	path = ft_strjoin(aux, var);
 	free(aux);

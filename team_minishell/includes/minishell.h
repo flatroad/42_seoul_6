@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 20:16:38 by junsyun           #+#    #+#             */
-/*   Updated: 2023/02/03 09:08:41 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/02/03 09:44:20 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ char	**ft_setenv(char *var, char *value, char **envp, int n);
 char	*get_prompt(t_prompt prompt);
 void	free_content(void *content);
 void	sigint_set_readline(int sig);
+void	sig_exec(int sig);
 void	handle_sigint_child(int sig);
 int		ft_strchars_i(const char *s, char *set);
 int		ft_strchr_i(const char *s, int c);
