@@ -1,7 +1,7 @@
 #include "../../minishell.h"
 #include "../../libft/libft.h"
 
-t_envp_list	*is_pair(char *str, int	i)
+t_envp_list	*is_pair(char *str, int i)
 {
 	t_envp_list	*exp;
 

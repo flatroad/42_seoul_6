@@ -5,6 +5,8 @@ int	check_bulitin(t_fork *fok)
 	int		len;
 	char	*str;
 
+	if (fok->full_cmd == NULL)
+		return (8);
 	str = fok->full_cmd[0];
 	len = ft_strlen(str);
 	if (strncmp(str, "echo", len) == 0)

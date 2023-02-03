@@ -1,7 +1,9 @@
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-int	env(t_envp_list *envp)
+extern int status;
+
+void	env(t_envp_list *envp)
 {
 	t_envp_list	*memo;
 
@@ -16,5 +18,5 @@ int	env(t_envp_list *envp)
 		}
 		memo = memo->next;
 	}
-	return (0);
+	status = 0;
 }

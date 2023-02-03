@@ -1,5 +1,5 @@
-#include "minishell.h"
-#include "./libft/libft.h"
+#include "../minishell.h"
+#include "../libft/libft.h"
 
 int	find_path(t_fork *fork, t_station *stt)
 {
@@ -8,9 +8,16 @@ int	find_path(t_fork *fork, t_station *stt)
 	memo = fork;
 	while (memo != NULL)
 	{
-		conf_path(memo->full_cmd[0], memo, stt->env_list);
+		if (memo->full_cmd == NULL)
+			fork->check = 9;
+		else
+			conf_path(memo->full_cmd[0], memo, stt->path_list);
 		if (fork->check == 10)
+		{
+			free_find_path(fork);
+			free(stt);
 			return (1);
+		}
 		memo = memo->next;
 	}
 	return (0);
@@ -18,7 +25,7 @@ int	find_path(t_fork *fork, t_station *stt)
 
 void	conf_path(char *str, t_fork *fork, t_path_list *path)
 {
-	if (check_bulitin(str) == 0)
+	if (check_bulitin(fork) != 0)
 		return ;
 	if (first_check(str, fork) == 0)
 		return ;
@@ -68,21 +75,4 @@ int	second_check(char *check, t_fork *fork, t_path_list *path)
 		memo = memo->next;
 	}
 	return (1);
-}
-
-char	*ft_strjoin_three(char *str_f, char *str_s, char *str_t)
-{
-	char	*str;
-	char	*str_final;
-
-	str = ft_strjoin(str_f, str_s);
-	if (str == NULL)
-		return (NULL);
-	str_final = ft_strjoin(str, str_t);
-	if (str_final == NULL)
-	{
-		free(str);
-		return (NULL);
-	}
-	return (str_final);
 }

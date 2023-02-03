@@ -1,16 +1,18 @@
 #include "../../minishell.h"
 #include "../../libft/libft.h"
 
-int	cd(char *str, t_envp_list *envp)
+extern int	status;
+
+void	cd(char *str, t_envp_list *envp)
 {
 	int		flag;
 	char	path[1024];
 	
 	if (getcwd(path, 1024) == NULL)
 	{
-		ft_putstr_fd("Error, ", 2);
+		ft_putstr_fd("Error, cd: ", 2);
 		ft_putendl_fd(strerror(errno), 2);
-		return (1);
+		status = 1;
 	}
 	if (str == NULL)
 		flag = go_to_home(envp, path);
@@ -18,7 +20,7 @@ int	cd(char *str, t_envp_list *envp)
 		flag = stay_pwd(envp, path);
 	else
 		flag = go_to_str(envp, str, path);
-	return (flag);
+	status = flag;
 }
 
 int	go_to_home(t_envp_list *envp, char *path)

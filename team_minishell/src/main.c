@@ -1,12 +1,12 @@
 #include "../includes/minishell.h"
 
-extern int	g_status;
+// extern int	g_status;
 
 int	main(int argc, char **argv, char **envp)
 {
 	char				*out;
 	t_prompt			prompt;
-	t_refer_env			*refer_env;
+	t_ref_env			*refer_env;
 
 	if (argc != 1 || argv[1] != NULL)
 	{

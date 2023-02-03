@@ -1,12 +1,10 @@
 #include "../../includes/minishell.h"
 
-extern int	g_status;
-
 void	cd(char *str, t_envp_list *envp)
 {
 	int		flag;
 	char	path[1024];
-	
+
 	if (getcwd(path, 1024) == NULL)
 	{
 		ft_putstr_fd("Error, cd: ", 2);
@@ -33,7 +31,7 @@ int	go_to_home(t_envp_list *envp, char *path)
 		i = strlen(list->key);
 		if (strncmp(list->key, "HOME", i) == 0)
 		{
-			if(change_dir(list->value) == 1)
+			if (change_dir(list->value) == 1)
 				return (1);
 			if (modify_envp(envp, path, list->value) == 1)
 				return (1);
@@ -57,9 +55,9 @@ int	go_to_str(t_envp_list *envp, char *str, char *old_path)
 {
 	char	path[1024];
 
-	if(change_dir(str) == 1)
+	if (change_dir(str) == 1)
 		return (1);
-	if(getcwd(path, 1024) == NULL)
+	if (getcwd(path, 1024) == NULL)
 		return (error_cd(strerror(errno)));
 	if (modify_envp(envp, old_path, path) == 1)
 		return (1);

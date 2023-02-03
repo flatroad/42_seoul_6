@@ -1,7 +1,5 @@
 #include "../../includes/minishell.h"
 
-extern int	g_status;
-
 char	*get_here_str(char *str[2], size_t len, char *limit, char *warn)
 {
 	char	*temp;
@@ -13,7 +11,7 @@ char	*get_here_str(char *str[2], size_t len, char *limit, char *warn)
 		str[1] = ft_strjoin(str[1], str[0]);
 		free(temp);
 		free(str[0]);
-		str[0] = readline("> ");
+		str[0] = readline("heredoc> ");
 		if (!str[0])
 		{
 			printf("%s (wanted `%s\')\n", warn, limit);
@@ -42,7 +40,7 @@ int	get_here_doc(char *str[2], char *aux[2])
 	write(fd[WRITE_END], str[1], ft_strlen(str[1]));
 	free(str[1]);
 	close(fd[WRITE_END]);
-	if (g_status == 130)
+	if (g_status == 2)
 	{
 		close(fd[READ_END]);
 		return (-1);

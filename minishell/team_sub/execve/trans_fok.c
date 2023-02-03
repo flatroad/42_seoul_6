@@ -1,5 +1,5 @@
-#include "minishell.h"
-#include "./libft/libft.h"
+#include "../minishell.h"
+#include "../libft/libft.h"
 
 t_station	*trans_stt(t_prompt *exec_ptr, t_refer_env *refer_env)
 {
@@ -20,7 +20,6 @@ t_station	*trans_stt(t_prompt *exec_ptr, t_refer_env *refer_env)
 		fokl = fokl->next;
 		memo = memo->next;
 	}
-	stt->pid = 0;
 	return (stt);
 }
 
@@ -35,7 +34,6 @@ t_station	*free_fork(t_station *stt)
 		free(sv);
 	}
 	free(stt);
-	ft_putendl_fd("Error, fok malloc fail..", 2);
 	return (NULL);
 }
 
@@ -50,6 +48,9 @@ t_fork	*add_fork(t_mini *mini)
 	fok->full_path = mini->full_path;
 	fok->infile = mini->infile;
 	fok->outfile = mini->outfile;
+	fok->check = 0;
+	if (fok->infile < 0 || fok->outfile < 0)
+		fok->check = 4;
 	fok->next = NULL;
 	return (fok);
 }

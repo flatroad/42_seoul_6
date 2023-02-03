@@ -1,5 +1,5 @@
-#include "minishell.h"
-#include "./libft/libft.h"
+#include "../minishell.h"
+#include "../libft/libft.h"
 
 int	single_bulitin(t_station *stt, int check)
 {

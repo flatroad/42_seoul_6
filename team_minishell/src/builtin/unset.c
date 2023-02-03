@@ -1,11 +1,9 @@
 #include "../../includes/minishell.h"
 
-extern int	g_status;
-
 void	unset(char **str, t_envp_list *envp)
 {
 	int	i;
-	
+
 	i = 1;
 	while (str[i] != NULL)
 	{
@@ -31,7 +29,6 @@ void	check_unset(char *str, t_envp_list *envp)
 		before_memo = memo;
 		memo = memo->next;
 	}
-
 }
 
 int	same_check_unset(char *s1, char *s2)

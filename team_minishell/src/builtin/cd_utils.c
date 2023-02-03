@@ -1,7 +1,5 @@
 #include "../../includes/minishell.h"
 
-extern int g_status;
-
 int	modify_envp(t_envp_list *envp, char *path, char *s)
 {
 	t_envp_list	*list;
@@ -13,11 +11,11 @@ int	modify_envp(t_envp_list *envp, char *path, char *s)
 	count = 0;
 	while (list != NULL)
 	{
-		i = strlen (list->key);	
+		i = strlen(list->key);
 		if (change_pwd(list, s, i, &count) == 1)
-				return (1);
+			return (1);
 		if (change_oldpwd(list, path, i, &count) == 1)
-				return (1);
+			return (1);
 		if (count == 2)
 			return (0);
 		list = list->next;

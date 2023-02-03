@@ -1,81 +1,76 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/03 21:59:06 by sounchoi          #+#    #+#             */
+/*   Updated: 2023/02/03 22:02:25 by sounchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
-extern int	g_status;
-
-char	*expand_path(char *str, int i, int quotes[2], char *var)
+char	*ft_get_env_key(char *str, int i, char *key, t_prompt *prompt)
 {
-	char	*path;
-	char	*aux;
+	char	*tmp;
 
-	quotes[0] = 0;
-	quotes[1] = 0;
-	while (str && str[++i])
+	tmp = key;
+	if (!key && str[i] == '$')
+		key = ft_itoa(prompt->pid);
+	else if (!key && str[i] == '?')
 	{
-		quotes[0] = (quotes[0] + (!quotes[1] && str[i] == '\'')) % 2;
-		quotes[1] = (quotes[1] + (!quotes[0] && str[i] == '\"')) % 2;
-		if (!quotes[0] && !quotes[1] && str[i] == '~' && (i == 0 || \
-			str[i - 1] != '$'))
-		{
-			aux = ft_substr(str, 0, i);
-			path = ft_strjoin(aux, var);
-			free(aux);
-			aux = ft_substr(str, i + 1, ft_strlen(str));
-			free(str);
-			str = ft_strjoin(path, aux);
-			free(aux);
-			free(path);
-			return (expand_path(str, i + ft_strlen(var) - 1, quotes, var));
-		}
+		if (g_status == 2)
+			key = ft_itoa(130);
+		else
+			key = ft_itoa(g_status);
 	}
-	free(var);
-	return (str);
+	free(tmp);
+	return (key);
 }
 
-static char	*get_substr_var(char *str, int i, t_prompt *prompt)
+static char	*get_substr_var(char *str, int i, \
+t_ref_env *ref_env, t_prompt *prompt)
 {
-	char	*aux;
+	char	*ret;
 	int		pos;
 	char	*path;
-	char	*var;
+	char	*key;
 
-	printf("%s\n", str);
 	pos = ft_strchars_i(&str[i], "|\"\'$?>< ") + (ft_strchr("$?", str[i]) != 0);
 	if (pos == -1)
 		pos = ft_strlen(str) - 1;
-	aux = ft_substr(str, 0, i - 1);
-	var = ft_getenv(&str[i], prompt->envp, \
-		ft_strchars_i(&str[i], "\"\'$|>< "));
-	if (!var && str[i] == '$')
-		var = ft_itoa(prompt->pid);
-	else if (!var && str[i] == '?')
-	{
-		if (g_status == 2)
-			var = ft_itoa(130);
-		else
-			var = ft_itoa(g_status);
-	}
-	path = ft_strjoin(aux, var);
-	free(aux);
-	aux = ft_strjoin(path, &str[i + pos]);
-	free(var);
-	free(path);
-	free(str);
-	return (aux);
+	ret = ft_substr(str, 0, i - 1);
+	key = ft_getenv(&str[i], ref_env, ft_strchars_i(&str[i], "\"\'$|>< "));
+	key = ft_get_env_key(str, i, key, prompt);
+	path = ft_strjoin(ret, key);
+	free(ret);
+	ret = ft_strjoin(path, &str[i + pos]);
+	free (key);
+	free (path);
+	free (str);
+	return (ret);
 }
 
-char	*expand_vars(char *str, int i, int quotes[2], t_prompt *prompt)
+char	*expand_vars(char *str, t_ref_env *refer_env, \
+						int quotes[2], t_prompt *prompt)
 {
+	char	*t_str;
+
 	quotes[0] = 0;
 	quotes[1] = 0;
-	while (str && str[++i])
+	while (str && str[++(prompt->i)])
 	{
-		quotes[0] = (quotes[0] + (!quotes[1] && str[i] == '\'')) % 2;
-		quotes[1] = (quotes[1] + (!quotes[0] && str[i] == '\"')) % 2;
-		if (!quotes[0] && str[i] == '$' && str[i + 1] && \
-			((ft_strchars_i(&str[i + 1], "/~%^{}:; ") && !quotes[1]) || \
-			(ft_strchars_i(&str[i + 1], "/~%^{}:;\"") && quotes[1])))
-			return (expand_vars(get_substr_var(str, ++i, prompt), -1, \
-				quotes, prompt));
+		quotes[0] = (quotes[0] + (!quotes[1] && str[prompt->i] == '\'')) % 2;
+		quotes[1] = (quotes[1] + (!quotes[0] && str[prompt->i] == '\"')) % 2;
+		if (!quotes[0] && str[prompt->i] == '$' && str[prompt->i + 1] && \
+			((ft_strchars_i(&str[prompt->i + 1], "/~%^{}:; ") && !quotes[1]) || \
+			(ft_strchars_i(&str[prompt->i + 1], "/~%^{}:;\"") && quotes[1])))
+		{
+			t_str = get_substr_var(str, ++prompt->i, refer_env, prompt);
+			return (expand_vars(t_str, refer_env, quotes, prompt));
+		}
 	}
 	return (str);
 }

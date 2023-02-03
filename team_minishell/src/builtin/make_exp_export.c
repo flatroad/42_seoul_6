@@ -2,7 +2,7 @@
 
 t_envp_list	*make_exp(char **exp_str)
 {
-	int	i;
+	int			i;
 	t_envp_list	*exp;
 	t_envp_list	*memo;
 

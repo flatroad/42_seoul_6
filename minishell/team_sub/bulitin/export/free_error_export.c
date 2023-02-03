@@ -1,7 +1,6 @@
 #include "../../minishell.h"
 #include "../../libft/libft.h"
 
-
 void	free_exp(t_envp_list *exp)
 {
 	t_envp_list	*memo;	

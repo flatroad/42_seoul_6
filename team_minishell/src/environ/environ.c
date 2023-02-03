@@ -1,21 +1,27 @@
 #include "../../includes/minishell.h"
 
-char	*ft_getenv(char *var, char **envp, int n)
+char	*ft_getenv(char *var, t_ref_env *refer_env, int n)
 {
-	int	i;
-	int	n2;
+	int			n2;
+	t_envp_list	*list;
+	char		*str;
 
-	i = 0;
+	list = refer_env->envp;
 	if (n < 0)
 		n = ft_strlen(var);
-	while (!ft_strchr(var, '=') && envp && envp[i])
+	while (!ft_strchr(var, '=') && list != NULL)
 	{
-		n2 = n;
-		if (n2 < ft_strchr_i(envp[i], '='))
-			n2 = ft_strchr_i(envp[i], '=');
-		if (!ft_strncmp(envp[i], var, n2))
-			return (ft_substr(envp[i], n2 + 1, ft_strlen(envp[i])));
-		i++;
+		n2 = ft_strlen(list->key);
+		if (n > n2)
+			n2 = n;
+		if (!ft_strncmp(list->key, var, n2))
+		{
+			str = ft_strdup(list->value);
+			if (str == NULL)
+				ft_putendl_fd("parser env malloc fail..", 2);
+			return (str);
+		}
+		list = list->next;
 	}
 	return (NULL);
 }

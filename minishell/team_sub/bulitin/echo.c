@@ -1,13 +1,15 @@
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-int	echo(char **str)
+extern int status;
+
+void	echo(char **str)
 {
 	if (str[1] == NULL)
 		write(1, "\n", 2);
 	else
 		group_echo(str);
-	return (0);
+	status = 0;
 }
 
 void	group_echo(char **str)

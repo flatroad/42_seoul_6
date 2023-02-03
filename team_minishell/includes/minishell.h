@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 20:16:38 by junsyun           #+#    #+#             */
-/*   Updated: 2023/02/03 09:44:20 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/02/03 22:00:43 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # define FALSE		0
 # define ERROR		-1
 
+extern int	g_status;
+
 typedef	struct s_path_list
 {
 	char				*value;
@@ -52,11 +54,11 @@ typedef	struct s_envp_list
 	struct s_envp_list	*next;
 }	t_envp_list;  //환경변수
 
-typedef struct s_refer_env
+typedef struct s_ref_env
 {
 	t_path_list	*path; //-> 실행경로
 	t_envp_list	*envp; //-> 환경변수
-}	t_refer_env;
+}	t_ref_env;
 
 typedef struct s_mini
 {
@@ -71,6 +73,7 @@ typedef struct s_prompt
 	t_list	*cmds;
 	char	**envp;
 	pid_t	pid;
+	int		i;
 }			t_prompt;
 
 typedef struct s_fork
@@ -111,7 +114,7 @@ char	*mini_readline(t_prompt *prompt, char *str);
 void	*mini_here_fd(int fd[2]);
 
 
-void	*check_args(char *out, t_prompt *p, t_refer_env *refer_env);
+void	*check_args(char *out, t_prompt *p, t_ref_env *refer_env);
 char	**ft_cmdtrim(char const *s, char *set);
 char	**ft_cmdsubsplit(char const *s, char *set);
 char	*ft_strtrim_all(char const *s1, int squote, int dquote);
@@ -125,11 +128,12 @@ t_mini	*get_infile2(t_mini *node, char **args, int *i);
 
 void	exec_custom(char ***out, char *full, char *args, char **envp);
 
-char	*expand_vars(char *str, int i, int quotes[2], t_prompt *prompt);
+char	*ft_get_key_env(char *str, int i, char *key, t_prompt *prompt);
+char	*expand_vars(char *str, t_ref_env *refer_env, int quotes[2], t_prompt *prompt);
 char	*expand_path(char *str, int i, int quotes[2], char *var);
 int		get_here_doc(char *str[2], char *aux[2]);
 void	*ft_perror(int err_type, char *param, int err);
-char	*ft_getenv(char	*var, char **envp, int n);
+char	*ft_getenv(char	*var, t_ref_env *refer_env, int n);
 char	**ft_setenv(char *var, char *value, char **envp, int n);
 char	*get_prompt(t_prompt prompt);
 void	free_content(void *content);
@@ -139,12 +143,16 @@ void	handle_sigint_child(int sig);
 int		ft_strchars_i(const char *s, char *set);
 int		ft_strchr_i(const char *s, int c);
 
+
+//asdfsdfsdfsdfsd
+void	sig_heredoc_rl(int sig);
+
 // add option
 //env
 	//check_envp
 char	**check_envp(char **envp);
 	// free_env
-t_refer_env	*free_refer_env(int flag, t_refer_env *refer_env);
+t_ref_env	*free_refer_env(int flag, t_ref_env *refer_env);
 void	free_envp(int flag, t_envp_list *start);
 void	free_path(int flag, t_path_list *path);
 void	free_envp_path(char	**path);
@@ -156,7 +164,7 @@ t_path_list	*make_path(char **envp);
 t_path_list	*make_path_list(char **path);
 t_path_list	*add_path_list(char *str);
 	// make_refer_env
-t_refer_env	*make_refer_env(char **envp);
+t_ref_env	*make_refer_env(char **envp);
 
 //execve
 	// exec_error_handle.c
@@ -164,7 +172,7 @@ int	execst_error_handle(int cas);
 int	mulcmd_error_handle(int cas, t_fork *fok);
 int	sglcmd_error_handle(int cas, t_fork *fok);
 	// execve_main.c
-void	exec_st(t_prompt *exec, t_refer_env *refer_env);
+void	exec_st(t_prompt *exec, t_ref_env *refer_env);
 	// execve_utils.c
 int	check_bulitin(t_fork *fok);
 	// find_full_path.c
@@ -176,8 +184,8 @@ int	second_check(char *check, t_fork *fork, t_path_list *path);
 void	free_find_path(t_fork *fork);
 char	*ft_strjoin_three(char *str_f, char *str_s, char *str_t);
 	// multi_bulitin_exec.c
-int	exec_multi_bul(t_fork *fok, t_station *stt, int cas);
-int	multi_bulitin(t_station *stt, t_fork *fok, int cas);
+void	exec_multi_bul(t_fork *fok, t_station *stt, int cas);
+int		multi_bulitin(t_station *stt, t_fork *fok, int cas);
 	// multi_cmd_exec.c
 void	exec_multi_cmd(t_fork *fok);
 	// multi_cmd.c
@@ -188,20 +196,53 @@ int	check_multi_case(t_fork *fok, t_station *stt, int *pip, int i);
 int	set_pipe(t_fork *fok, int *pip, int i);
 	// single_bulitin_exec.c
 int	single_bulitin(t_station *stt, int check);
-void	single_fork(t_station *stt, char *path, char **cmd);
+void	single_fork(t_station *stt, char *path, char **cmd, int pip[2]);
 	// single_cmd.c
 int	single_cmd(t_station *stt);
 int	exec_single_cmd(t_station *stt);
-int	set_dup(t_station *stt);
+int	set_dup(t_station *stt, int pip[2]);
 	// trans_fok.c
-t_station	*trans_stt(t_prompt *exec_ptr, t_refer_env *refer_env);
+t_station	*trans_stt(t_prompt *exec_ptr, t_ref_env *refer_env);
 t_station	*make_fok(t_list *memo, t_station *stt);
 t_station	*free_fork(t_station *stt);
 t_fork	*add_fork(t_mini *mini);
 
-t_station	*test_tran(t_refer_env *refer_env);
+t_station	*test_tran(t_ref_env *refer_env);
 
 //bulitin
+	//s_echo s_echo
+	void	s_echo(char **str, int fd);
+	void	s_group_echo(char **str, int fd);
+	int		s_check_option_echo(char *str);
+	void	s_is_op_echo(char	**str, int i, int fd);
+	void	s_not_op_echo(char **str, int fd);
+	//s_env s_env
+	void	s_env(t_envp_list *envp, int fd);
+	//s_export s_export
+	void	s_export(char **exp_str, t_envp_list *envp, int fd);
+	//s_export s_free_error_export.c
+	void	s_free_exp(t_envp_list *exp);
+	void	s_error_pr(t_envp_list *exp);
+	//s_export s_make_exp_export_sub.c
+	t_envp_list	*s_is_pair(char *str, int i);
+	t_envp_list	*s_is_single(char	*str);
+	int	s_make_key(char **key, char *str, int i);
+	int	s_make_value(char **value, char *str, int i);
+	//s_export s_make_exp_export.c
+	t_envp_list	*s_make_exp(char **exp_str);
+	t_envp_list	*s_check_exp_str(char *str);
+	t_envp_list	*s_is_exp_null(void);
+	t_envp_list	*s_not_exp_null(char *str);
+	//s_export s_out_export.c
+	void	s_out_export(t_envp_list *envp, int fd);
+	//s_export s_output_exp_export.c
+	int	s_output_exp(t_envp_list *exp, t_envp_list *envp);
+	int	s_error_check(char *str);
+	int	s_push_export(t_envp_list *exp, t_envp_list *envp);
+	int	s_same_check(t_envp_list *memo, t_envp_list *exp);
+	t_envp_list	*s_change_refer(t_envp_list *exp);
+	//s_pwd s_pwd.c
+	void	s_pwd(int fd);
 	//cd	cd_utils.c
 	int	modify_envp(t_envp_list *envp, char *path, char *s);
 	int	change_pwd(t_envp_list *list, char *s, int i, int *count);

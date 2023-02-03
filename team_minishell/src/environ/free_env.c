@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-t_refer_env	*free_refer_env(int flag, t_refer_env *refer_env)
+t_ref_env	*free_refer_env(int flag, t_ref_env *refer_env)
 {
 	if (flag == 0)
 		write(2, "Error, refer_env malloc fail\n", 30);

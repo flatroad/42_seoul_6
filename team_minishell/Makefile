@@ -17,7 +17,12 @@ MAIN			= main
 BUILTIN			= echo env export pwd unset new_exit\
 				cd cd_utils \
 				export free_error_export make_exp_export \
-				make_exp_export_sub out_export output_exp_export
+				make_exp_export_sub out_export output_exp_export \
+				s_echo s_env s_export s_free_error_export \
+				s_make_exp_export_sub s_make_exp_export \
+				s_out_export s_output_exp_export \
+				s_pwd
+
 
 PARSER			= fill_node	\
 			    ft_cmdsubsplit	\

@@ -1,5 +1,5 @@
-#include "minishell.h"
-#include "./libft/libft.h"
+#include "../minishell.h"
+#include "../libft/libft.h"
 
 int	check_bulitin(t_fork *fok)
 {

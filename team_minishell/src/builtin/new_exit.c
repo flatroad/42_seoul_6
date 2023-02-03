@@ -1,7 +1,5 @@
 #include "../../includes/minishell.h"
 
-extern int	g_status;
-
 void	new_exit(char **str)
 {
 	int	i;

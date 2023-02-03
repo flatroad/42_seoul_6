@@ -2,7 +2,7 @@
 
 void	out_export(t_envp_list *envp)
 {
-	t_envp_list *memo;
+	t_envp_list	*memo;
 
 	memo = envp;
 	while (memo != NULL)

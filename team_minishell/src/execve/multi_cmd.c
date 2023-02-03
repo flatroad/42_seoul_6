@@ -22,7 +22,11 @@ void	start_multi_cmd(t_fork *fok, t_station *stt)
 	if (pipe(pip) == -1)
 		mulcmd_error_handle(0, fok);
 	if (fok->check != 0 && fok->check != 9)
+	{
+		close (pip[0]);
+		close (pip[1]);
 		mulcmd_error_handle(fok->check, fok);
+	}
 	if (fok->next == NULL)
 		i = 1;
 	start_multi_fork(fok, stt, pip, i);
@@ -52,20 +56,23 @@ void	start_multi_fork(t_fork *fok, t_station *stt, int pip[2], int i)
 		close(fok->outfile);
 }
 
-
 int	check_multi_case(t_fork *fok, t_station *stt, int pip[2], int i)
 {
 	int	cas;
 
 	if (set_pipe(fok, pip, i) == 1)
+	{
+		close(pip[1]);
+		close(pip[0]);
 		return (mulcmd_error_handle(4, fok));
-	if (fok->check == 9)
-		return (0);
+	}
 	cas = check_bulitin(fok);
 	if (cas != 0)
 		exec_multi_bul(fok, stt, cas);
 	else
 		exec_multi_cmd(fok);
+	close(pip[1]);
+	close(pip[0]);
 	exit(0);
 }
 

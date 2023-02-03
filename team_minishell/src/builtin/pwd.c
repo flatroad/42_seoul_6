@@ -1,7 +1,5 @@
 #include "../../includes/minishell.h"
 
-extern int g_status;
-
 void	pwd(void)
 {
 	char	path[1024];

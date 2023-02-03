@@ -1,6 +1,8 @@
 #include "../../minishell.h"
 #include "../../libft/libft.h"
 
+extern int status;
+
 int	modify_envp(t_envp_list *envp, char *path, char *s)
 {
 	t_envp_list	*list;
@@ -74,7 +76,8 @@ int	change_dir(char *str)
 
 int	error_cd(char *s)
 {
-	ft_putstr_fd("Error, ", 2);
+	ft_putstr_fd("Error, cd: ", 2);
 	ft_putendl_fd(s, 2);
+	status = 1;
 	return (1);
 }

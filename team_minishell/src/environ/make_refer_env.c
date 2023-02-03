@@ -1,10 +1,10 @@
 #include "../../includes/minishell.h"
 
-t_refer_env	*make_refer_env(char **envp)
+t_ref_env	*make_refer_env(char **envp)
 {
-	t_refer_env	*refer_env;
+	t_ref_env	*refer_env;
 
-	refer_env = (t_refer_env *)malloc(sizeof(t_refer_env) * 1);
+	refer_env = (t_ref_env *)malloc(sizeof(t_ref_env) * 1);
 	if (refer_env == NULL)
 		return (free_refer_env(0, refer_env));
 	if (envp == NULL || envp[0] == NULL)

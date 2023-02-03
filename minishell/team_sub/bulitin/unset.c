@@ -1,7 +1,9 @@
 #include "../minishell.h"
 #include "../libft/libft.h"
 
-int	unset(char **str, t_envp_list *envp)
+extern int	status;
+
+void	unset(char **str, t_envp_list *envp)
 {
 	int	i;
 	
@@ -11,7 +13,7 @@ int	unset(char **str, t_envp_list *envp)
 		check_unset(str[i], envp);
 		i++;
 	}
-	return (0);
+	status = 0;
 }
 
 void	check_unset(char *str, t_envp_list *envp)

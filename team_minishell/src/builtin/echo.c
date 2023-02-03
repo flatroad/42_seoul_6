@@ -1,7 +1,5 @@
 #include "../../includes/minishell.h"
 
-extern int g_status;
-
 void	echo(char **str)
 {
 	if (str[1] == NULL)

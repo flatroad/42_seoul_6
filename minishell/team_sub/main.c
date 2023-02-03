@@ -1,10 +1,12 @@
 #include "minishell.h"
-#include "./libft/libft.h"
+#include "libft/libft.h"
+
+extern int	status;
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_refer_env *refer_env;
-	// t_prompt	*exec;
+	t_prompt	*execl;
 	char		*str;
 
 	if (argc != 1)
@@ -15,6 +17,8 @@ int	main(int argc, char **argv, char **envp)
 	refer_env = make_refer_env(envp);
 	if (refer_env == NULL)
 		exit(1);
-	exec_st(refer_env);
+	exec_st(execl, refer_env);
+	waitpid(-1, NULL, 0);
+	system("leaks a.out");
 	return (0);
 }

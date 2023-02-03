@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-t_station	*trans_stt(t_prompt *exec_ptr, t_refer_env *refer_env)
+t_station	*trans_stt(t_prompt *exec_ptr, t_ref_env *refer_env)
 {
 	t_station	*stt;
 	t_list		*memo;

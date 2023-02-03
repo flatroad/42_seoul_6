@@ -1,9 +1,10 @@
-#include "minishell.h"
-#include "./libft/libft.h"
+#include "../minishell.h"
+#include "../libft/libft.h"
 
-int exec_multi_bul(t_fork *fok, t_station *stt, int cas)
+int	exec_multi_bul(t_fork *fok, t_station *stt, int cas)
 {
-    multi_bulitin(stt, fok, cas);
+	multi_bulitin(stt, fok, cas);
+
 	return (0);
 }
 

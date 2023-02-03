@@ -1,12 +1,11 @@
 #include "../../includes/minishell.h"
 
-void	exec_st(t_prompt *exec, t_refer_env *refer_env)
+void	exec_st(t_prompt *exec, t_ref_env *refer_env)
 {
 	t_station	*stt;
 
 	signal(SIGINT, sig_exec);
 	signal(SIGQUIT, sig_exec);
-	
 	stt = trans_stt(exec, refer_env);
 	if (stt == NULL)
 		execst_error_handle(0);

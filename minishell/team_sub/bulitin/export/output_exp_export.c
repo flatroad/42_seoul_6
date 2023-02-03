@@ -3,18 +3,18 @@
 
 int	output_exp(t_envp_list *exp, t_envp_list *envp)
 {
-	t_envp_list *memo;
+	t_envp_list	*memo;
 
 	memo = exp;
-	while(memo != NULL)
+	while (memo != NULL)
 	{
-		if(error_check(memo->key) == 1)
+		if (error_check(memo->key) == 1)
 		{
 			error_pr(memo);
 			memo = memo->next;
 			continue ;
 		}
-		if(push_export(memo, envp) == 1)
+		if (push_export(memo, envp) == 1)
 			return (1);
 		memo = memo->next;
 	}
@@ -43,7 +43,7 @@ int	error_check(char *str)
 
 int	push_export(t_envp_list *exp, t_envp_list *envp)
 {
-	t_envp_list *memo;
+	t_envp_list	*memo;
 	int			i;
 
 	memo = envp;

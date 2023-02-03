@@ -1,7 +1,5 @@
 #include "../../includes/minishell.h"
 
-extern int g_status;
-
 int	execst_error_handle(int cas)
 {
 	if (cas == 0)
@@ -36,7 +34,7 @@ int	mulcmd_error_handle(int cas, t_fork *fok)
 int	sglcmd_error_handle(int cas, t_fork *fok)
 {
 	if (cas == 0)
-		ft_putstr_fd("multi_cmd pipe fail: ", 2);
+		ft_putstr_fd("single_cmd pipe fail: ", 2);
 	else if (cas == 1)
 		ft_putstr_fd("command not found: ", 2);
 	else if (cas == 2)

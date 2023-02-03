@@ -1,10 +1,9 @@
 #include "../../includes/minishell.h"
 
-int	exec_multi_bul(t_fork *fok, t_station *stt, int cas)
+void	exec_multi_bul(t_fork *fok, t_station *stt, int cas)
 {
 	multi_bulitin(stt, fok, cas);
-
-	return (0);
+	exit(g_status);
 }
 
 int	multi_bulitin(t_station *stt, t_fork *fok, int cas)

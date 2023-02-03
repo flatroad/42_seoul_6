@@ -1,8 +1,6 @@
 #include "../../includes/minishell.h"
 
-extern int	g_status;
-
-static char	**split_all(char **args, t_prompt *prompt)
+static char	**split_all(char **args, t_prompt *prompt, t_ref_env *refer_env)
 {
 	char	**subsplit;
 	int		i;
@@ -11,9 +9,8 @@ static char	**split_all(char **args, t_prompt *prompt)
 	i = -1;
 	while (args && args[++i])
 	{
-		args[i] = expand_vars(args[i], -1, quotes, prompt);
-		args[i] = expand_path(args[i], -1, quotes, \
-			ft_getenv("HOME", prompt->envp, 4));
+		prompt->i = -1;
+		args[i] = expand_vars(args[i], refer_env, quotes, prompt);
 		subsplit = ft_cmdsubsplit(args[i], "<|>");
 		ft_matrix_replace_in(&args, subsplit, i);
 		i += ft_matrixlen(subsplit) - 1;
@@ -22,13 +19,13 @@ static char	**split_all(char **args, t_prompt *prompt)
 	return (args);
 }
 
-static void	*parse_args(char **args, t_prompt *p, t_refer_env *refer_env)
+static void	*parse_args(char **args, t_prompt *p, t_ref_env *refer_env)
 {
 	int	is_exit;
 	int	i;
 
 	is_exit = 0;
-	p->cmds = fill_nodes(split_all(args, p), -1);
+	p->cmds = fill_nodes(split_all(args, p, refer_env), -1);
 	if (!p->cmds)
 		return (p);
 	i = ft_lstsize(p->cmds);
@@ -43,7 +40,7 @@ static void	*parse_args(char **args, t_prompt *p, t_refer_env *refer_env)
 	return (p);
 }
 
-void	*check_args(char *out, t_prompt *p, t_refer_env *refer_env)
+void	*check_args(char *out, t_prompt *p, t_ref_env *refer_env)
 {
 	char	**arg;
 	t_mini	*n;
