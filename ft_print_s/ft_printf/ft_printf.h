@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sounchoi <sounchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 16:12:57 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/02/04 12:35:53 by sounchoi         ###   ########.fr       */
+/*   Updated: 2022/07/06 16:13:10 by sounchoi         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,6 @@
 
 #include <unistd.h>
 #include <stdarg.h>
-
-typedef struct	s_list
-{
-	void *content;
-	struct s_list	*next
-}	t_list;
-
-typedef	struct s_not_var
-{
-	int		type;
-	char	*str;
-	int		len;
-}	t_not_var;
-
-typedef	struct s_var
-{
-	int			type;
-	char		*str;
-	int			str_len;
-	int			zero_count;
-	int			point_count;
-	int			space_count;
-	int			plus_sign;
-	int			sort_sign;
-	int			sharp_sign;
-	char		*tran_str;
-	int			all_len;
-}	t_var;
 
 int	ft_printf (const char *str, ...);
 int	ft_arg (va_list list, char c, int count);
