@@ -1,84 +1,95 @@
 #include <iostream>
 
-typedef struct animal
+class date
 {
-	char name[30];
-	int	age;
-
-	int health;
-	int food;
-	int clean;
-} animal;
-
-void create_animal(animal *ani)
-{
-	std::cout << "동물의 이름? : ";
-	std::cin >> ani->name;
-
-	std::cout << "동물의 나이? : ";
-	std::cin >> ani->age;
-
-	ani->health = 100;
-	ani->clean = 100;
-	ani->food = 100;
-}
-
-void play(animal *ani)
-{
-	ani->health += 10;
-	ani->food -= 20;
-	ani->clean -= 30;
-}
-
-void one_day_pass(animal *ani)
-{
-	ani->health += 10;
-	ani->food -= 30;
-	ani->food -= 20;
-}
-
-void show_stat(animal *ani)
-{
-	std::cout << ani->name << "의 상태" << std::endl;
-	std::cout << "체력 : " << ani->health << std::endl;
-	std::cout << "배부름 : " << ani->food << std::endl;
-	std::cout << "청결 : " << ani->clean << std::endl;
-}
-
-int	main()
-{
-	animal *list[10];
-	int animal_num = 0;
-
-	for (;;)
+	private:
+		int	year_;
+		int	month_;
+		int	day_;
+	public:
+		void addday(int inc);
+		void addmonth(int inc);
+		void addyear(int inc);
+		int getcurrecnt(int year, int month);
+		void showdate();
+	
+	date(int year, int month, int day)
 	{
-		std::cout << "1. 동물 추가하기 " << std::endl;
-		std::cout << "2. 놀기 " << std::endl;
-		std::cout << "3. 상태 보기 " << std::endl;
-		
-		int input;
-		std::cin >> input;
+		year_ = year;
+		month_ = month;
+		day_ = day;
+	}
+};
 
-		switch(input)
+int date::getcurrecnt(int year, int month)
+{
+	static int month_day[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	if (month != 2)
+	{
+		return (month_day[month - 1]);
+	}
+	else if (year % 4 == 0 && year % 100 != 0)
+	{
+		return 29;
+	}
+	else
+		return 28;
+}
+
+void date::addday(int inc)
+{
+	while (true)
+	{
+		int current_month = getcurrecnt(year_, month_);
+		if (day_ + inc <= current_month)
 		{
-			int play_with;
-			case 1:
-				list[animal_num] = new animal;
-				create_animal(list[animal_num]);
-
-				animal_num++;
-				break ;
-			case 2:
-				std::cout << "누구랑 놀게? : ";
-				std::cin >> play_with;
-
-				if (play_with < animal_num) play(list[play_with]);
-
-				break ;
-			case 3:
-				std::cout << "누구껄 보게 : ";
-				std::cin >> play_with;
-
-				if (play_with < animal_num) show_stat(l)
+			day_ += inc;
+			return ;
 		}
+		else{
+			inc -= (current_month - day_ + 1);
+			day_ = 1;
+			addmonth(1);
+		}
+	}
+}
+
+void date::addmonth(int inc)
+{
+	addyear((inc + month_ - 1) / 12);
+	month_ = month_ + inc % 12;
+	month_ = (month_ == 12 ? 12 : month_ % 12);
+}
+
+void date::addyear(int inc)
+{
+	year_ += inc;
+}
+
+void date::showdate()
+{
+	std::cout << "오늘은 " << year_ << " 년 " << month_ << " 월 " << day_ << " 일 입니다." << std::endl;
+}
+
+int main()
+{
+	date day(2011, 3, 1);
+	day.showdate();
+
+	day.addday(30);
+	day.showdate();
+
+	day.addday(2000);
+	day.showdate();
+
+	day.addday(29);
+	day.showdate();
+
+	day.addday(2500);
+	day.showdate();
+
+	day.addday(30);
+	day.showdate();
+
+	return (0);
 }
