@@ -10,18 +10,18 @@ class phonebook
 		
 }
 
-class contact
+class Contact
 {
 	private:
-		std::string FirstName;
+		std::string firstName;
 		std::string LastName;
 		std::string NickName;
 		std::string PhoneNumber;
 		std::string DarkestSecret;
 	public:
-		InsertFN(std::string FirstName);
-		InsertLN(std::string LastName);
-		InsertNN()
+		insertFN(std::string FirstName);
+		insertLN(std::string LastName);
+		insertNN()
 }
 
 
