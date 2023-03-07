@@ -3,26 +3,17 @@
 
 #include <iostream>
 #include <string>
+#include "Contact.hpp"
 
-class phonebook
+class PhoneBook
 {
 	private:
-		
-}
-
-class Contact
-{
-	private:
-		std::string firstName;
-		std::string LastName;
-		std::string NickName;
-		std::string PhoneNumber;
-		std::string DarkestSecret;
+		Contact PhoneBook[8];
+		int	check = 0;
 	public:
-		insertFN(std::string FirstName);
-		insertLN(std::string LastName);
-		insertNN()
-}
-
+		void	ADD();
+		void	SEARCH();
+		void	EXIT();
+};
 
 #endif

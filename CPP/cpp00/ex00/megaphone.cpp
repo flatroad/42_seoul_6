@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+std::string	transToupper(char *s);
+
 int	main(int argc, char **argv)
 {
 	if (argc < 2)
@@ -10,11 +12,17 @@ int	main(int argc, char **argv)
 	}
 	for (int i = 1; i < argc; i++)
 	{
-		std::string str = argv[i];
-		for (int j = 0; str[j]; j++)
-			str[j] = std::toupper(str[j]);
+		std::string str = transToupper(argv[i]);
 		std::cout << str << " ";
 	}
 	std::cout << std::endl;
 	return (0);
+}
+
+std::string	transToupper(char *s)
+{
+	std::string	str = s;
+	for (int j = 0; str[j]; j++)
+		str[j] = std::toupper(str[j]);
+	return (str);
 }
