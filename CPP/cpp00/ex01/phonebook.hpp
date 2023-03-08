@@ -14,6 +14,8 @@ class PhoneBook
 	public:
 		void	add();
 		void	search();
+		void	outAllList();
+		void	outIdxList();
 		void	exit();
 		void	set();
 };

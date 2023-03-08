@@ -18,11 +18,11 @@ class Contact
 		void	insertNN(std::string nickName);
 		void	insertPN(std::string phoneNumber);
 		void	insertDS(std::string darkestSecret);
-		// void	searchFN();
-		// void	searchLN();
-		// void	searchNN();
-		// void	searchPN();
-		// void	searchDS();
+		void	searchFN();
+		void	searchLN();
+		void	searchNN();
+		void	searchPN();
+		void	searchDS();
 };
 
 #endif

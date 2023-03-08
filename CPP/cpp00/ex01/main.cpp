@@ -12,8 +12,12 @@ int	main()
 		std::string	order;
 		getline(std::cin, order);
 		order = transToupper(order);
-		// if (order.compare("add") == 0)
-		// 	obj.add
+		if (order.compare("ADD") == 0)
+			obj.add();
+		else if (order.compare("SEARCH") == 0)
+			obj.search();
+		else if (order.compare("EXIT") == 0)
+			obj.exit();
 	}
 	return (0);
 }

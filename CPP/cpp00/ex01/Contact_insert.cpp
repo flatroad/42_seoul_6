@@ -7,7 +7,6 @@ void	Contact::insertFN(std::string firstName)
 	check = 1;
 	while (check)
 	{
-		check = 0;
 		std::cout << "firstName : ";
 		getline(std::cin, firstName);
 		if (firstName.empty() == 1)
@@ -15,12 +14,13 @@ void	Contact::insertFN(std::string firstName)
 			std::cout << "firstName is empty.. try again!" << std::endl;
 			continue ;
 		}
+		check = 0;
 		for (int i = 0; i < firstName[i]; i++)
 		{
 			if (!(std::isalpha(firstName[i])))
 			{
 				std::cout << "is not string.. try again!" << std::endl;
-				check == 1;
+				check = 1;
 				break ;
 			}
 		}
@@ -35,7 +35,6 @@ void	Contact::insertLN(std::string lastName)
 	check = 1;
 	while (check)
 	{
-		check = 0;
 		std::cout << "lastName : ";
 		getline(std::cin, lastName);
 		if (lastName.empty() == 1)
@@ -43,12 +42,13 @@ void	Contact::insertLN(std::string lastName)
 			std::cout << "lastName is empty.. try again!" << std::endl;
 			continue ;
 		}
+		check = 0;
 		for (int i = 0; i < lastName[i]; i++)
 		{
 			if (!(std::isalpha(lastName[i])))
 			{
 				std::cout << "is not string.. try again!" << std::endl;
-				check == 1;
+				check = 1;
 				break ;
 			}
 		}
@@ -63,7 +63,6 @@ void	Contact::insertNN(std::string nickName)
 	check = 1;
 	while (check)
 	{
-		check = 0;
 		std::cout << "nickName : ";
 		getline(std::cin, nickName);
 		if (nickName.empty() == 1)
@@ -71,12 +70,13 @@ void	Contact::insertNN(std::string nickName)
 			std::cout << "nickName is empty.. try again!" << std::endl;
 			continue ;
 		}
+		check = 0;
 		for (int i = 0; i < nickName[i]; i++)
 		{
 			if (!(std::isalpha(nickName[i])))
 			{
 				std::cout << "is not string.. try again!" << std::endl;
-				check == 1;
+				check = 1;
 				break ;
 			}
 		}
@@ -117,20 +117,20 @@ void	Contact::insertDS(std::string darkestSecret)
 	check = 1;
 	while (check)
 	{
-		check = 0;
-		std::cout << "nickName : ";
+		std::cout << "darkestSecret : ";
 		getline(std::cin, darkestSecret);
 		if (darkestSecret.empty() == 1)
 		{
 			std::cout << "darkestSecret is empty.. try again!" << std::endl;
 			continue ;
 		}
+		check = 0;
 		for (int i = 0; i < darkestSecret[i]; i++)
 		{
 			if (!(std::isalpha(darkestSecret[i])))
 			{
 				std::cout << "is not string.. try again!" << std::endl;
-				check == 1;
+				check = 1;
 				break ;
 			}
 		}
