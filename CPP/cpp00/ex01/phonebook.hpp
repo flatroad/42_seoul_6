@@ -8,12 +8,14 @@
 class PhoneBook
 {
 	private:
-		Contact PhoneBook[8];
-		int	check = 0;
+		Contact phoneList[8];
+		int	check_;
+	
 	public:
-		void	ADD();
-		void	SEARCH();
-		void	EXIT();
+		void	add();
+		void	search();
+		void	exit();
+		void	set();
 };
 
 #endif

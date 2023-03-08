@@ -1,6 +1,6 @@
-#include "Contact.hpp"
+// #include "Contact.hpp"
 
-void	Contact::searchFN()
-{
+// void	Contact::searchFN()
+// {
 	
-}
+// }
