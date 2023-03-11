@@ -7,19 +7,15 @@ int	main()
 {
 	void	*mlx;
 	void	*ptr;
+	void	*img;
+	int		img_width;
+	int		img_height;
 
 	mlx = mlx_init();
 	ptr = mlx_new_window(mlx, 1920, 1280, "test");
-	mlx_pixel_put(mlx, ptr, 1, 1, 0x00FF0000);
-	mlx_pixel_put(mlx, ptr, 2, 1, 0x00FF0000);
-	mlx_pixel_put(mlx, ptr, 3, 1, 0x00FF0000);
-	mlx_pixel_put(mlx, ptr, 4, 1, 0x00FF0000);
-	mlx_pixel_put(mlx, ptr, 5, 1, 0x00FF0000);
-	mlx_pixel_put(mlx, ptr, 5, 2, 0x00FF0000);
-	mlx_pixel_put(mlx, ptr, 1, 2, 0x00FF0000);
-	mlx_pixel_put(mlx, ptr, 2, 2, 0x00FF0000);
-	mlx_pixel_put(mlx, ptr, 3, 2, 0x00FF0000);
-	mlx_pixel_put(mlx, ptr, 4, 2, 0x00FF0000);
+	img = mlx_xpm_file_to_image(mlx, "mini.xpm", &img_width, &img_height);
+	printf("%p\n", img);
+	mlx_put_image_to_window(mlx, ptr, img, 0, 0);
 	mlx_loop(mlx);
 	return (0);
 }
