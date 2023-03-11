@@ -1,9 +1,14 @@
 /* XPM */
 static char *result[] = {
 /* columns rows colors chars-per-pixel */
-"2 2 1 1 ",
-"   w #808080",
+"6 6 2 1 ",
+"w  c #39650F",
+"l  c #FFFFFF",
 /* pixels */
-"ww",
-"ww"
+"llllll",
+"lwwwwl",
+"lwwwwl",
+"lwwwwl",
+"lwwwwl",
+"llllll"
 };
