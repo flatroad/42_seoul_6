@@ -1,5 +1,8 @@
 #include "cub3d.h"
 
+
+#include <string.h>
+
 typedef struct s_map
 {
 	int		xsize;
@@ -28,7 +31,7 @@ int	main()
 	str[0] = "1111";
 	str[1] = "1001";
 	str[2] = "1111";
-	str[3] = "    ";
+	str[3] = "  1 ";
 	str[4] = NULL;
 
 	map_data.map = str;
@@ -57,9 +60,10 @@ int	map_vaildity(t_map *map_data, t_map_obj *map_obj)
 	while (y < map_data->ysize - 1)
 	{
 		x = 0;
-		while (x < map_data->xsize)
+		while (x < map_data->xsize - 1)
 		{
 			insert_map_obj(map_obj, map_data->map[y][x]);
+			printf("%s %d %d\n", "test", y ,x);
 			if (check_outline_point(map_data, y, x) == 1)
 				return (1);
 			if (check_four_point(map_data, y, x) == 1)
@@ -81,22 +85,39 @@ int	check_outline_point(t_map *map_data, int y, int x)
 {
 	if (y != map_data->ysize - 1 && x != map_data->xsize - 1 && y != 0 && x != 0)
 		return (0);
-	if (map_data->map[y][x] == '0')
+	if (map_data->map[y][x] != '1' && map_data->map[y][x] != ' ')
 		return (1);
 	return (0);
 }
 
 int	check_four_point(t_map *map_data, int y, int x)
 {
+	printf("y = %d x = %d\n", y, x);
 	if (map_data->map[y][x] != ' ')
 		return (0);
-	if (y > 0 && map_data->map[y - 1][x] == '0')
+	if (y > 0 && map_data->map[y - 1][x] != '1' \
+		&& map_data->map[y - 1][x] != ' ')
+	{
+		printf("1 : %c ", map_data->map[y - 1][x]);
 		return (1);
-	if (y < map_data->ysize - 2 && map_data->map[y + 1][x] == '0')
+	}
+	if (y < map_data->ysize - 2 && map_data->map[y + 1][x] != '1' \
+		&& map_data->map[y + 1][x] != ' ')
+	{
+		printf("2 : %c ", map_data->map[y + 1][x]);
 		return (1);
-	if (x > 0 && map_data->map[y][x - 1] == '0')
+	}
+	if (x > 0 && map_data->map[y][x - 1] != '1' \
+		&& map_data->map[y][x - 1] != ' ')
+	{
+		printf("3 : %c ", map_data->map[y][x - 1]);
 		return (1);
-	if (x < map_data->xsize - 1 && map_data->map[y][x + 1] == '0')
+	}
+	if (x < map_data->xsize - 2 && map_data->map[y][x + 1] != '1' \
+		&& map_data->map[y][x + 1] != ' ')
+	{
+		printf("4 : %c\n", map_data->map[y][x + 1]);
 		return (1);
+	}
 	return (0);
 }
