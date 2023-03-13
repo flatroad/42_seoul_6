@@ -1,5 +1,6 @@
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
+#include "CommonFN.hpp"
 
 std::string	transToupper(std::string s);
 
@@ -20,12 +21,4 @@ int	main()
 			obj.exit();
 	}
 	return (0);
-}
-
-std::string	transToupper(std::string s)
-{
-	std::string	str = s;
-	for (int j = 0; str[j]; j++)
-		str[j] = std::toupper(str[j]);
-	return (str);
 }

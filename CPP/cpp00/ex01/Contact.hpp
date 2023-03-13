@@ -13,16 +13,17 @@ class Contact
 		std::string phoneNumber_;
 		std::string darkestSecret_;
 	public:
-		void	insertFN(std::string firstName);
-		void	insertLN(std::string lastName);
-		void	insertNN(std::string nickName);
-		void	insertPN(std::string phoneNumber);
-		void	insertDS(std::string darkestSecret);
-		void	searchFN();
-		void	searchLN();
-		void	searchNN();
-		void	searchPN();
-		void	searchDS();
+		void		insertFN(std::string firstName);
+		void		insertLN(std::string lastName);
+		void		insertNN(std::string nickName);
+		void		insertPN(std::string phoneNumber);
+		void		insertDS(std::string darkestSecret);
+		void		searchFN();
+		void		searchLN();
+		void		searchNN();
+		void		searchPN();
+		void		searchDS();
+		std::string	outFN();
 };
 
 #endif

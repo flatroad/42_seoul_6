@@ -17,36 +17,3 @@ void	PhoneBook::add()
 	phoneList[check_].insertDS(darkestSecret);
 	check_++;
 }
-
-void	PhoneBook::search()
-{
-	int	check;
-	std::string	idx;
-
-	check = 1;
-	while (check)
-	{
-		std::cout << "if you all list just enter or you want particular phonebook, you write particular index : ";
-		getline(std::cin, idx);
-		if (idx.empty() == 1)
-		{
-			PhoneBook::outAllList();
-		}
-	}
-}
-
-void	PhoneBook::outAllList()
-{
-	int	check;
-
-	check = 1;
-	while (check)
-	{
-		
-	}
-}
-
-void	PhoneBook::set()
-{
-	check_ = 0;
-}
