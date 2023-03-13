@@ -28,6 +28,12 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 int	new_image_minimap(t_mini *mini)
 {
+	void	*mlx;
+	void	*win_ptr;
+
+	mlx = mlx_init();
+	win_ptr = mlx_new_window(mlx, 1920, 1080, "test");
+
 	int	x;
 	int	y;
 
@@ -37,12 +43,31 @@ int	new_image_minimap(t_mini *mini)
 		x = 0;
 		while (x < mini->parti_x)
 		{
-			new_img(mini->mini_obj[y][x].map, mini->mini_obj[y][x].img);
+			new_img(mini->mini_obj[y][x].map, &(mini->mini_obj[y][x].img), mlx);
 		}
 	}
 }
 
-int	mew_img(char **map, t_data img)
+int	mew_img(char **map, t_data *img, void *mlx)
 {
-	img.img = 
+	int	i;
+	int	j;
+	img->img = mlx_new_image(mlx, 640, 480);
+	img->addr = mlx_get_data_addr(img->img, &(img->bits_per_pixel), &(img->line_length), &(img->endian));
+	i = 0;
+	while (map[i] != NULL | i != 10)
+	{
+		j = 0;
+		while (map[j] < NULL || j != 10)
+		{
+			if (map[i][j] == '0')
+				my_mlx_pixel_put(img, i, j, 0x00FFFFFF);
+			if (map[i][j] == '1')
+				my_mlx_pixel_put(img, i, j, 0x000000FF);
+			if (map[i][j] == ' ' || map[i][j] == 0)
+				my_mlx_pixel_put(img, i, j, 0x00FF0000);
+			j++;
+		}
+		i++;
+	}
 }
