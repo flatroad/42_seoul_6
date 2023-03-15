@@ -43,9 +43,9 @@ int		mini_obj_malloc(t_mini *mini);
 void	mini_obj_free(t_mini *mini, int max);
 int		mini_obj_insert(t_mini *mini, t_map *map_data);
 int		mini_obj_init(t_mini *mini);
-void	mini_obj_map_free(char **map, int max);
 int		mini_obj_map_malloc(t_mini_obj *mini_obj);
-void	mini_obj_map_insert(t_mini_obj **mini_obj, t_map *map_data);
-
+void	mini_obj_map_insert(t_mini_obj **mini_obj, t_map *map_data, t_mini *mini);
+void	find_minimap(t_mini *mini);
+void	print_minimap(t_mini_obj mini_obj);
 
 #endif

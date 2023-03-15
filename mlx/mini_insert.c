@@ -64,4 +64,3 @@ void	mini_obj_free(t_mini *mini, int max)
 	}
 	free(mini->mini_obj);
 }
-
