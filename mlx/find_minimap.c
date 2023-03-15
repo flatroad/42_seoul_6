@@ -14,7 +14,7 @@ void	find_minimap(t_mini *mini)
 
 void	print_minimap(t_mini_obj mini_obj)
 {
-	for (int i = 0; i < 11; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 11; j++)
 		{

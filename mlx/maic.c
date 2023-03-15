@@ -18,7 +18,7 @@ int	main()
 	map_data.map[8] = "   100000001";
 	map_data.map[9] = "111100001001";
 	map_data.map[10] = "110000001001";
-	map_data.map[11] = "110000001001";
+	map_data.map[11] = "111111111111";
 	map_data.map[12] = NULL;
 	map_data.xsize = 13;
 	map_data.ysize = 12;

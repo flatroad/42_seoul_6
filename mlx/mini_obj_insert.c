@@ -37,16 +37,24 @@ int	mini_obj_init(t_mini *mini)
 int	mini_obj_map_malloc(t_mini_obj *mini_obj)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	mini_obj->map = (char **)malloc(sizeof(char *) * 11);
+	mini_obj->map = (char **)malloc(sizeof(char *) * 10);
 	if (mini_obj->map == NULL)
 		return (1);
-	while (i < 11)
+	while (i < 10)
 	{
+		j = 0;
 		mini_obj->map[i] = (char *)malloc(sizeof(char) * 11);
 		if (mini_obj->map[i] == NULL)
 			return (1);
+		while (j < 10)
+		{
+			mini_obj->map[i][j] = ' ';
+			j++;
+		}
+		mini_obj->map[i][j] = 0;
 		i++;
 	}
 	return (0);
@@ -68,12 +76,6 @@ void	mini_obj_map_insert(t_mini_obj **mini_obj, t_map *map_data, t_mini *mini)
 			mini_obj[i / 10][j / 10].map[i % 10][j % 10] = map_data->map[i][j];
 			j++;
 		}
-		while (j < max - 1)
-		{
-			mini_obj[i / 10][j / 10].map[i % 10][j % 10] = 0;
-			j++;
-		}
-		mini_obj[i / 10][j / 10].map[10][10] = 0;
 		i++;
 	}
 }
