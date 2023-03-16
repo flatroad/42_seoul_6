@@ -1,26 +1,26 @@
 #include "Contact.hpp"
 
-void	Contact::searchFN()
+std::string	Contact::searchFN()
 {
-	std::cout << firstName_;
+	return (firstName_);
 }
 
-void	Contact::searchLN()
+std::string	Contact::searchLN()
 {
-	std::cout << lastName_;
+	return (lastName_);
 }
 
-void	Contact::searchNN()
+std::string	Contact::searchNN()
 {
-	std::cout << nickName_;
+	return (nickName_);
 }
 
-void	Contact::searchPN()
+std::string	Contact::searchPN()
 {
-	std::cout << phoneNumber_;
+	return (phoneNumber_);
 }
 
-void	Contact::searchDS()
+std::string	Contact::searchDS()
 {
-	std::cout << darkestSecret_;
+	return (darkestSecret_);
 }

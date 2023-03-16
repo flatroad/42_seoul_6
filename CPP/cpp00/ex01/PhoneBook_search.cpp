@@ -1,24 +1,6 @@
 #include "PhoneBook.hpp"
 #include "CommonFN.hpp"
 
-void	PhoneBook::add()
-{
-	std::string firstName;
-	std::string lastName;
-	std::string nickName;
-	std::string phoneNumber;
-	std::string darkestSecret;
-
-	check_ = check_ % 8;
-	std::cout << check_ << "list" << std::endl;
-	phoneList[check_].insertFN(firstName);
-	phoneList[check_].insertLN(lastName);
-	phoneList[check_].insertNN(nickName);
-	phoneList[check_].insertPN(phoneNumber);
-	phoneList[check_].insertDS(darkestSecret);
-	check_++;
-}
-
 void	PhoneBook::search()
 {
 	int	check;
@@ -33,7 +15,7 @@ void	PhoneBook::search()
 		if (idx.empty() == 1)
 			PhoneBook::outAllList();
 		else if (idx.length() == 1 && idx.find_first_not_of("12345678") != std::string::npos)
-			PhoneBook::outIdxList(stoi(idx));
+			PhoneBook::outSingleList(stoi(idx));
 		else if (idx.compare("EXIT") == 0)
 			check = 0;
 		else
@@ -47,7 +29,7 @@ void	PhoneBook::outAllList()
 	std::string	str;
 
 	idx = 0;
-	while (idx != 8 || PhoneBook::phoneList[idx].outFN().empty() != 1)
+	while (idx != 8 || PhoneBook::phoneList[idx].searchFN().empty() != 1)
 	{
 		PhoneBook::outIdxList(idx);
 		idx++;
@@ -56,7 +38,7 @@ void	PhoneBook::outAllList()
 
 void	PhoneBook::outIdxList(int idx)
 {
-	std::cout << "| ";
+	std::cout << "|";
 	PhoneBook::phoneList[idx].searchFN();
 	std::cout << " | ";
 	PhoneBook::phoneList[idx].searchLN();
@@ -67,4 +49,12 @@ void	PhoneBook::outIdxList(int idx)
 	std::cout << " | ";
 	PhoneBook::phoneList[idx].searchDS();
 	std::cout << " |" << std::endl;
+}
+
+void	printf_list(std::string str)
+{
+	if (str.length() > 10)
+	{
+		for (int i = 0; i)
+	}
 }

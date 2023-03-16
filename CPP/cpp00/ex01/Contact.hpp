@@ -18,12 +18,11 @@ class Contact
 		void		insertNN(std::string nickName);
 		void		insertPN(std::string phoneNumber);
 		void		insertDS(std::string darkestSecret);
-		void		searchFN();
-		void		searchLN();
-		void		searchNN();
-		void		searchPN();
-		void		searchDS();
-		std::string	outFN();
+		std::string		searchFN();
+		std::string		searchLN();
+		std::string		searchNN();
+		std::string		searchPN();
+		std::string		searchDS();
 };
 
 #endif
