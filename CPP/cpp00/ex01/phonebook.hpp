@@ -16,7 +16,9 @@ class PhoneBook
 		void	search();
 		void	outAllList();
 		void	outIdxList(int idx);
-		void	exit();
+		void	printfList(std::string str);
+		void	outSingleList(int i);
+		int		exit();
 		void	set();
 };
 
