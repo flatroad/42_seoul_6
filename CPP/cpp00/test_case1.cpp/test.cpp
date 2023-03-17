@@ -5,6 +5,7 @@
 int	main()
 {
 	char *kk;
+	char *jj;
 
 	std::cin >> kk;
 	printf("%p\n", kk);
@@ -12,6 +13,6 @@ int	main()
 
 	std::cout << kk << std::endl;
 	std::cin >> kk;
-	std::cout << kk << std::endl;
+	std::cin.clear();
 	return (0);
 }
