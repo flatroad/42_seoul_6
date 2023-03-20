@@ -38,14 +38,7 @@ void	my_mlx_pixel_put(t_img_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-unsigned int	get_color(t_img_data *data, int x, int y)
-{
-	char	*dst;
-	int		color;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
 int main()
 {
 	void	*mlx;
@@ -64,8 +57,19 @@ int main()
 	int i = 0;
 	while (i < 10)
 	{
-		my_mlx_pixel_put(&map, i, 8, img.addr);
+		my_mlx_pixel_put(&map, 4, i, get_color(&img, 0, 0));
+		my_mlx_pixel_put(&map, 5, i, get_color(&img, 0, 0));
+		my_mlx_pixel_put(&map, 6, i, get_color(&img, 0, 0));
+		my_mlx_pixel_put(&map, 7, i, get_color(&img, 0, 0));
+		my_mlx_pixel_put(&map, 8, i, get_color(&img, 0, 0));
+		my_mlx_pixel_put(&map, 10, i, get_color(&img, 13, 6));
+		my_mlx_pixel_put(&map, 11, i, get_color(&img, 13, 6));
+		my_mlx_pixel_put(&map, 12, i, get_color(&img, 13, 6));
+		my_mlx_pixel_put(&map, 13, i, get_color(&img, 13, 6));
+		my_mlx_pixel_put(&map, 14, i, get_color(&img, 13, 6));
 		i++;
 	}
 	mlx_put_image_to_window(mlx, win_ptr, map.img, 0, 0);
+	mlx_put_image_to_window(mlx, win_ptr, img.img, 64, 64);
+	mlx_loop(mlx);
 }
