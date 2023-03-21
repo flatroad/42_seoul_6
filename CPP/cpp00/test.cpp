@@ -1,17 +1,28 @@
 #include <iostream>
-#include <string>
+#include <string> 
 
-int	main()
+
+namespace ProgcomImp1
 {
-	std::string	str;
+	void SimpleFunc(void)
+	{
+		std::cout << "2" << std::endl;
+	}
+}
 
-	str = "123456789";
+namespace BestComImp1
+{
+	void SimpleFunc(void)
+	{
+		std::cout << "1" << std::endl;
+	}
+	ProgcomImp1
+	
+}
 
-	std::string sub;
-
-	sub = str.substr(1, 510);
-
-	std::cout << sub << std::endl;
-
+int main(void)
+{
+	BestComImp1::SimpleFunc();
+	BestComImp1::ProgcomImp1::SimpleFunc();
 	return (0);
 }
