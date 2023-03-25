@@ -192,16 +192,16 @@ int	main(int argc, char **argv)
 				if (side == 1)
 				{
 					if (map_y > pos_y)
-						dir = 0; //동
+						dir = 0; //동 E
 					else
-						dir = 1; //서
+						dir = 1; //서 W
 				}
 				else
 				{
 					if (map_x > pos_x)
-						dir = 2; //남
+						dir = 2; //남 S
 					else
-						dir = 3; //북
+						dir = 3; //북 N
 				}
 				hit = 1;
 			}
