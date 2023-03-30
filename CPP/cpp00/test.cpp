@@ -1,28 +1,17 @@
 #include <iostream>
-#include <string> 
+#include <string>
 
 
-namespace ProgcomImp1
+int	main()
 {
-	void SimpleFunc(void)
-	{
-		std::cout << "2" << std::endl;
-	}
-}
+	std::cin >> kk;
+	printf("%p\n", kk);
+	kk[1] = '0';
+	printf("%p\n", kk);
 
-namespace BestComImp1
-{
-	void SimpleFunc(void)
-	{
-		std::cout << "1" << std::endl;
-	}
-	ProgcomImp1
-	
-}
-
-int main(void)
-{
-	BestComImp1::SimpleFunc();
-	BestComImp1::ProgcomImp1::SimpleFunc();
+	std::cout << kk << std::endl;
+	char *jj;
+	std::cin >> jj;
+	std::cout << jj << std::endl;
 	return (0);
 }
