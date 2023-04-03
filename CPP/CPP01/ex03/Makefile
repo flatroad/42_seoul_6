@@ -1,9 +1,9 @@
 CC	=	c++
 CPPFLAGE	=	-Wall -Wextra -Werror -std=c++98
-CPPFILES	=	newZombie.cpp \
-				randomChump.cpp \
-				Zombie.cpp \
-				main.cpp
+CPPFILES	=	HumanA.cpp \
+				HumanB.cpp \
+				main.cpp \
+				Weapon.cpp
 NAME	=	Zombie
 OBJS			=	$(CPPFILES:.c=.o)
 

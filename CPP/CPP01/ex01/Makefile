@@ -1,4 +1,4 @@
-CC	=	g++
+CC	=	c++
 CPPFLAGE	=	-Wall -Wextra -Werror -std=c++98
 CPPFILES	=	zombieHorde.cpp \
 				Zombie.cpp \

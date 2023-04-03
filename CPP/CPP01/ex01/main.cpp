@@ -1,9 +1,16 @@
 #include "Zombie.hpp"
 
+void exec();
+
 int main()
 {
-	Zombie *kk = zombieHorde(4, "zombie");
-	
-	delete kk;
+	exec();
+	system("leaks Zombie");
 	return (0);
+}
+
+void exec()
+{
+	Zombie *kk = zombieHorde(4, "zombie");
+	delete []kk;
 }
