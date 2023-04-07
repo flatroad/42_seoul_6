@@ -1,9 +1,10 @@
 #include "InputFile.hpp"
 
-InputFile::InputFile(char *input_file, char *check_str, char *tran_str):input_file_(input_file),check_str_(check_str),tran_str_(tran_str)
+InputFile::InputFile(char *input_file, char *check_str):input_file_(input_file),check_str_(check_str)
 {
 	start_ = 0;
 	end_ = 0;
+	std::cout << "hello, InputFile" << std::endl;
 }
 
 InputFile::~InputFile()
@@ -15,10 +16,15 @@ int	InputFile::check_file()
 {
 	if (!(this->input_file_.is_open()))
 	{
-		std::cout << "File not found." << std::endl;
+		std::cout << "InFile not found." << std::endl;
 		return (1);
 	}
 	return (0);
+}
+
+void	InputFile::set_str_len()
+{
+	this->check_str_len = this->check_str_.length();
 }
 
 void	InputFile::set_contents()
@@ -42,12 +48,9 @@ int InputFile::check_end()
 		return (1);
 }
 
-std::string	InputFile::send_str()
+t_send_str	InputFile::send_str()
 {
-	this->end_ = this->contents_.find(this->check_str_, start_);
-	if (this->end_ == std::string::npos)
-		return (this->contents_.substr(this->start_));
-	else if
-		
-
+	int	check;
+	check = this->contents_.find(this->check_str_);
+	
 }

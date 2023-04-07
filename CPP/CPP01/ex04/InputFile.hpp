@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "SendStr.hpp"
 
 class InputFile
 {
@@ -13,13 +14,15 @@ class InputFile
 		std::string		contents_;
 		int				start_;
 		int				end_;
+		int				check_str_len;
 	public:
-		InputFile(char *input_file, char *check_str, char *tran_str);
+		InputFile(char *input_file, char *check_str);
 		~InputFile();
 		int		check_file();
 		void	set_contents();
+		void	set_str_len();
 		int		check_end();
-		std::string	send_str();
+		t_send_str	send_str();
 };
 
 #endif

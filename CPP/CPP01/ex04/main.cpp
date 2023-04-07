@@ -1,6 +1,8 @@
 #include "NameData.hpp"
 #include "InputFile.hpp"
-// #include "OutputFile.hpp"
+#include "TranStr.hpp"
+#include "SendStr.hpp"
+#include "OutputFile.hpp"
 
 int main(int argc, char **argv)
 {
@@ -10,10 +12,17 @@ int main(int argc, char **argv)
 		return (1);
 	}
 	t_NameData ND = {argv[1], argv[2], argv[3], argv[4]};
-	InputFile infile(ND.infile_name, ND.check_str, ND.outfile_name);
+	TranStr tran(ND.tran_str);
+	InputFile infile(ND.infile_name, ND.check_str);
 	if (infile.check_file())
 		return (1);
 	infile.set_contents();
+	OutputFile outfile(ND.outfile_name);
+	if (outfile.check_file())
+		return (1);
+	while (infile.check_end())
+	{
+	}
 
 	return (0);
 }

@@ -8,12 +8,11 @@
 class OutputFile
 {
 	private:
-		std::ifstream	output_file_;
+		std::ofstream	output_file_;
 	public:
 		OutputFile(char *output_file);
 		~OutputFile();
 		int	check_file();
-		void	set_contents();
 };
 
 #endif

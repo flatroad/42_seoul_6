@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "SendStr.hpp"
 
 class TranStr
 {
@@ -12,7 +13,7 @@ class TranStr
 	public:
 		TranStr(char *tran_str);
 		~TranStr();
-		std::string	do_tran();
+		std::string	do_tran(t_send_str data);
 };
 
 #endif
