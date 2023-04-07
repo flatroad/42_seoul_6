@@ -10,9 +10,10 @@ class OutputFile
 	private:
 		std::ofstream	output_file_;
 	public:
-		OutputFile(char *output_file);
+		OutputFile(std::string output_file);
 		~OutputFile();
 		int	check_file();
+		void	add_file(std::string save);
 };
 
 #endif

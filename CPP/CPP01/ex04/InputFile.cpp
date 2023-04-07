@@ -30,14 +30,13 @@ void	InputFile::set_str_len()
 void	InputFile::set_contents()
 {
 	std::string	buf;
-	getline(this->input_file_, buf);
-	while (this->input_file_)
+	while (getline(this->input_file_, buf))
 	{
 		this->contents_.append(buf);
+		if (this->input_file_.eof())
+			break;
 		this->contents_.append("\n");
-		getline(this->input_file_, buf);
 	}
-	std::cout << this->contents_ << std::endl;
 }
 
 int InputFile::check_end()
@@ -51,6 +50,25 @@ int InputFile::check_end()
 t_send_str	InputFile::send_str()
 {
 	int	check;
-	check = this->contents_.find(this->check_str_);
-	
+	t_send_str	send_list;
+	check = this->contents_.find(this->check_str_, this->start_) - this->start_;
+	if (check == -1 || this->check_str_len == 0)
+	{
+		send_list.str = this->contents_.substr(this->start_);
+		this->end_ = -1;
+		return (send_list);
+	} 
+	else if (check == 0)
+	{
+		this->end_ += (this->check_str_len);
+		send_list.i = 1;
+	}
+	else
+	{
+		this->end_ += check;
+		send_list.i = 0;
+	}
+	send_list.str = this->contents_.substr(this->start_, this->end_ - this->start_);
+	this->start_ = this->end_;
+	return (send_list);
 }

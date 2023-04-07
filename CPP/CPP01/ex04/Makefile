@@ -1,6 +1,8 @@
 CC	=	c++
 CPPFLAGE	=	-Wall -Wextra -Werror -std=c++98
-CPPFILES	=	replace.cpp \
+CPPFILES	=	InputFile.cpp \
+				OutputFile.cpp \
+				TranStr.cpp \
 				main.cpp
 NAME	=	Zombie
 OBJS			=	$(CPPFILES:.c=.o)

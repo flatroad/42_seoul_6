@@ -1,6 +1,9 @@
 #include "TranStr.hpp"
 
-TranStr::TranStr(char *tran_str):tran_str_(tran_str){};
+TranStr::TranStr(char *tran_str):tran_str_(tran_str)
+{
+	std::cout << "hello, TranStr" << std::endl;
+}
 
 TranStr::~TranStr()
 {

@@ -1,6 +1,6 @@
 #include "OutputFile.hpp"
 
-OutputFile::OutputFile(char *output_file):output_file_(output_file)
+OutputFile::OutputFile(std::string output_file):output_file_(output_file)
 {
 	std::cout << "hello, OutputFile" << std::endl;
 }
@@ -18,4 +18,9 @@ int	OutputFile::check_file()
 		return (1);
 	}
 	return (0);
+}
+
+void	OutputFile::add_file(std::string save)
+{
+	this->output_file_ << save;
 }
