@@ -9,6 +9,7 @@ InputFile::InputFile(char *input_file, char *check_str):input_file_(input_file),
 
 InputFile::~InputFile()
 {
+	input_file_.close();
 	std::cout << "goodbye InputFile" << std::endl;
 }
 

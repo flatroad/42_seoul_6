@@ -7,6 +7,7 @@ OutputFile::OutputFile(std::string output_file):output_file_(output_file)
 
 OutputFile::~OutputFile()
 {
+	output_file_.close();
 	std::cout << "goodbye OutputFile" << std::endl;
 }
 
