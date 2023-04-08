@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cmath>
 
 class Fixed
 {
@@ -22,5 +23,7 @@ class Fixed
 		 int toInt( void ) const;
 		void setRawBits( int const raw );
 };
+
+std::ostream& operator<<(std::ostream& out_stream, const Fixed& obj);
 
 #endif
