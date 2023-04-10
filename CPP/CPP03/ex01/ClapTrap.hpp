@@ -4,17 +4,23 @@
 #include <iostream>
 #include <string>
 
-class ScavTrap: public ClapTrap;
-
-
 class ClapTrap
 {
-	private:
+	private :
 		std::string	Name_;
 		int			HitPoints_;
 		int			EnergyPoints_;
 		int			AttackDamage_;
-	public:
+	protected :
+		void setName(std::string Name);
+		void setHitPoints(int HitPoints);
+		void setEnergyPoints(int EnergyPoints);
+		void setAttackDamage(int AttackDamage);
+		std::string getName() const;
+		int getHitPoints() const;
+		int getEnergyPoints() const;
+		int getAttackDamage() const;
+	public :
 		ClapTrap(std::string Name);
 		~ClapTrap();
 		ClapTrap(const ClapTrap& obj);

@@ -1,6 +1,7 @@
 CC	=	c++
 CPPFLAGE	=	-Wall -Wextra -Werror -std=c++98
 CPPFILES	=	ClapTrap.cpp \
+				ScavTrap.cpp \
 				main.cpp
 NAME	=	ClapTrap
 OBJS			=	$(CPPFILES:.c=.o)
