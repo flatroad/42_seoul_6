@@ -6,4 +6,7 @@ int main()
 	ScavTrap a(b);
 
 	a.guardGate();
+	a.attack("b");
+	a.beRepaired(10);
+	a.takeDamage(10);
 }

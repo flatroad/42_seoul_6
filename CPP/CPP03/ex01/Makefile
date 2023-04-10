@@ -4,12 +4,12 @@ CPPFILES	=	ClapTrap.cpp \
 				ScavTrap.cpp \
 				main.cpp
 NAME	=	ClapTrap
-OBJS			=	$(CPPFILES:.c=.o)
+OBJS			=	$(CPPFILES:.cpp=.o)
 
 $(NAME): $(OBJS)
 	$(CC) $(CPPFLAGE) $(OBJS) -o $@
 
-%.o: %.c
+%.o: %.cpp
 	$(CC) $(CPPFLAGE) -c $? -o $@
 
 all: $(NAME)
