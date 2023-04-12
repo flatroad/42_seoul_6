@@ -5,6 +5,7 @@ CPPFILES	=	Animal.cpp \
 				Dog.cpp \
 				WrongCat.cpp \
 				WrongAnimal.cpp \
+				Brain.cpp \
 				main.cpp
 NAME	=	AnimalFarm
 OBJS			=	$(CPPFILES:.cpp=.o)
