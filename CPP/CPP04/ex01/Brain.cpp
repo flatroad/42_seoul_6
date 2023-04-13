@@ -26,5 +26,5 @@ Brain &Brain::operator=(const Brain& obj)
 
 Brain::~Brain()
 {
-	std::cout << "Cat Destructor called" << std::endl;
+	std::cout << "Brain Destructor called" << std::endl;
 }
