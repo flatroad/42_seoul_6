@@ -38,7 +38,7 @@ void	test2()
 	Dog *dog2 = new Dog();
 	Dog *dog3;
 
-	dog3 = dog2;
+	*dog3 = *dog2;
 	
 	dog1->ad_attr();
 	dog2->ad_attr();

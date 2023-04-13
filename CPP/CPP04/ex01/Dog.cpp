@@ -21,11 +21,12 @@ Dog::Dog(const Dog& obj)
 Dog &Dog::operator=(const Dog& obj)
 {
 	std::cout << "Dog Copy assignment operator called" << std::endl;
-	if (this != &obj)
-	{
-		*this->attr_ = *obj.attr_;
+	// if (this != &obj)
+	// {
+		std::cout << "why not?\n";
+		*(this->attr_) = *(obj.attr_);
 		this->setType(obj.getType());
-	}
+	// }
 	return (*this);
 }
 
