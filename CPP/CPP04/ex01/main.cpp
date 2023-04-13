@@ -8,7 +8,7 @@ void	test2();
 
 int main()
 {
-	// test();
+	test();
 	test2();
 	system("leaks AnimalFarm");
 	return (0);
@@ -36,16 +36,13 @@ void	test2()
 {
 	Dog *dog1 = new Dog();
 	Dog *dog2 = new Dog();
-	Dog *dog3;
 
-	*dog3 = *dog2;
+	*dog2 = *dog1;
 	
 	dog1->ad_attr();
 	dog2->ad_attr();
-	dog3->ad_attr();
 
 	delete dog1;
 	delete dog2;
-	delete dog3;
 }
 
