@@ -1,0 +1,91 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_error_handle.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: junsyun <junsyun@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/03 23:06:11 by junsyun           #+#    #+#             */
+/*   Updated: 2023/02/05 03:03:06 by junsyun          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/minishell.h"
+
+extern int	g_status;
+
+int	execst_error_handle(int cas)
+{
+	if (cas == 0)
+		ft_putendl_fd("trans_stt malloc Fail...", 2);
+	if (cas == 1)
+		ft_putendl_fd("find_path malloc fail..", 2);
+	g_status = 1;
+	return (0);
+}
+
+int	mulcmd_error_handle(int cas, t_fork *fok)
+{
+	if (cas == 0)
+		ft_putstr_fd("multi_cmd pipe fail: ", 2);
+	else if (cas == 1)
+		ft_putstr_fd("command not found: ", 2);
+	else if (cas == 2)
+		ft_putstr_fd("permission denied: ", 2);
+	else if (cas == 3)
+		ft_putstr_fd("fork fail: ", 2);
+	else if (cas == 4)
+		ft_putstr_fd("dup2 fail: ", 2);
+	else if (cas == 5)
+		ft_putstr_fd("execve is fail: ", 2);
+	if (fok->full_cmd != NULL)
+		ft_putstr_fd(fok->full_cmd[0], 2);
+	ft_putchar_fd('\n', 2);
+	if (fok->check == 1)
+		g_status = 127;
+	else if (fok->check == 2)
+		g_status = 126;
+	else
+		g_status = 1;
+	return (g_status);
+}
+
+int	sglcmd_error_handle(int cas, t_fork *fok)
+{
+	if (cas == 0)
+		ft_putstr_fd("single_cmd pipe fail: ", 2);
+	else if (cas == 1)
+		ft_putstr_fd("command not found: ", 2);
+	else if (cas == 2)
+		ft_putstr_fd("permission denied: ", 2);
+	else if (cas == 3)
+		ft_putstr_fd("fork fail: ", 2);
+	else if (cas == 4)
+		ft_putstr_fd("dup2 fail: ", 2);
+	else if (cas == 5)
+		ft_putstr_fd("execve is fail: ", 2);
+	if (fok->full_cmd != NULL)
+		ft_putstr_fd(fok->full_cmd[0], 2);
+	ft_putchar_fd('\n', 2);
+	if (fok->check == 1)
+		g_status = 127;
+	else if (fok->check == 2)
+		g_status = 126;
+	else
+		g_status = 1;
+	return (0);
+}
+
+void	exec_free(t_station	*stt)
+{
+	t_fork	*memo;
+
+	while (stt->fok != NULL)
+	{
+		memo = stt->fok;
+		free(stt->fok->full_path);
+		stt->fok = stt->fok->next;
+		free(memo);
+	}
+	free(stt);
+}
