@@ -88,11 +88,6 @@ void Server::make_event_window()
 		fds[i].fd = -1;
 }
 
-void error_handle(int num)
-{
-	
-}
-
 void Server::accept_client()
 {
 	Client *client = new Client;
@@ -138,12 +133,12 @@ void Server::execute()
 			if (fds[i].revents & POLLIN)
 			{
 				message_receive(fds[i]);
-				continue ;
+				break ;
 			}
 			if (fds[i].revents & POLLHUP || fds[i].revents & POLLERR)
 			{
 				erase_clinet(fds[i]);
-				continue ;
+				break ;
 			}      
 		}
 	}
@@ -183,9 +178,18 @@ Client *Server::find_client(int fd)
 	return (NULL);
 }
 
-void Server::erase_client()
+void Server::erase_clinet(pollfd &fds)
 {
-	
+	Client *client;
+	client = this->find_client(fds.fd);
+	close(client->get_socket());
+	/*
+		Todo
+		클라이언트 연쇄제거
+	*/
+	// delete client;
+	fds.fd = -1;
+	fds.events = 0;
 }
 
 int Server::get_cmd(std::string s) {	return (this->parse_map[s]); }

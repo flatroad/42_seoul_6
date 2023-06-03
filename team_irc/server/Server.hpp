@@ -10,6 +10,7 @@
 // 테스트용
 #include <vector>
 #include <netdb.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -27,7 +28,7 @@ class Server {
 		std::set<Client *> cli_set;
 		std::map<std::string, int> parse_map;
 		void accept_client();
-		void erase_clinet();
+		void erase_clinet(pollfd &fds);
 	public:
 		std::vector<Client *>cli_vector;
 		Server(char *srv_port, char *passwd);
