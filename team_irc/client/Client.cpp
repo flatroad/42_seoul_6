@@ -1,11 +1,16 @@
 #include "Client.hpp"
 
 
-Client::Client() 
+Client::Client()
 { 
 	pass_flag = false;
 	nick_name = "";
 	user_name = "";
+}
+
+void Client::set_sub_memory(std::string str)
+{
+	this->sub_memory = str;
 }
 
 int Client::get_socket() const { return (this->cli_sock); }

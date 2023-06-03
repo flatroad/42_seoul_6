@@ -11,7 +11,6 @@
 
 #define ERROR 1
 
-#define MAX_CLIENTS 10
 #include <unistd.h>
 
 int main(int argc, char **argv)
@@ -20,7 +19,8 @@ int main(int argc, char **argv)
 		Server server(argv[1], argv[2]);
 		server.parse_map_init();
 		server.init();
-		server.start();
+		server.make_event_window();
+		server.execute();
 	}
 	catch (int err_num)
 	{
@@ -28,18 +28,12 @@ int main(int argc, char **argv)
 	}
 
 
-	struct pollfd fds[MAX_CLIENTS + 1]; // +1 for the server socket
-	fds[0].fd = server_fd;
-	fds[0].events = POLLIN;
-	for (int i = 1; i < MAX_CLIENTS + 1; ++i)
-		fds[i].fd = -1;
 	
 	int monitoring = 1;
 	int i;
 	while (1)
 	{
 		// Wait for events on file descriptors
-		int ret = poll(fds, monitoring, -1);
 		if (ret == -1) 
 		{
 			perror("Error in poll");
@@ -47,9 +41,9 @@ int main(int argc, char **argv)
 		}
 
 		// Check for events on server socket
-		if (fds[0].revents & POLLIN)
+		if (fds[0]s.revents & POLLIN)
 		{
-			struct sockaddr_in clientAddress;
+			struct sockaddr_in clientAddres;
 			socklen_t clientAddressLength = sizeof(clientAddress);
 			int newClientSocket = accept(server_fd, 
 				(struct sockaddr*)&clientAddress, &clientAddressLength);
@@ -101,7 +95,7 @@ int main(int argc, char **argv)
 						printf("Client disconnected\n");
 					else 
 						perror("Error in recv");
-					close(fds[i].fd);
+					close(fds[i].fd); 
 					fds[i].fd = -1;
 				}
 				else if (bytesRead > 0)

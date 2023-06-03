@@ -14,21 +14,30 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
+#define MAXCLIENT 20
+
 class Server {
 	private:
 		int srv_sock;
 		int srv_port;
 		char *passwd;
+		struct pollfd fds[MAXCLIENT + 1];
 		struct sockaddr_in serv_addr;
 		std::set<Channel *> ch_set;
 		std::set<Client *> cli_set;
 		std::map<std::string, int> parse_map;
+		void accept_client();
+		void erase_clinet();
 	public:
 		std::vector<Client *>cli_vector;
 		Server(char *srv_port, char *passwd);
 		void parse_map_init();
 		void init();
-		void start();
+		void make_event_window();
+		void execute();
+		Client *find_client(int fd);
+		std::string message_receive(pollfd &fds);
+		struct pollfd &Server::find_vacant_fds();
 		bool is_num(char *s);
 		void set_socket(int socker_fd);
 		int get_socket() const;

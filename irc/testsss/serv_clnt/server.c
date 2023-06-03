@@ -23,17 +23,20 @@ int main(int argc, char *argv[])
 		printf("Usage : %s <port>\n", argv[0]);
 		exit(1);
 	}
-
+	int rev_buf;
+	socklen_t sock_len = sizeof(rev_buf);
 	serv_sock = socket(PF_INET, SOCK_STREAM, 0);
 
 	if (serv_sock == -1)
 		error_handling("socket() error");
-	
+	getsockopt(serv_sock, SOL_SOCKET, SO_RCVBUF, &rev_buf, &sock_len);
+	// rev_buf = 1;
+	// setsockopt(serv_sock, SOL_SOCKET, SO_RCVBUF, (void *)&rev_buf, sock_len);
+	printf("%d\n",rev_buf);
 	memset(&serv_addr, 0, sizeof(serv_addr));
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	serv_addr.sin_port = htons(atoi(argv[1]));
-
 	if (bind(serv_sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == -1)
 		error_handling("bind() error");
 	
@@ -44,7 +47,7 @@ int main(int argc, char *argv[])
 	clnt_sock = accept(serv_sock, (struct sockaddr*)&clnt_addr, &clnt_addr_size);
 	if (clnt_sock == -1)
 		error_handling("accept() error");
-	
+	printf("%d\n", 123);
 	write(clnt_sock, message, sizeof(message));
 	close(clnt_sock);
 	close(serv_sock);

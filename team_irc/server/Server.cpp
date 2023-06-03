@@ -63,15 +63,12 @@ void Server::init()
 {
 	this->srv_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (srv_sock == -1)
-	{
-		std::cerr << "socket() error" << std::endl;
-		throw (errno);
-	}
+		throw ("socket() error");
 	this->serv_addr.sin_family = AF_INET;
 	this->serv_addr.sin_addr.s_addr = INADDR_ANY;
 	this->serv_addr.sin_port = htons(this->srv_port);
 
-	if (bind(this->srv_sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == -1)
+	if (bind(this->srv_sock, reinterpret_cast<sockaddr*>(&serv_addr), sizeof(serv_addr)) == -1)
 	{
 		std::cerr << "bind() error" << std::endl;
 		throw (errno);
@@ -83,11 +80,112 @@ void Server::init()
 	}
 }
 
-void Server::start()
+void Server::make_event_window()
 {
-	// 여기서 accept 진행.
-	// 여기서 while {poll()받을것}
-	// 여기서 부터는 오류에 따라 종료 진행 결정.
+	fds[0].fd = this->srv_sock;
+	fds[0].events = POLLIN;
+	for (int i = 1; i < MAXCLIENT + 1; ++i)
+		fds[i].fd = -1;
+}
+
+void error_handle(int num)
+{
+	
+}
+
+void Server::accept_client()
+{
+	Client *client = new Client;
+	client->set_socket(accept(this->srv_sock, \
+	reinterpret_cast<sockaddr*>(&client->get_cil_addr()), &(client->get_cli_size())));
+	if (client->get_socket() == -1)
+	{
+		delete client;
+		throw(1);
+	}
+	this->find_vacant_fds().fd = client->get_socket();
+}
+
+struct pollfd &Server::find_vacant_fds()
+{
+	for(int i = 1; i < MAXCLIENT + 1; i++)
+	{
+		if (this->fds[i].revents & POLLIN)
+		{
+			this->fds[i].events = POLLIN | POLLERR | POLLHUP;
+			return (this->fds[i]);
+		}
+	}
+}
+
+void Server::execute()
+{
+	this->make_event_window();
+	while (1)
+	{
+		int check = poll(fds, MAXCLIENT + 1, -1);
+		if (check == -1)
+			throw("poll() error");
+		if (fds[0].revents & POLLIN)
+		{
+			accept_client();
+			continue ;
+		}
+		for (int i = 1; i < MAXCLIENT + 1; i++)
+		{
+			if (fds[i].fd == -1)
+				continue ;
+			if (fds[i].revents & POLLIN)
+			{
+				message_receive(fds[i]);
+				continue ;
+			}
+			if (fds[i].revents & POLLHUP || fds[i].revents & POLLERR)
+			{
+				erase_clinet(fds[i]);
+				continue ;
+			}      
+		}
+	}
+}
+
+std::string Server::message_receive(pollfd &fds)
+{
+	std::string message;
+	std::string sv_message;
+	Client client;
+	char buffer[1024];
+	int message_size = 0;
+	int idx = -1;
+
+	while (idx == -1)
+	{
+		message_size = recv(fds.fd, buffer, 1024, 0);
+		if (message_size == -1)
+			throw (1);
+		message.append(buffer);
+		idx = message.find("\r\n");
+	}
+	this->find_client(fds.fd)->set_sub_memory(message.substr(idx + 2));
+	return (message.substr(0, idx + 2));
+}
+
+Client *Server::find_client(int fd)
+{
+	std::set<Client *>::iterator it = this->cli_set.begin();
+	for (; it != cli_set.end(); it++)
+	{
+		if( (*it)->get_socket() == fd)
+		{
+			return ((*it));
+		}
+	}
+	return (NULL);
+}
+
+void Server::erase_client()
+{
+	
 }
 
 int Server::get_cmd(std::string s) {	return (this->parse_map[s]); }

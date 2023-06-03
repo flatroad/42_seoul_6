@@ -1,17 +1,18 @@
-#include <stdio.h>
+#include <iostream>
+#include <string>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
-void error_handling(char *message);
+void	error_handling(std::string message);
 
 int main(int argc, char *argv[])
 {
 	int sock;
 	struct sockaddr_in serv_addr;
-	char message[30];
+	char message[2];
 	int str_len;
 
 	if (argc != 3)
@@ -32,18 +33,24 @@ int main(int argc, char *argv[])
 	if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == -1)
 		error_handling("connect() error!");
 	
-	str_len = read(sock, message, sizeof(message) - 1);
-	if (str_len == -1)
-		error_handling("read() error!");
-	
-	printf("Message from server : %s \n", message);
-	close(sock);
+	std::string test;
+	std::cout  << "hello" << std::endl;
+	while (test.find("\r\n") == std::string::npos)
+	{
+		std::cout << test << std::endl;
+		str_len = recv(sock, message, 1, 0);
+		if (str_len == -1)
+			error_handling("read() error!");
+		test.append(message);
+	}
+	std::cout  << "hello" << std::endl;
+	// std::cout << test << std::endl;
+	// close(sock);
 	return (0);
 }
 
-void	error_handling(char *message)
+void	error_handling(std::string message)
 {
-	fputs(message, stderr);
-	fputc('\n', stderr);
+	std::cerr << message << std::endl;
 	exit(1);
 }
