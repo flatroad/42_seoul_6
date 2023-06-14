@@ -1,38 +1,23 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : name("none"), grade(150) {
-	std::cout << "[Bureaucrat] Default constructor" << '\n';
-}
-
-Bureaucrat::Bureaucrat(const std::string& name) : name(name), grade(150) {
-	std::cout << "[Bureaucrat] constructor" << '\n';
-}
-
-Bureaucrat::Bureaucrat(const std::string& name, int grade) : name(name), grade(grade) {
-	std::cout << "[Bureaucrat] constructor" << '\n';
-}
-
-Bureaucrat::Bureaucrat(const Bureaucrat& obj) :name(obj.getName()), grade(obj.getGrade()) {
-	std::cout << "[Bureaucrat] Copy constructor" << '\n';
-}
-
-Bureaucrat::~Bureaucrat() {
-	std::cout << "[Bureaucrat] Destructor" << '\n';
-}
-
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat& obj)
+Bureaucrat::Bureaucrat(const std::string& name, int grade) : name(name), grade(grade)
 {
-	std::cout << "[Bureaucrat] Copy Copy assignment operator" << '\n';
-	this->grade = obj.getGrade();
-	return (*this);
+	try
+	{
+		this.
+	}
 }
 
-std::string Bureaucrat::getName()const
+Bureaucrat::Bureaucrat(const Bureaucrat& obj) : name(obj.getName()), grade(obj.getGrade()){}
+
+Bureaucrat::~Bureaucrat(){}
+
+std::string Bureaucrat::getName() const
 {
 	return (this->name);
 }
 
-int Bureaucrat::getGrade()const
+int Bureaucrat::getGrade() const
 {
 	return (this->grade);
 }
