@@ -7,7 +7,6 @@
 #define GRADE_HIGH 1
 #define GRADE_LOW 150
 
-
 class Bureaucrat {
  private:
 	const std::string name;
@@ -16,15 +15,14 @@ class Bureaucrat {
 		public:
 			virtual const char* what() const throw(); 
 	};
- public:
-	Bureaucrat(const std::string& name, int grade);
-	Bureaucrat(const Bureaucrat& obj);
-	~Bureaucrat();
 	class GradeTooLowException : public std::exception{
 		public:
 			virtual const char* what() const throw(); 
 	};
-
+ public:
+	Bureaucrat(const std::string& name, int grade);
+	Bureaucrat(const Bureaucrat& obj);
+	~Bureaucrat();
 	std::string getName()const;
 	int getGrade()const;
 	void incrementGrade();

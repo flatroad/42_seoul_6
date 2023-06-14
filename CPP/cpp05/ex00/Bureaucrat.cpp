@@ -5,9 +5,9 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) : name(name), grade(g
 	try
 	{
 		if (this->grade > GRADE_LOW)
-			throw Bureaucrat::GradeTooLowException();
+			throw (Bureaucrat::GradeTooLowException());
 		if (this->grade < GRADE_HIGH)
-			throw Bureaucrat::GradeTooHighException();
+			throw (Bureaucrat::GradeTooHighException());
 	}
 	catch(const std::exception& e)
 	{
