@@ -4,7 +4,15 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) : name(name), grade(g
 {
 	try
 	{
-		this.
+		if (this->grade > GRADE_LOW)
+			throw Bureaucrat::GradeTooLowException();
+		if (this->grade < GRADE_HIGH)
+			throw Bureaucrat::GradeTooHighException();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		throw (1);
 	}
 }
 
@@ -40,12 +48,12 @@ void Bureaucrat::decrementGrade()
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return ("[Bureaucrat] Grade too low exception");
+	return ("Bureaucrat Grade too low");
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return ("[Bureaucrat] Grade too high exception");
+	return ("Bureaucrat Grade too high");
 }
 
 std::ostream& operator <<(std::ostream& out_stream, const Bureaucrat& bureaucrat){

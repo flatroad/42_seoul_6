@@ -1,34 +1,24 @@
 #include "Bureaucrat.hpp"
 
-void state_print(Bureaucrat& one, Bureaucrat& two){
-	std::cout << "================" << '\n';
-	std::cout << one;
-	std::cout << two;
-	std::cout << "================" << '\n';
-}
-
 int main(){
-	Bureaucrat one("one", 150);
-	Bureaucrat two("two", 1);
 	try
 	{
-		one.incrementGrade();
+		Bureaucrat *test1 = new Bureaucrat("soun", 3);
+		Bureaucrat *test2 = new Bureaucrat("choi", 2);
 	}
-	catch(const std::exception& e)
+	catch(int e_num)
 	{
-		std::cerr << e.what() << '\n';
+		if (e_num == 1)
+		{
+			std::cerr << "constructor fail" << std::endl;
+			delete test1;
+			delete test2;
+		}
+		else if (int e_num == 2)
+		{
+			std::cerr << "inc or dec fail" << std::endl;
+			delete test1;
+			delete test2;
+		}
 	}
-	try
-	{
-		two.decrementGrade();
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	state_print(one, two);
-	std::cout << "===== 증감 ======" << '\n';
-	one.decrementGrade();
-	two.incrementGrade();
-	state_print(one, two);
 }
