@@ -1,10 +1,13 @@
 #include "Bureaucrat.hpp"
 
-int main(){
+void	test()
+{
+	Bureaucrat *test1 = NULL;
+	Bureaucrat *test2 = NULL;
 	try
 	{
-		Bureaucrat *test1 = new Bureaucrat("soun", 3);
-		Bureaucrat *test2 = new Bureaucrat("choi", 2);
+		test1 = new Bureaucrat("soun", -1);
+		test2 = new Bureaucrat("choi", -1);
 	}
 	catch(int e_num)
 	{
@@ -14,11 +17,17 @@ int main(){
 			delete test1;
 			delete test2;
 		}
-		else if (int e_num == 2)
+		else if (e_num == 2)
 		{
 			std::cerr << "inc or dec fail" << std::endl;
 			delete test1;
 			delete test2;
 		}
 	}
+}
+
+int main()
+{
+	test();
+	system("leaks Bureaucrat");
 }

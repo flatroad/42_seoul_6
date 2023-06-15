@@ -1,8 +1,8 @@
-NAME := a.out
+NAME := Bureaucrat
 CXX := c++
 CXXFLAGS := -Wextra -Werror -Wall -std=c++98
 SRCS := main.cpp \
-			Bureaucrat.cpp
+		Bureaucrat.cpp
 OBJS := $(SRCS:%.cpp=%.o)
 RM := rm -f
 
