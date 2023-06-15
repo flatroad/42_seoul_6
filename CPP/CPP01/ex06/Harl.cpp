@@ -39,3 +39,28 @@ void Harl::complain( std::string level )
 
 	(this->*ptrFunc[a % 13 % 7 - 1])();
 }
+
+
+void Harl::complain(std::string level){
+	int i = 0;
+	for (; i < FUNC_SIZE; i++){
+		if (!level.compare(cmd[i])){
+			break;
+		}
+	}
+	switch (i)
+	{
+	case (DEBUG):
+		(this->*f[DEBUG])();
+	case (INFO):
+		(this->*f[INFO])();
+	case (WARNING):
+		(this->*f[WARNING])();
+	case (ERROR):
+		(this->*f[ERROR])();
+		break;
+	default:
+		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+		break;
+	}
+}
