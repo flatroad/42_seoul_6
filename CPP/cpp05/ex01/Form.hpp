@@ -11,12 +11,8 @@ class Form {
 	private:
 		const std::string name;
 		bool check_sign;
-		//서명등급
-		const int grade_sign;
-		//서명 실행 등급
-		const int grade_exec;
-		Form();
-		Form& operator=(const Form& obj);
+		const int sign_lv;
+		const int exec_lv;
 
 	public:
 		Form(const std::string name, const int grade_sign, const int grade_exec);

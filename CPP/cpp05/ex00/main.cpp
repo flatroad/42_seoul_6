@@ -6,10 +6,12 @@ void	test()
 	Bureaucrat *test2 = NULL;
 	try
 	{
-		test1 = new Bureaucrat("soun", 1);
-		test2 = new Bureaucrat("choi", 1);
+		test1 = new Bureaucrat("soun", 2);
+		test2 = new Bureaucrat("choi", 2);
 		try
 		{
+			std::cout << *test1 << std::endl;
+			std::cout << *test2 << std::endl;
 			test1->incrementGrade();
 			test2->incrementGrade();
 			std::cout << *test1 << std::endl;

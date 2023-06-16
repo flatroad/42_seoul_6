@@ -1,13 +1,8 @@
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
-Form::Form() : name("none"), check_sign(false), grade_sign(1), grade_exec(1) {
-	std::cout << "[Form] Default constructor" << '\n';
-}
-
-Form::Form(const std::string name, const int grade_sign, const int grade_exec) 
-	: name(name), check_sign(false), grade_sign(grade_sign), grade_exec(grade_exec){
-		std::cout << "[Form] constructor" << '\n';
+Form::Form(const std::string name, const int grade_sign, const int grade_exec) : name(name), check_sign(false), grade_sign(grade_sign), grade_exec(grade_exec)
+{
 		if (grade_sign > GRADE_LOW || grade_exec > GRADE_LOW)
 			throw Form::GradeTooLowException();
 		else if (grade_sign < GRADE_HIGH || grade_exec < GRADE_HIGH)
@@ -23,13 +18,6 @@ Form::Form(const Form& obj)
 Form::~Form() {
 	std::cout << "[Form] Destructor" << '\n';
 }
-
-Form& Form::operator=(const Form& obj) {
-	std::cout << "[Form] Copy assignment operator" << '\n';
-	this->check_sign = obj.getCheckSign();
-	return (*this);
-}
-
 
 std::string Form::getName() const{
 	return (this->name);
