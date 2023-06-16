@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(const std::string& name, int grade) : name(name), grade(grade)
+Bureaucrat::Bureaucrat(const std::string& name, int grade) : name(name), grade(grade) throw(std::exception&)
 {
 	try
 	{
@@ -30,7 +30,7 @@ int Bureaucrat::getGrade() const
 	return (this->grade);
 }
 
-void Bureaucrat::incrementGrade()
+void Bureaucrat::decrementGrade()
 {
 	if (grade + 1 > GRADE_LOW)
 		throw Bureaucrat::GradeTooLowException();
@@ -38,7 +38,7 @@ void Bureaucrat::incrementGrade()
 		grade++;
 }
 
-void Bureaucrat::decrementGrade()
+void Bureaucrat::incrementGrade()
 {
 	if (grade - 1 < GRADE_HIGH)
 		throw Bureaucrat::GradeTooHighException();
@@ -46,17 +46,17 @@ void Bureaucrat::decrementGrade()
 		grade--;
 }
 
-const char* Bureaucrat::GradeTooLowException::what() const throw()
+const char* Bureaucrat::GradeTooLowException::what()
 {
-	return ("Bureaucrat Grade too low");
+	return ("grade over low");
 }
 
-const char* Bureaucrat::GradeTooHighException::what() const throw()
+const char* Bureaucrat::GradeTooHighException::what()
 {
-	return ("Bureaucrat Grade too high");
+	return ("grade over high");
 }
 
 std::ostream& operator <<(std::ostream& out_stream, const Bureaucrat& bureaucrat){
-	out_stream << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << "." << '\n';
+	out_stream << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << "." << std::endl;
 	return (out_stream);
 }

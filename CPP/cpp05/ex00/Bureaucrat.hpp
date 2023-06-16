@@ -13,14 +13,14 @@ class Bureaucrat {
 	int grade;
 	class GradeTooHighException : public std::exception{
 		public:
-			virtual const char* what() const throw(); 
+			virtual const char* what(); 
 	};
 	class GradeTooLowException : public std::exception{
 		public:
-			virtual const char* what() const throw(); 
+			virtual const char* what(); 
 	};
  public:
-	Bureaucrat(const std::string& name, int grade);
+	Bureaucrat(const std::string& name, int grade) throw(std::exception&);
 	Bureaucrat(const Bureaucrat& obj);
 	~Bureaucrat();
 	std::string getName()const;
