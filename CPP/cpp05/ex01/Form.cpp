@@ -1,13 +1,44 @@
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
-Form::Form(const std::string name, const int grade_sign, const int grade_exec) : name(name), check_sign(false), grade_sign(grade_sign), grade_exec(grade_exec)
+Form::Form(const std::string name, const int sign_lv, const int exec_lv) : name_(name), check_sign_(false), sign_lv_(sign_lv), exec_lv_(exec_lv)
 {
-		if (grade_sign > GRADE_LOW || grade_exec > GRADE_LOW)
+	try
+	{
+		if (sign_lv_ > GRADE_LOW || exec_lv_ > GRADE_LOW)
 			throw Form::GradeTooLowException();
-		else if (grade_sign < GRADE_HIGH || grade_exec < GRADE_HIGH)
+		else if (sign_lv_ < GRADE_HIGH || exec_lv_ < GRADE_HIGH)
 			throw Form::GradeTooHighException();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		throw (3);
+	}
 }
+
+Form::Form(const Form& obj) : name_(obj.getName()), 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Form::Form(const Form& obj)
 	:	name(obj.getName()), check_sign(obj.getCheckSign()), grade_sign(obj.getGradeSign()), grade_exec(obj.getGradeExec())
