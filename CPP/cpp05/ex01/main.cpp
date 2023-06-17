@@ -1,21 +1,22 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 void	test()
 {
 	Bureaucrat *test1 = NULL;
-	Bureaucrat *test2 = NULL;
+	Form *payment_documents = NULL;
 	try
 	{
-		test1 = new Bureaucrat("soun", 2);
-		test2 = new Bureaucrat("choi", 2);
+		test1 = new Bureaucrat("soun", 7);
+		payment_documents = new Form("docu", 5, 3);
 		try
 		{
 			std::cout << *test1 << std::endl;
-			std::cout << *test2 << std::endl;
-			test1->incrementGrade();
-			test2->incrementGrade();
+			std::cout << *payment_documents << std::endl;
+			test1->grade_increment();
+			test1->signForm(*payment_documents);
 			std::cout << *test1 << std::endl;
-			std::cout << *test2 << std::endl;
+			std::cout << *payment_documents << std::endl;
 		}
 		catch(const std::exception& e)
 		{
@@ -30,17 +31,21 @@ void	test()
 			std::cerr << "constructor fail" << std::endl;
 		else if (e_num == 2)
 			std::cerr << "inc or dec fail" << std::endl;
+		else if (e_num == 3)
+			std::cerr << "form constructor fail" << std::endl;
+		else if (e_num == 4)
+			std::cerr << "sign error" << std::endl;
 		if (test1 != NULL)
 			delete test1;
-		if (test2 != NULL)
-			delete test2;
+		if (payment_documents != NULL)
+			delete payment_documents;
 		return ;
 		// delete test1;
-		// delete test2;
+		// delete payment_documents;
 	
 	}
 	delete test1;
-	delete test2;
+	delete payment_documents;
 }
 
 int main()

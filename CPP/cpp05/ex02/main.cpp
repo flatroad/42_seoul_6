@@ -1,84 +1,55 @@
 #include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
+#include "Form.hpp"
 
-void shrubberyTest()
+void	test()
 {
+	Bureaucrat *test1 = NULL;
+	Form *payment_documents = NULL;
 	try
 	{
-		Bureaucrat bob("BOB", 4);
-		Bureaucrat bob2("BOB", 138);
-		ShrubberyCreationForm test1("test1");
-		ShrubberyCreationForm test2("test2");
-		std::cout << '\n';
-		bob.signForm(test1);
-		bob.executeForm(test1);
-		std::cout << '\n';
-		bob2.signForm(test2);
-		bob2.executeForm(test2);
-		std::cout << '\n';
+		test1 = new Bureaucrat("soun", 7);
+		payment_documents = new Form("docu", 5, 3);
+		try
+		{
+			std::cout << *test1 << std::endl;
+			std::cout << *payment_documents << std::endl;
+			test1->grade_increment();
+			test1->signForm(*payment_documents);
+			std::cout << *test1 << std::endl;
+			std::cout << *payment_documents << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << std::endl;
+			throw (2);
+		}
+		
 	}
-	catch(const std::exception& e)
+	catch(int e_num)
 	{
-		std::cerr << e.what() << '\n';
+		if (e_num == 1)
+			std::cerr << "constructor fail" << std::endl;
+		else if (e_num == 2)
+			std::cerr << "inc or dec fail" << std::endl;
+		else if (e_num == 3)
+			std::cerr << "form constructor fail" << std::endl;
+		else if (e_num == 4)
+			std::cerr << "sign error" << std::endl;
+		if (test1 != NULL)
+			delete test1;
+		if (payment_documents != NULL)
+			delete payment_documents;
+		return ;
+		// delete test1;
+		// delete payment_documents;
+	
 	}
+	delete test1;
+	delete payment_documents;
 }
 
-void roboTest()
+int main()
 {
-	try
-	{
-		Bureaucrat bob("BOB", 4);
-		Bureaucrat bob2("BOB", 138);
-		RobotomyRequestForm test1("test1");
-		RobotomyRequestForm test2("test2");
-		std::cout << '\n';
-		bob.signForm(test1);
-		bob.executeForm(test1);
-		std::cout << '\n';
-		bob2.signForm(test2);
-		bob2.executeForm(test2);
-		std::cout << '\n';
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-}
-
-void presidentTest()
-{
-	try
-	{
-		Bureaucrat bob("BOB", 4);
-		Bureaucrat bob2("BOB", 138);
-		PresidentialPardonForm test1("test1");
-		PresidentialPardonForm test2("test2");
-		std::cout << '\n';
-		bob.signForm(test1);
-		bob.executeForm(test1);
-		std::cout << '\n';
-		bob2.signForm(test2);
-		bob2.executeForm(test2);
-		std::cout << '\n';
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-}
-
-
-
-int main(){
-	std::cout << "====== ShrubberyCreationForm Test =====" << '\n';	
-	shrubberyTest();
-	std::cout << '\n';
-	std::cout << "====== RobotomyRequestForm Test =====" << '\n';	
-	roboTest();
-	std::cout << '\n';
-	std::cout << "====== PresidentialPardonForm Test =====" << '\n';	
-	presidentTest();
-	std::cout << '\n';
+	test();
+	system("leaks Bureaucrat");
 }

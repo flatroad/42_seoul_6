@@ -12,8 +12,8 @@ void	test()
 		{
 			std::cout << *test1 << std::endl;
 			std::cout << *test2 << std::endl;
-			test1->incrementGrade();
-			test2->incrementGrade();
+			test1->grade_increment();
+			test2->grade_increment();
 			std::cout << *test1 << std::endl;
 			std::cout << *test2 << std::endl;
 		}
