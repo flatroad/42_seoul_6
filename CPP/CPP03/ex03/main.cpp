@@ -2,7 +2,12 @@
 
 int main()
 {
-	DiamondTrap b("a");
+	DiamondTrap b("b");
+	DiamondTrap c = b;
+	
+	c = b;
 
-	b.print_setting();
+	c.highFivesGuys();
+	c.guardGate();
+	c.print_setting();
 }

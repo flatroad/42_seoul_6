@@ -4,14 +4,8 @@ DiamondTrap::DiamondTrap(std::string name): ClapTrap(name + "_clap_name"), FragT
 {
 	std::cout << "DiamondTrap Destructor called" << std::endl;
 	this->Name_ = name;
-	std::cout << FragTrap::ClapTrap::getHitPoints() << std::endl;
-	std::cout << FragTrap::ClapTrap::getAttackDamage() << std::endl;
-	std::cout << ScavTrap::ClapTrap::getHitPoints() << std::endl;
-	std::cout << ScavTrap::ClapTrap::getAttackDamage() << std::endl;
-	std::cout << ScavTrap::ClapTrap::getEnergyPoints() << std::endl;
-	std::cout << ScavTrap::ClapTrap::getEnergyPoints() << std::endl;
 	ClapTrap::setHitPoints(FragTrap::getHitPoints());
-	ClapTrap::setAttackDamage(FragTrap::getAttackDamage());
+	ClapTrap::setAttackDamage(30);
 };
 
 DiamondTrap::~DiamondTrap()
@@ -29,7 +23,7 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap& obj)
 	std::cout << "DiamondTrap Copy assignment operator called" << std::endl;
 	if (this != &obj)
 	{
-		this->Name_ = obj.Name_;
+		this->Name_ = obj.DiamondTrap::Name_;
 		ClapTrap::operator=(obj);
 	}
 	return (*this);

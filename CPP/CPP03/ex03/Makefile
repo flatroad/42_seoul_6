@@ -5,7 +5,7 @@ CPPFILES	=	ClapTrap.cpp \
 				ScavTrap.cpp \
 				main.cpp \
 				DiamondTrap.cpp
-NAME	=	FragTrap
+NAME	=	DiamondTrap
 OBJS			=	$(CPPFILES:.cpp=.o)
 
 $(NAME): $(OBJS)
