@@ -1,25 +1,15 @@
-#include <unistd.h>
-#include <fcntl.h>
 #include <stdio.h>
-#include "get_next_line.h"
+#include <fcntl.h>
+#include "get_next_line_bonus.h"
 
 int main()
 {
-   int  fd;
-   char	*flag;
-   fd = open ("./text.txt", O_RDONLY);
-   if (fd < 0)
-   {
-      printf("디스크립터가 실패했습니다.");
-      return (0);
-   }
-   flag  = get_next_line(fd);
-   while (flag)
-   {
-      free(flag);
-      printf("%s", flag);
-      flag = get_next_line(fd);
-   }
-   system("leaks a.out");
-   return (0);
+	int fd = open("./test.txt", O_RDONLY | O_CREAT, 0644);
+
+	for (int i = 0; i < 3; i++)
+	{
+		printf("%d\n", fd);
+		printf("%s\n", get_next_line_bonus(fd));
+	}
+	return (0);
 }
