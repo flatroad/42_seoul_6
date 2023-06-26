@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 13:08:18 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/06/26 02:20:19 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/06/26 02:56:05 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,25 +66,25 @@ t_dict_node	*find_node(int fd, t_dict *dict)
 	t_dict_node	*node;
 
 	node = dict->dict_head;
-	while (node != NULL)
-	{
-		if (node->fd == fd)
-			return (node);
-	}
+	while (node != NULL && node->fd != fd)
+		node = node->next;
+	if (node != NULL)
+		return (node);
 	node = (t_dict_node *)malloc(sizeof(t_dict_node) * 1);
 	if (node == NULL)
 		return (node);
+	node->fd = fd;
+	if (dict->dict_head == NULL)
+		dict->dict_head = node;
 	if (dict->dict_end != NULL)
 		dict->dict_end->next = node;
-	else
-		dict->dict_end = node;
 	dict->dict_end = node;
 	node->next = NULL;
 	node->value = (char *)malloc(sizeof(char) * 1);
 	if (node->value == NULL)
 	{
 		free(node);
-		node = NULL;
+		return (node);
 	}
 	node->value[0] = 0;
 	return (node);
