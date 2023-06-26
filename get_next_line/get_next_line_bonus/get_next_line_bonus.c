@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 13:08:18 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/06/26 15:09:39 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:59:09 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,34 +63,7 @@ size_t	ft_strbox(int i, const char *s, int c)
 	}
 }
 
-t_dict_node	*find_node(int fd, t_dict *dict)
-{
-	t_dict_node	*node;
 
-	node = dict->dict_head;
-	while (node != NULL && node->fd != fd)
-		node = node->next;
-	if (node != NULL)
-		return (node);
-	node = (t_dict_node *)malloc(sizeof(t_dict_node) * 1);
-	if (node == NULL)
-		return (node);
-	node->fd = fd;
-	if (dict->dict_head == NULL)
-		dict->dict_head = node;
-	if (dict->dict_end != NULL)
-		dict->dict_end->next = node;
-	dict->dict_end = node;
-	node->next = NULL;
-	node->value = (char *)malloc(sizeof(char) * 1);
-	if (node->value == NULL)
-	{
-		free(node);
-		return (node);
-	}
-	node->value[0] = 0;
-	return (node);
-}
 
 t_dict_node	*dict_free(t_dict *dict)
 {

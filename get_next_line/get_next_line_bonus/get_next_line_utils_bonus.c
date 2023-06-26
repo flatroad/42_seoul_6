@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 13:08:18 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/06/26 16:06:31 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:58:16 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,23 @@
 char	*get_next_line_bonus(int fd)
 {
 	static t_dict	*dict = NULL;
-	t_read_out		read_out;
-	t_dict_node		*node;
+	char			*value;
 
 	if (dict == NULL)
+	{
 		dict = (t_dict *)malloc(sizeof(t_dict) * 1);
-	if (fd < 0 || BUFFER_SIZE <= 0 || dict == NULL)
+		if (dict == NULL)
+			return (NULL);
+		dict->dict_free = dict_free;
+		dict->find_node = find_node;
+		dict->out_value = out_value;
+	}
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return ((char *)dict_free(dict));
-	dict->dict_free = dict_free;
-	dict->find_node = find_node;
-	node = dict->find_node(fd, dict);
-	if (node == NULL)
+	value = dict->out_value(fd, dict);
+	if (value == NULL)
 		return (NULL);
-	if (ft_strbox(2, node->value, '\n') == 0)
+	if (ft_strbox(2, value, '\n') == 0)
 		read_out.read_buf = read_fd(node->fd, node->value);
 	else
 		read_out.read_buf = no_read_fd(node->value);
@@ -39,6 +43,65 @@ char	*get_next_line_bonus(int fd)
 	free(read_out.read_buf);
 	printf("fd : %d, dict : %p\n", fd, dict);
 	return (read_out.out_buf);
+}
+
+char	*out_value(int fd, t_dict *dict)
+{
+	t_dict_node *node;
+
+	node = dict->find_node(fd, dict);
+	if (node != NULL)
+		return (node->value);
+	node = (t_dict_node *)malloc(sizeof(t_dict_node) * 1);
+	if (node == NULL)
+		return (NULL);
+	node->value = (char *)malloc(sizeof(char) * 1);
+	if (node->value == NULL)
+	{
+		free(node);
+		return (NULL);
+	}
+	node->fd = fd;
+	if (dict->dict_head == NULL)
+		dict->dict_head = node;
+	if (dict->dict_end == NULL)
+		dict->dict_end = node;
+	else
+	{
+		dict->dict_end->next = node;
+		dict->dict_end = dict->dict_end->next;
+	}
+	dict->dict_end->next = NULL;
+	return (dict->dict_end);
+}
+
+t_dict_node	*find_node(int fd, t_dict *dict)
+{
+	t_dict_node	*node;
+
+	node = dict->dict_head;
+	while (node != NULL && node->fd != fd)
+		node = node->next;
+	if (node != NULL)
+		return (node);
+	node = (t_dict_node *)malloc(sizeof(t_dict_node) * 1);
+	if (node == NULL)
+		return (node);
+	node->fd = fd;
+	if (dict->dict_head == NULL)
+		dict->dict_head = node;
+	if (dict->dict_end != NULL)
+		dict->dict_end->next = node;
+	dict->dict_end = node;
+	node->next = NULL;
+	node->value = (char *)malloc(sizeof(char) * 1);
+	if (node->value == NULL)
+	{
+		free(node);
+		return (node);
+	}
+	node->value[0] = 0;
+	return (node);
 }
 
 char	*read_fd(int fd, char *save_buf)

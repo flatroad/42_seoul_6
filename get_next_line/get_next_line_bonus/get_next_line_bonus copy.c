@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line_bonus copy.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 13:08:18 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/06/26 15:09:39 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:40:01 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	s1_len;
-	size_t	s2_len;
+	size_t	ptr_len;
 	size_t	idx;
 	char	*ptr;
 
 	if (s1 == 0 || s2 == 0)
 		return (0);
-	s1_len = ft_strbox(1, ((char *)s1), 0);
-	s2_len = ft_strbox(1, ((char *)s2), 0);
+	ptr_len = ft_strbox(1, ((char *)s1), 0) + ft_strbox(1, ((char *)s2), 0);
 	idx = 0;
-	ptr = (char *)malloc(s1_len + s2_len + 1);
-	if (ptr == 0)
-		return (0);
-	ptr[s1_len + s2_len] = 0;
+	ptr = (char *)malloc(ptr_len + 1);
+	if (ptr == NULL)
+		return (NULL);
+	ptr[ptr_len] = 0;
 	while (s1[idx] != 0)
 	{
 		ptr[idx] = s1[idx];

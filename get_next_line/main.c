@@ -10,8 +10,14 @@ int main()
 
 	for (int i = 0; i < 3; i++)
 	{
-		printf("%s\n", get_next_line_bonus(fd));
-		printf("%s\n", get_next_line_bonus(fd2));
+		char *str;
+		printf("%d, %d\n", fd, fd2);
+		str = get_next_line_bonus(fd);
+		printf("%s\n", str);
+		free(str);
+		str = get_next_line_bonus(fd2);
+		printf("%s\n", str);
+		free(str);
 	}
 	return (0);
 }
