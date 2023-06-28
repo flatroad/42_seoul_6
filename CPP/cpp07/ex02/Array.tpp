@@ -1,3 +1,6 @@
+#ifndef ARRAY_TPP
+#define ARRAY_TPP
+
 #include "Array.hpp"
 
 template<typename T>
@@ -19,7 +22,7 @@ Array<T>::Array(const Array& obj)
 template<typename T>
 Array<T>& Array<T>::operator=(const Array& obj)
 {
-	if (*this != obj)
+	if (this != &obj)
 	{
 		if (this->arr_ != NULL)
 			delete (this->arr_);
@@ -27,7 +30,7 @@ Array<T>& Array<T>::operator=(const Array& obj)
 		this->arr_ = new T[this->arr_size_];
 		for (unsigned int i = 0; i < this->arr_size_; i++)
 		{
-			this->arr_size_[i] = obj.arr_[i];
+			this->arr_[i] = obj.arr_[i];
 		}
 	}
 	return (*this);
@@ -43,9 +46,9 @@ Array<T>::~Array()
 template<typename T>
 T& Array<T>::operator[](unsigned int idx) const
 {
-	if (this->arr_size <= idx)
+	if (this->arr_size_ <= idx)
 		throw (Array<T>::IndexOut());
-	return (this->arr[idx]);
+	return (this->arr_[idx]);
 }
 
 template<typename T>
@@ -59,3 +62,5 @@ unsigned int Array<T>::size() const
 {
 	return (this->arr_size_);
 }
+
+#endif

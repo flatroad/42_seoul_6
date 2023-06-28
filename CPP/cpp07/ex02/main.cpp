@@ -20,6 +20,7 @@ void test()
         Array<int> test(tmp);
     }
 
+    printf("%d\n", 123);
     for (int i = 0; i < MAX_VAL; i++)
     {
         if (mirror[i] != numbers[i])
