@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 13:08:18 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/06/29 09:28:52 by sounchoi         ###   ########.fr       */
+/*   Created: 2023/06/29 21:56:05 by sounchoi          #+#    #+#             */
+/*   Updated: 2023/06/29 21:56:12 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,18 @@
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t	s1_len;
-	size_t	s2_len;
+	size_t	new_s_len;
 	size_t	idx;
 	char	*ptr;
 
-	if (s1 == 0 || s2 == 0)
+	if (s1 == NULL || s2 == NULL)
 		return (0);
-	s1_len = ft_strbox(1, ((char *)s1), 0);
-	s2_len = ft_strbox(1, ((char *)s2), 0);
+	new_s_len = ft_strbox(1, ((char *)s1), 0) + ft_strbox(1, ((char *)s2), 0);
 	idx = 0;
-	ptr = (char *)malloc(s1_len + s2_len + 1);
-	if (ptr == 0)
-		return (0);
-	ptr[s1_len + s2_len] = 0;
+	ptr = (char *)malloc(new_s_len + 1);
+	if (ptr == NULL)
+		return (NULL);
+	ptr[new_s_len] = 0;
 	while (s1[idx] != 0)
 	{
 		ptr[idx] = s1[idx];
@@ -42,7 +40,7 @@ char	*ft_strjoin(char *s1, char *s2)
 size_t	ft_strbox(int i, const char *s, int c)
 {
 	size_t	len;
-	
+
 	if (i == 1)
 	{
 		len = 0;
@@ -68,43 +66,45 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	len_max;
 	char	*dst;
-	int		idx;
+	size_t	idx;
 
-	if (s == NULL)
+	if (s == NULL || start >= len)
 		return (NULL);
 	len_max = len - start;
-	idx = start;
-	dst = (char *)malloc(sizeof(char) * len + 1);
+	idx = 0;
+	dst = (char *)malloc(sizeof(char) * len_max + 1);
 	if (dst == NULL)
 		return (NULL);
-	while (start < len && *(s + start) != 0)
+	dst[len_max] = 0;
+	while (idx < len_max && s[start] != 0)
 	{
-		*dst = *(s + start);
-		dst++;
+		dst[idx] = s[start];
+		idx++;
 		start++;
 	}
-	*dst = 0;
-	return (dst - len_max);
+	return (dst);
 }
-
-
 
 char	*read_fd(int fd, char *save_buf)
 {
 	int		flag;
 	char	read_ln[BUFFER_SIZE + 1];
 	char	*free_buf;
+	int		i;
 
 	flag = 1;
 	while (flag > 0)
 	{
+		while (i < BUFFER_SIZE + 1)
+		{
+			read_ln[i] = 0;
+			i++;
+		}
+		i = 0;
 		free_buf = save_buf;
-		flag = read(fd, read_ln, BUFFER_SIZE);
-		read_ln[flag] = 0;
-		if (flag < 0)
-			continue ;
-		read_ln[flag] = 0;
-		if (ft_strbox(2, (const char *)read_ln, '\n') != 0)
+		if (read(fd, read_ln, BUFFER_SIZE) <= 0)
+			break ;
+		if (ft_strbox(2, (const char *)read_ln, '\n') == 1)
 			flag = -1;
 		save_buf = ft_strjoin(save_buf, read_ln);
 		free(free_buf);
@@ -114,12 +114,10 @@ char	*read_fd(int fd, char *save_buf)
 	return (save_buf);
 }
 
-
-char	*out_put(int fd, char *read_buf, t_dict *dict)
+char	*out_put(int fd, char *read_buf, t_dict **dict)
 {
 	char	*out_line;
 	char	*save_buf;
-	char	*dict_str;
 	size_t	len;
 	size_t	idx;
 
@@ -134,9 +132,11 @@ char	*out_put(int fd, char *read_buf, t_dict *dict)
 	out_line = ft_substr(read_buf, 0, len);
 	if (out_line == NULL)
 		return (NULL);
-	save_buf = ft_substr(read_buf, len + 1, ft_strbox(1, save_buf, 0));
-	dict_str = dict->out_value(fd, dict);
-	dict_str = save_buf;
+	save_buf = ft_substr(read_buf, len, ft_strbox(1, read_buf, 0));
+	if (save_buf == NULL)
+		(*dict)->destory_node(fd, dict);
+	else
+		(*dict)->find_node(fd, (*dict))->value = save_buf;
 	free(read_buf);
 	return (out_line);
 }

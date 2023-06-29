@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 13:08:18 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/06/29 09:20:41 by sounchoi         ###   ########.fr       */
+/*   Created: 2023/06/29 21:55:59 by sounchoi          #+#    #+#             */
+/*   Updated: 2023/06/29 22:04:44 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,34 +18,70 @@ char	*get_next_line_bonus(int fd)
 	static t_dict	*dict = NULL;
 	char			*value;
 	char			*out_str;
-	
+
 	if (dict == NULL)
 	{
 		dict = (t_dict *)malloc(sizeof(t_dict) * 1);
 		if (dict == NULL)
 			return (NULL);
-		dict->dict_free = dict_free;
+		dict->dict_head = NULL;
 		dict->find_node = find_node;
 		dict->out_value = out_value;
+		dict->destory_node = destory_node;
+		dict->self_check = self_check;
 	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return ((char *)dict_free(dict));
-	value = dict->out_value(fd, dict);
-	if (value == NULL)
 		return (NULL);
-	if (ft_strbox(2, value, '\n') == 0)
+	value = dict->out_value(fd, dict);
+	if (value != NULL && ft_strbox(2, value, '\n') == 0)
 		value = read_fd(fd, value);
 	if (value == NULL)
 		return (NULL);
-	out_str = out_put(fd, value, dict);
-	if (out_str == NULL)
-		return (NULL);
+	out_str = out_put(fd, value, &dict);
 	return (out_str);
+}
+
+void	self_check(t_dict **dict)
+{
+	if ((*dict)->dict_head == NULL)
+	{
+		free(*dict);
+		(*dict) = NULL;
+	}
+}
+
+void	destory_node(int fd, t_dict **dict)
+{
+	t_dict_node	*node;
+	t_dict_node	*node_sv;
+
+	node_sv = (*dict)->dict_head;
+	if (node_sv->fd == fd)
+	{
+		(*dict)->dict_head = node_sv->next;
+		free(node_sv);
+	}
+	else
+	{
+		while (node_sv->next != NULL)
+		{
+			node = node_sv->next;
+			if (node->fd == fd)
+			{
+				node_sv->next = node->next;
+				free(node);
+				break ;
+			}
+			node_sv = node_sv->next;
+		}
+	}
+	(*dict)->self_check(dict);
 }
 
 char	*out_value(int fd, t_dict *dict)
 {
-	t_dict_node *node;
+	t_dict_node	*node;
+	t_dict_node	*node_sv;
 
 	node = dict->find_node(fd, dict);
 	if (node != NULL)
@@ -53,24 +89,22 @@ char	*out_value(int fd, t_dict *dict)
 	node = (t_dict_node *)malloc(sizeof(t_dict_node) * 1);
 	if (node == NULL)
 		return (NULL);
+	node->fd = fd;
+	node->next = NULL;
 	node->value = (char *)malloc(sizeof(char) * 1);
 	if (node->value == NULL)
-	{
-		free(node);
-		return (NULL);
-	}
-	node->fd = fd;
+		return (free(node), NULL);
+	node->value[0] = 0;
 	if (dict->dict_head == NULL)
 		dict->dict_head = node;
-	if (dict->dict_end == NULL)
-		dict->dict_end = node;
 	else
 	{
-		dict->dict_end->next = node;
-		dict->dict_end = dict->dict_end->next;
+		node_sv = dict->dict_head;
+		while (node_sv->next != NULL)
+			node_sv = node_sv->next;
+		node_sv->next = node;
 	}
-	dict->dict_end->next = NULL;
-	return (dict->dict_end->value);
+	return (node->value);
 }
 
 t_dict_node	*find_node(int fd, t_dict *dict)
@@ -82,41 +116,5 @@ t_dict_node	*find_node(int fd, t_dict *dict)
 		node = node->next;
 	if (node != NULL)
 		return (node);
-	node = (t_dict_node *)malloc(sizeof(t_dict_node) * 1);
-	if (node == NULL)
-		return (node);
-	node->fd = fd;
-	if (dict->dict_head == NULL)
-		dict->dict_head = node;
-	if (dict->dict_end != NULL)
-		dict->dict_end->next = node;
-	dict->dict_end = node;
-	node->next = NULL;
-	node->value = (char *)malloc(sizeof(char) * 1);
-	if (node->value == NULL)
-	{
-		free(node);
-		return (node);
-	}
-	node->value[0] = 0;
-	return (node);
-}
-
-t_dict_node	*dict_free(t_dict *dict)
-{
-	t_dict_node	*memo;
-
-	if (dict == NULL)
-		return (NULL);
-	while (dict->dict_head != NULL)
-	{
-		if (dict->dict_head->value != NULL)
-			free(dict->dict_head->value);
-		memo = dict->dict_head;
-		dict->dict_head = dict->dict_head->next;
-		free(memo);
-	}
-	free(dict);
-	dict = NULL;
 	return (NULL);
 }
