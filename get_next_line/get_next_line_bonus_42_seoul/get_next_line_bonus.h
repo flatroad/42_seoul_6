@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 21:55:52 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/06/29 21:57:01 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/06/29 23:05:37 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_read_out
 	char	*out_buf;
 }	t_read_out;
 
-char		*get_next_line_bonus(int fd);
+char		*get_next_line(int fd);
 t_dict_node	*find_node(int fd, t_dict *dict);
 void		destory_node(int fd, t_dict **dict);
 char		*out_value(int fd, t_dict *dict);

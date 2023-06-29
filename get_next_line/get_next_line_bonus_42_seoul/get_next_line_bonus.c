@@ -6,14 +6,13 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 21:55:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/06/29 22:44:04 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/06/29 23:27:38 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <stdio.h>
 
-char	*get_next_line_bonus(int fd)
+char	*get_next_line(int fd)
 {
 	static t_dict	*dict = NULL;
 	char			*value;
@@ -114,7 +113,7 @@ t_dict_node	*find_node(int fd, t_dict *dict)
 	node = dict->dict_head;
 	while (node != NULL && node->fd != fd)
 		node = node->next;
-	if (node != NULL)
+	if (node != NULL && node->fd == fd)
 		return (node);
 	return (NULL);
 }

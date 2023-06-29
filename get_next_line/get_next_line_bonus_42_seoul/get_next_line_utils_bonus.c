@@ -6,12 +6,11 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 21:56:05 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/06/29 22:49:02 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/06/29 23:21:35 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <stdio.h>
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -119,10 +118,8 @@ char	*out_put(int fd, char *read_buf, t_dict **dict)
 	char	*out_line;
 	char	*save_buf;
 	size_t	len;
-	size_t	idx;
 
 	len = 0;
-	idx = 0;
 	while (read_buf[len] != 0 && read_buf[len] != '\n')
 		len++;
 	if (read_buf[len] == '\n')
