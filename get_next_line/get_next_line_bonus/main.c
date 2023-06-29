@@ -5,8 +5,8 @@
 
 int main()
 {
-	int fd1 = open("./test1.txt", O_WRONLY | O_CREAT , 0644);
-	int fd2 = open("./test2.txt", O_WRONLY | O_CREAT , 0644);
+	int fd1 = open("./test1.txt", O_RDONLY | O_CREAT , 0644);
+	int fd2 = open("./test2.txt", O_RDONLY | O_CREAT , 0644);
 
 	printf("%d ,%d\n", fd1, fd2);
 	for (int i = 0; i < 5; i++)

@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 13:08:18 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/06/29 09:10:16 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/06/29 09:28:52 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ char	*read_fd(int fd, char *save_buf)
 	{
 		free_buf = save_buf;
 		flag = read(fd, read_ln, BUFFER_SIZE);
+		read_ln[flag] = 0;
 		if (flag < 0)
 			continue ;
 		read_ln[flag] = 0;
