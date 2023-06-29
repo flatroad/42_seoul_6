@@ -5,116 +5,138 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/29 21:55:59 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/06/29 22:04:44 by sounchoi         ###   ########.fr       */
+/*   Created: 2023/06/29 21:56:05 by sounchoi          #+#    #+#             */
+/*   Updated: 2023/06/29 22:49:02 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 #include <stdio.h>
 
-char	*get_next_line_bonus(int fd)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	static t_dict	*dict = NULL;
-	char			*value;
-	char			*out_str;
+	size_t	new_s_len;
+	size_t	idx;
+	char	*ptr;
 
-	if (dict == NULL)
+	if (s1 == NULL || s2 == NULL)
+		return (0);
+	new_s_len = ft_strbox(1, ((char *)s1), 0) + ft_strbox(1, ((char *)s2), 0);
+	idx = 0;
+	ptr = (char *)malloc(new_s_len + 1);
+	if (ptr == NULL)
+		return (NULL);
+	ptr[new_s_len] = 0;
+	while (s1[idx] != 0)
 	{
-		dict = (t_dict *)malloc(sizeof(t_dict) * 1);
-		if (dict == NULL)
-			return (NULL);
-		dict->dict_head = NULL;
-		dict->find_node = find_node;
-		dict->out_value = out_value;
-		dict->destory_node = destory_node;
-		dict->self_check = self_check;
+		ptr[idx] = s1[idx];
+		idx++;
 	}
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	value = dict->out_value(fd, dict);
-	if (value != NULL && ft_strbox(2, value, '\n') == 0)
-		value = read_fd(fd, value);
-	if (value == NULL)
-		return (NULL);
-	out_str = out_put(fd, value, &dict);
-	return (out_str);
+	while (*s2 != 0)
+		ptr[idx++] = *(s2++);
+	return (ptr);
 }
 
-void	self_check(t_dict **dict)
+size_t	ft_strbox(int i, const char *s, int c)
 {
-	if ((*dict)->dict_head == NULL)
-	{
-		free(*dict);
-		(*dict) = NULL;
-	}
-}
+	size_t	len;
 
-void	destory_node(int fd, t_dict **dict)
-{
-	t_dict_node	*node;
-	t_dict_node	*node_sv;
-
-	node_sv = (*dict)->dict_head;
-	if (node_sv->fd == fd)
+	if (i == 1)
 	{
-		(*dict)->dict_head = node_sv->next;
-		free(node_sv);
+		len = 0;
+		while (s[len] != 0)
+			len++;
+		return (len);
 	}
 	else
 	{
-		while (node_sv->next != NULL)
+		while (*s != 0)
 		{
-			node = node_sv->next;
-			if (node->fd == fd)
-			{
-				node_sv->next = node->next;
-				free(node);
-				break ;
-			}
-			node_sv = node_sv->next;
+			if (*s == (char)c)
+				return (1);
+			s++;
 		}
+		if (c == 0)
+			return (1);
+		return (0);
 	}
-	(*dict)->self_check(dict);
 }
 
-char	*out_value(int fd, t_dict *dict)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	t_dict_node	*node;
-	t_dict_node	*node_sv;
+	size_t	len_max;
+	char	*dst;
+	size_t	idx;
 
-	node = dict->find_node(fd, dict);
-	if (node != NULL)
-		return (node->value);
-	node = (t_dict_node *)malloc(sizeof(t_dict_node) * 1);
-	if (node == NULL)
+	if (s == NULL || start >= len)
 		return (NULL);
-	node->fd = fd;
-	node->next = NULL;
-	node->value = (char *)malloc(sizeof(char) * 1);
-	if (node->value == NULL)
-		return (free(node), NULL);
-	node->value[0] = 0;
-	if (dict->dict_head == NULL)
-		dict->dict_head = node;
-	else
+	len_max = len - start;
+	idx = 0;
+	dst = (char *)malloc(sizeof(char) * len_max + 1);
+	if (dst == NULL)
+		return (NULL);
+	dst[len_max] = 0;
+	while (idx < len_max && s[start] != 0)
 	{
-		node_sv = dict->dict_head;
-		while (node_sv->next != NULL)
-			node_sv = node_sv->next;
-		node_sv->next = node;
+		dst[idx] = s[start];
+		idx++;
+		start++;
 	}
-	return (node->value);
+	return (dst);
 }
 
-t_dict_node	*find_node(int fd, t_dict *dict)
+char	*read_fd(int fd, char *save_buf)
 {
-	t_dict_node	*node;
+	int		flag;
+	char	read_ln[BUFFER_SIZE + 1];
+	char	*free_buf;
+	int		i;
 
-	node = dict->dict_head;
-	while (node != NULL && node->fd != fd)
-		node = node->next;
-	if (node != NULL)
-		return (node);
-	return (NULL);
+	flag = 1;
+	while (flag > 0)
+	{
+		i = 0;
+		while (i < BUFFER_SIZE + 1)
+		{
+			read_ln[i] = 0;
+			i++;
+		}
+		free_buf = save_buf;
+		if (read(fd, read_ln, BUFFER_SIZE) <= 0)
+			break ;
+		if (ft_strbox(2, (const char *)read_ln, '\n') == 1)
+			flag = -1;
+		save_buf = ft_strjoin(save_buf, read_ln);
+		free(free_buf);
+		if (save_buf == NULL)
+			return (NULL);
+	}
+	return (save_buf);
+}
+
+char	*out_put(int fd, char *read_buf, t_dict **dict)
+{
+	char	*out_line;
+	char	*save_buf;
+	size_t	len;
+	size_t	idx;
+
+	len = 0;
+	idx = 0;
+	while (read_buf[len] != 0 && read_buf[len] != '\n')
+		len++;
+	if (read_buf[len] == '\n')
+		len++;
+	if (len == 0)
+		return (NULL);
+	out_line = ft_substr(read_buf, 0, len);
+	if (out_line == NULL)
+		return (NULL);
+	save_buf = ft_substr(read_buf, len, ft_strbox(1, read_buf, 0));
+	if (save_buf == NULL)
+		(*dict)->destory_node(fd, dict);
+	else
+		(*dict)->find_node(fd, (*dict))->value = save_buf;
+	free(read_buf);
+	return (out_line);
 }
