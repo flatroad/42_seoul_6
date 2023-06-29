@@ -6,11 +6,12 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 13:08:18 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/06/26 17:59:09 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/06/29 09:10:16 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+#include <stdio.h>
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -63,23 +64,78 @@ size_t	ft_strbox(int i, const char *s, int c)
 	}
 }
 
-
-
-t_dict_node	*dict_free(t_dict *dict)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	t_dict_node	*memo;
+	size_t	len_max;
+	char	*dst;
+	int		idx;
 
-	if (dict == NULL)
+	if (s == NULL)
 		return (NULL);
-	while (dict->dict_head != NULL)
+	len_max = len - start;
+	idx = start;
+	dst = (char *)malloc(sizeof(char) * len + 1);
+	if (dst == NULL)
+		return (NULL);
+	while (start < len && *(s + start) != 0)
 	{
-		if (dict->dict_head->value != NULL)
-			free(dict->dict_head->value);
-		memo = dict->dict_head;
-		dict->dict_head = dict->dict_head->next;
-		free(memo);
+		*dst = *(s + start);
+		dst++;
+		start++;
 	}
-	free(dict);
-	dict = NULL;
-	return (NULL);
+	*dst = 0;
+	return (dst - len_max);
+}
+
+
+
+char	*read_fd(int fd, char *save_buf)
+{
+	int		flag;
+	char	read_ln[BUFFER_SIZE + 1];
+	char	*free_buf;
+
+	flag = 1;
+	while (flag > 0)
+	{
+		free_buf = save_buf;
+		flag = read(fd, read_ln, BUFFER_SIZE);
+		if (flag < 0)
+			continue ;
+		read_ln[flag] = 0;
+		if (ft_strbox(2, (const char *)read_ln, '\n') != 0)
+			flag = -1;
+		save_buf = ft_strjoin(save_buf, read_ln);
+		free(free_buf);
+		if (save_buf == NULL)
+			return (NULL);
+	}
+	return (save_buf);
+}
+
+
+char	*out_put(int fd, char *read_buf, t_dict *dict)
+{
+	char	*out_line;
+	char	*save_buf;
+	char	*dict_str;
+	size_t	len;
+	size_t	idx;
+
+	len = 0;
+	idx = 0;
+	while (read_buf[len] != 0 && read_buf[len] != '\n')
+		len++;
+	if (read_buf[len] == '\n')
+		len++;
+	if (len == 0)
+		return (NULL);
+	out_line = ft_substr(read_buf, 0, len);
+	if (out_line == NULL)
+		return (NULL);
+	save_buf = ft_substr(read_buf, len + 1, ft_strbox(1, save_buf, 0));
+	dict_str = dict->out_value(fd, dict);
+	dict_str = save_buf;
+	free(read_buf);
+	return (out_line);
 }

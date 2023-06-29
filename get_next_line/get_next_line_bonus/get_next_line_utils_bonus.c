@@ -6,7 +6,7 @@
 /*   By: sounchoi <sounchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 13:08:18 by sounchoi          #+#    #+#             */
-/*   Updated: 2023/06/26 17:58:16 by sounchoi         ###   ########.fr       */
+/*   Updated: 2023/06/29 09:02:08 by sounchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ char	*get_next_line_bonus(int fd)
 {
 	static t_dict	*dict = NULL;
 	char			*value;
-
+	char			*out_str;
+	
 	if (dict == NULL)
 	{
 		dict = (t_dict *)malloc(sizeof(t_dict) * 1);
@@ -33,16 +34,13 @@ char	*get_next_line_bonus(int fd)
 	if (value == NULL)
 		return (NULL);
 	if (ft_strbox(2, value, '\n') == 0)
-		read_out.read_buf = read_fd(node->fd, node->value);
-	else
-		read_out.read_buf = no_read_fd(node->value);
-	if (read_out.read_buf == NULL)
+		value = read_fd(fd, value);
+	if (value == NULL)
 		return (NULL);
-	read_out.out_buf = out_put(read_out.read_buf);
-	node->value = save_put(read_out.read_buf);
-	free(read_out.read_buf);
-	printf("fd : %d, dict : %p\n", fd, dict);
-	return (read_out.out_buf);
+	out_str = out_put(fd, value, dict);
+	if (out_str == NULL)
+		return (NULL);
+	return (out_str);
 }
 
 char	*out_value(int fd, t_dict *dict)
@@ -72,7 +70,7 @@ char	*out_value(int fd, t_dict *dict)
 		dict->dict_end = dict->dict_end->next;
 	}
 	dict->dict_end->next = NULL;
-	return (dict->dict_end);
+	return (dict->dict_end->value);
 }
 
 t_dict_node	*find_node(int fd, t_dict *dict)
@@ -104,103 +102,21 @@ t_dict_node	*find_node(int fd, t_dict *dict)
 	return (node);
 }
 
-char	*read_fd(int fd, char *save_buf)
+t_dict_node	*dict_free(t_dict *dict)
 {
-	int		flag;
-	char	read_ln[BUFFER_SIZE + 1];
-	char	*free_buf;
+	t_dict_node	*memo;
 
-	flag = 1;
-	while (flag > 0)
+	if (dict == NULL)
+		return (NULL);
+	while (dict->dict_head != NULL)
 	{
-		free_buf = save_buf;
-		flag = read(fd, read_ln, BUFFER_SIZE);
-		if (flag < 0)
-			continue ;
-		read_ln[flag] = 0;
-		if (ft_strbox(2, (const char *)read_ln, '\n') != 0)
-			flag = -1;
-		save_buf = ft_strjoin(save_buf, read_ln);
-		free(free_buf);
-		if (save_buf == 0)
-			return (0);
+		if (dict->dict_head->value != NULL)
+			free(dict->dict_head->value);
+		memo = dict->dict_head;
+		dict->dict_head = dict->dict_head->next;
+		free(memo);
 	}
-	return (save_buf);
-}
-
-char	*no_read_fd(char *save_buf)
-{
-	char	*read_buf;
-	size_t	len;
-	size_t	i;
-
-	i = 0;
-	len = ft_strbox(1, save_buf, 0);
-	read_buf = (char *)malloc(len + 1);
-	if (read_buf == 0)
-		return (0);
-	read_buf[len] = 0;
-	while (i < len)
-	{
-		read_buf[i] = save_buf[i];
-		i++;
-	}
-	printf("12312312 %p\n", save_buf);
-	free(save_buf);
-	return (read_buf);
-}
-
-char	*out_put(char *read_buf)
-{
-	char	*out_line;
-	size_t	len;
-	size_t	idx;
-
-	len = 0;
-	idx = 0;
-	while (read_buf[len] != 0 && read_buf[len] != '\n')
-		len++;
-	if (read_buf[len] == '\n')
-		len++;
-	if (len == 0)
-		return (0);
-	out_line = malloc(sizeof(char) * (len + 1));
-	if (out_line == 0)
-		return (0);
-	out_line[len] = 0;
-	while (idx < len)
-	{
-		out_line[idx] = read_buf[idx];
-		idx++;
-	}
-	return (out_line);
-}
-
-char	*save_put(char *read_buf)
-{
-	char	*save_put;
-	size_t	len;
-	size_t	idx;
-
-	len = 0;
-	idx = 0;
-	while (read_buf[len] != 0 && read_buf[len] != '\n')
-		len++;
-	if (read_buf[len] == '\n')
-		len++;
-	if (len == 0)
-		return (0);
-	while (read_buf[len + idx] != 0)
-		idx++;
-	save_put = malloc(sizeof(char) * (len + 1));
-	if (save_put == 0)
-		return (0);
-	save_put[len] = 0;
-	idx = 0;
-	while (read_buf[len + idx] != 0)
-	{
-		save_put[idx] = read_buf[len + idx];
-		idx++;
-	}
-	return (save_put);
+	free(dict);
+	dict = NULL;
+	return (NULL);
 }
