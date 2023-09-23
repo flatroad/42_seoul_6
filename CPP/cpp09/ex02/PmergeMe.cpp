@@ -90,5 +90,8 @@ void	PM::makeList()
 
 double	PM::fordJohnsonVector()
 {
-	
+	clock_t	start = this->currentTime();
+
+
+	clock_t	end = this->currentTime();
 }
