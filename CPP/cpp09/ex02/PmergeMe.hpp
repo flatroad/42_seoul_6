@@ -7,6 +7,7 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
+#include <ctime>
 
 #define True 1
 #define False 0
@@ -20,18 +21,23 @@ typedef std::stringstream	stringstream;
 class PM
 {
 	private:
-		std::string	str_;
+		char		**argv_;
+		int			argc_;
 		vector		v_;
 		list		lst_;
 		bool	checkSameNumber(vector cp_v);
 		bool	checkIsNumber(string s);
 		int		convertInt(string s);
+		void	makeList();
+		clock_t	currentTime();
 	public:
-		PM(std::string str);
+		PM(int argc, char **argv);
 		~PM();
 		void	checkIfYouCanStart();
 		void	printVector();
-		// void	printlist();
+		void	printList();
+		double	fordJohnsonVector();
+		double	fordJohnsonList();
 };
 
 #endif

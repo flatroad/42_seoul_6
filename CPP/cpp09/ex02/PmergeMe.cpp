@@ -1,8 +1,9 @@
 #include "PmergeMe.hpp"
 
-PM::PM(std::string str)
+PM::PM(int argc, char **argv)
 {
-	this->str_ = str;
+	this->argc_ = argc;
+	this->argv_ = argv;
 }
 
 PM::~PM()
@@ -12,17 +13,20 @@ PM::~PM()
 
 void	PM::checkIfYouCanStart()
 {
-	string			memo;
-	istringstream	temp(this->str_);
-	while (getline(temp, memo, ' '))
+	char	**argv = ++this->argv_;
+
+	for (int i = 1; i < this->argc_; i++)
 	{
+		string memo(*argv);
 		if (checkIsNumber(memo) == False)
-			throw ("is worng obj");
+			throw ("Error, is worng obj");
 		this->v_.push_back(this->convertInt(memo));
+		argv++;
 	}
 	vector cp_v(this->v_.begin(), this->v_.end());
 	if (this->checkSameNumber(cp_v) == False)
-		throw ("have a same number");
+		throw ("Error, have a same number");
+	this->makeList();
 }
 
 bool	PM::checkSameNumber(vector cp_v)
@@ -45,6 +49,8 @@ bool	PM::checkIsNumber(string s)
 	istr >> num;
 	if (num > 2147483647)
 		return (False);
+	if (num < 0)
+		return (False);
 	if (istr.fail() == True)
 		return (False);
 	if (istr.eof() == False)
@@ -66,4 +72,23 @@ void	PM::printVector()
 	for (it = this->v_.begin(); it != this->v_.end(); it++)
 		std::cout << *it << " ";
 	std::cout << std::endl;
+}
+
+void	PM::printList()
+{
+	list::iterator it;
+	for (it = this->lst_.begin(); it != this->lst_.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+}
+
+void	PM::makeList()
+{
+	list lst(this->v_.begin(), this->v_.end());
+	this->lst_ = lst;
+}
+
+double	PM::fordJohnsonVector()
+{
+	
 }

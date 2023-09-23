@@ -1,14 +1,17 @@
 #include "PmergeMe.hpp"
 
-int	main()
+int	main(int argc, char **argv)
 {
-	string	str;
-	getline(std::cin, str);
-	PM merge(str);
 	try
 	{
+		if (argc < 2)
+			throw ("We don't have numbers^^");
+		PM merge(argc, argv);
 		merge.checkIfYouCanStart();
+		std::cout << "before(Vector): ";
 		merge.printVector();
+		std::cout << "before(List): ";
+		merge.printList();
 	}
 	catch(const char *e)
 	{
@@ -16,4 +19,3 @@ int	main()
 	}
 	return (0);
 }
-
