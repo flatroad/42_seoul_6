@@ -12,6 +12,7 @@ int	main(int argc, char **argv)
 		merge.printVector();
 		std::cout << "before(List): ";
 		merge.printList();
+		merge.fordJohnsonVector();
 	}
 	catch(const char *e)
 	{

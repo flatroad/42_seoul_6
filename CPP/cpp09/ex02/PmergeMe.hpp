@@ -17,12 +17,14 @@ typedef std::list<int>		list;
 typedef std::istringstream	istringstream;
 typedef std::string			string;
 typedef std::stringstream	stringstream;
+typedef std::pair<int, int>	pair;
 
 class PM
 {
 	private:
 		char		**argv_;
 		int			argc_;
+		int			count_;
 		vector		v_;
 		list		lst_;
 		bool	checkSameNumber(vector cp_v);
@@ -37,7 +39,7 @@ class PM
 		void	printVector();
 		void	printList();
 		double	fordJohnsonVector();
-		double	fordJohnsonList();
+		// double	fordJohnsonList();
 };
 
 #endif
