@@ -27,11 +27,10 @@ class PM
 		int			count_;
 		vector		v_;
 		list		lst_;
-		bool	checkSameNumber(vector cp_v);
+		void	countNumber();
 		bool	checkIsNumber(string s);
 		int		convertInt(string s);
 		void	makeList();
-		clock_t	currentTime();
 	public:
 		PM(int argc, char **argv);
 		~PM();
@@ -39,7 +38,8 @@ class PM
 		void	printVector();
 		void	printList();
 		double	fordJohnsonVector();
-		// double	fordJohnsonList();
+		double	fordJohnsonList();
+		int		getCount();
 };
 
 #endif

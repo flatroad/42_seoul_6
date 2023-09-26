@@ -23,26 +23,17 @@ void	PM::checkIfYouCanStart()
 		this->v_.push_back(this->convertInt(memo));
 		argv++;
 	}
-	vector cp_v(this->v_.begin(), this->v_.end());
-	if (this->checkSameNumber(cp_v) == False)
-		throw ("Error, have a same number");
+	this->countNumber();
 	this->makeList();
 }
 
-bool	PM::checkSameNumber(vector cp_v)
+void	PM::countNumber()
 {
-	std::sort(cp_v.begin(), cp_v.end());
 	vector::iterator it;
-	int memo = -1;
 	int	count = 0;
-	for (it = cp_v.begin(); it != cp_v.end(); it++)
-	{
+	for (it = this->v_.begin(); it != this->v_.end(); it++)
 		count = count + 1;
-		if (memo == *it)
-			return (False);
-	}
 	this->count_ = count;
-	return (True);
 }
 
 bool	PM::checkIsNumber(string s)
@@ -101,7 +92,7 @@ double	PM::fordJohnsonVector()
 	int	i = 0;
 	std::vector<pair>	vec;
 	vector				ans_vec;
-	// clock_t	start = this->currentTime();
+	clock_t	start_t = clock();
 	if (this->count_ % 2 == 1 || this->count_ == 1)
 	{
 		vec.push_back(std::make_pair(-1, this->v_[0]));
@@ -123,12 +114,66 @@ double	PM::fordJohnsonVector()
 		}
 	}
 	std::sort(vec.begin(), vec.end(), sortFirst);
-
-	for (int i = 0; i < (this->count_ / 2); i++)
+	vector::iterator	that;
+	for (it = vec.begin(); it != vec.end(); it++)
 	{
-		std::cout << i << " : " << vec[i].first << ", "<< vec[i].second <<  std::endl;
+		that = std::lower_bound(ans_vec.begin(), ans_vec.end(), (*it).second);
+		ans_vec.insert(that, (*it).second);
+		ans_vec.push_back((*it).first);
 	}
-	ans_vec.push_back()
-	// clock_t	end = this->currentTime();
+	if (ans_vec[0] == -1)
+		ans_vec.erase(ans_vec.begin());
+	this->v_ = ans_vec;
+	clock_t	end_t = clock();
+	double	calc_time = static_cast<double>(end_t - start_t) / CLOCKS_PER_SEC;
+	std::cout << calc_time * 1000000.0 << std::endl;
 	return (1.1);
+}
+
+double	PM::fordJohnsonList()
+{
+	int	i = 0;
+	std::list<pair>		lst;
+	list				ans_lst;
+	clock_t	start_t = clock();
+	if (this->count_ % 2 == 1 || this->count_ == 1)
+	{
+		lst.push_back(std::make_pair(-1, this->v_[0]));
+		i = 1;
+	}
+	while (i < this->count_)
+	{
+		lst.push_back(std::make_pair(this->v_[i], this->v_[i + 1]));
+		i = i + 2;
+	}
+	std::list<pair>::iterator it;
+	for (it = lst.begin(); it != lst.end(); it++)
+	{
+		if ((*it).first < (*it).second)
+		{
+			int memo = (*it).first;
+			(*it).first = (*it).second;
+			(*it).second = memo;
+		}
+	}
+	lst.sort(sortFirst);
+	list::iterator	that;
+	for (it = lst.begin(); it != lst.end(); it++)
+	{
+		that = std::lower_bound(ans_lst.begin(), ans_lst.end(), (*it).second);
+		ans_lst.insert(that, (*it).second);
+		ans_lst.push_back((*it).first);
+	}
+	if (*(ans_lst.begin()) == -1)
+		ans_lst.erase(ans_lst.begin());
+	this->lst_ = ans_lst;
+	clock_t	end_t = clock();
+	double	calc_time = static_cast<double>(end_t - start_t) / CLOCKS_PER_SEC;
+	std::cout << calc_time * 1000000.0 << std::endl;
+	return (1.1);
+}
+
+int	PM::getCount()
+{
+	return (this->count_);
 }
