@@ -24,30 +24,42 @@ void	BERICH::checkOpenFile()
 
 
 
-void	BERICH::checkProperData(char a, std::ifstream file)
+void	BERICH::checkProperData(char a, std::ifstream &file)
 {
 	std::string	one_line;
 	getline(file, one_line);
 	if (firstcheckProperData(one_line, a) == False)
 		throw ((chooseIt(a) + "checkProperData wrong").c_str());
-	// while (getline(file, one_line))
-	// {
-		
-	// }
+	while (getline(file, one_line))
+	{
+		int	date = this
+	}
+}
+
+int		BERICH::checkProperData(std::string str, char a)
+{
+	queue	que;
+	que = this.devideDateValue(str)
 }
 
 bool	BERICH::firstcheckProperData(std::string str, char a)
 {
 	std::istringstream	origin(str);
-	std::string memo;
-	queue		que;
-
+	std::string 		memo;
+	queue				que;
+	const char	*value = "value";
+	if (a == ',')
+		value = "exchange_rate";
+	
 	while(std::getline(origin, memo, a))
+	{
+		memo.erase(remove(memo.begin(), memo.end(), ' '), memo.end());
 		que.push(memo);
+	}
 	if (que.front().compare("date"))
 		return (False);
 	que.pop();
-	if (que.front().compare("value"))
+	if (que.front().compare(value))
 		return (False);
 	que.pop();
 	if (que.empty())
