@@ -16,8 +16,8 @@ void	test(int argc, char **argv)
 			throw ("parameter check plz");
 		BERICH	calcbit(argv[1]);
 		calcbit.checkOpenFile();
-		calcbit.checkProperData('|', calcbit.getInputFile());
-		calcbit.checkProperData(',', calcbit.getDateBase());
+		calcbit.checkProperDatabase(calcbit.getDateBase());
+		// calcbit.checkProperData('|', calcbit.getInputFile());
 	}
 	catch(const char *e)
 	{

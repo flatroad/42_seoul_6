@@ -22,14 +22,20 @@ class BERICH
 		std::ifstream	data_base_;
 		map				input_;
 		map				data_;
-		bool			firstcheckProperData(std::string str, char a);
-		int				checkProperData(std::string str);
-		queue			&devideDateValue(char a, std::ifstream &file);
+		bool			firstcheckProperDatabase(std::string str);
+		queue			devideDatebaseDateValue(std::string str);
+		int				devideDatebaseDate(std::string str);
+		double			devideDatebaseValue(std::string str);
+		bool			checkYear(std::string str);
+		bool			checkMonth(std::string str);
+		bool			checkDay(std::string str, std::string year, std::string month);
+		bool			firstcheckProperInputfile(std::string str);
 	public:
 		BERICH(char *str);
 		~BERICH();
-		void	checkOpenFile();
-		void	checkProperData(char a, std::ifstream &file);
+		void			checkOpenFile();
+		void			checkProperDatabase(std::ifstream &file);
+		void			checkProperInputfile(std::ifstream &file);
 		std::ifstream	&getInputFile();
 		std::ifstream	&getDateBase();
 };
