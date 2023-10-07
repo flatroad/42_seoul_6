@@ -5,6 +5,7 @@ void	test(int argc, char **argv);
 int main(int argc, char **argv)
 {
 	test(argc, argv);
+	system("leaks a.out");
 	return (0);
 }
 
@@ -17,7 +18,7 @@ void	test(int argc, char **argv)
 		BERICH	calcbit(argv[1]);
 		calcbit.checkOpenFile();
 		calcbit.checkProperDatabase(calcbit.getDateBase());
-		// calcbit.checkProperData('|', calcbit.getInputFile());
+		calcbit.checkProperInputfile(calcbit.getInputFile());
 	}
 	catch(const char *e)
 	{

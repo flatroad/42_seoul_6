@@ -188,6 +188,8 @@ bool	BERICH::firstcheckProperDatabase(std::string str)
 		memo.erase(remove(memo.begin(), memo.end(), ' '), memo.end());
 		que.push(memo);
 	}
+	if (que.size() != 2)
+		return (False);
 	if (que.front().compare("date"))
 		return (False);
 	que.pop();
@@ -230,7 +232,24 @@ void	BERICH::checkProperInputfile(std::ifstream &file)
 
 void	BERICH::btcPrint(int date, double value)
 {
-	
+	std::map<int, double>::iterator	it;
+
+	it = this->data_.find(date);
+	if (it == this->data_.end())
+	{
+		it = this->data_.lower_bound(date);
+		if (it == this->data_.begin())
+			throw ("no find data, is too old date");
+		else
+		{
+			--it;
+			std::cout << (*it).first / 10000 << "-" << ((*it).first % 10000) / 100 << "-" << (*it).first % 100;
+			std::cout << " => " << value << " = " << value * (*it).second << std::endl;
+			return ;
+		}
+	}
+	std::cout << (*it).first / 10000 << "-" << ((*it).first % 10000) / 100 << "-" << (*it).first % 100;
+	std::cout << " => " << value << " = " << value * (*it).second << std::endl;
 }
 
 bool	BERICH::firstcheckProperInputfile(std::string str)
@@ -244,6 +263,8 @@ bool	BERICH::firstcheckProperInputfile(std::string str)
 		memo.erase(remove(memo.begin(), memo.end(), ' '), memo.end());
 		que.push(memo);
 	}
+	if (que.size() != 2)
+		return (False);
 	if (que.front().compare("date"))
 		return (False);
 	que.pop();
@@ -301,7 +322,7 @@ queue	BERICH::devideInputfileDateValue(std::string str)
 	std::istringstream	datevalue(str);
 	std::string 		memo;
 
-	while(std::getline(datevalue, memo, ','))
+	while(std::getline(datevalue, memo, '|'))
 	{
 		memo.erase(remove(memo.begin(), memo.end(), ' '), memo.end());
 		que.push(memo);
