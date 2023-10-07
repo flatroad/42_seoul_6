@@ -204,21 +204,33 @@ bool	BERICH::firstcheckProperDatabase(std::string str)
 
 void	BERICH::checkProperInputfile(std::ifstream &file)
 {
-	queue				que;
-	std::string			one_line;
+	std::string	one_line;
 
 	getline(file, one_line);
-	if (firstcheckProperDatabase(one_line) == False)
-		throw ("database checkProperDatabase wrong");
+	if (this->firstcheckProperInputfile(one_line) == False)
+		throw ("inputfile checkProperDatabase wrong");
 	while (getline(file, one_line))
 	{
-		que = this->devideDatebaseDateValue(one_line);
-		int		date = this->devideDatebaseDate(que.front());
-		que.pop();
-		double value = this->devideDatebaseValue(que.front());
-		que.pop();
-		
+		try
+		{
+			queue	que;
+			que = this->devideInputfileDateValue(one_line);
+			int		date = this->devideDateInputfile(que.front());
+			que.pop();
+			double value = this->devideInputfileValue(que.front());
+			que.pop();
+			this->btcPrint(date, value);
+		}
+		catch (const char *str)
+		{
+			std::cerr << str << std::endl;
+		}
 	}
+}
+
+void	BERICH::btcPrint(int date, double value)
+{
+	
 }
 
 bool	BERICH::firstcheckProperInputfile(std::string str)
@@ -241,4 +253,60 @@ bool	BERICH::firstcheckProperInputfile(std::string str)
 	if (que.empty())
 		return (True);
 	return (False);
+}
+
+double BERICH::devideInputfileValue(std::string str)
+{
+	std::istringstream	str_num(str);
+	double	value;
+	str_num >> value;
+	if (value < 0)
+		throw ("Error: not a positive number.");
+	if (value > 1000.0)
+		throw ("Error: too large a number.");
+	if (str_num.fail() == True)
+		throw ("inputfile value is fail");
+	if (str_num.eof() == False)
+		throw ("inputfile value is fail");
+	return (value);
+}
+
+int		BERICH::devideDateInputfile(std::string str)
+{
+	std::istringstream	date(str);
+	std::string			memoyear;
+	std::string			memomonth;
+	std::string			memoday;
+	int					num;
+
+	std::getline(date, memoyear, '-');
+	if (this->checkYear(memoyear) == False)
+		throw ("inputfile year is fail");
+	std::getline(date, memomonth, '-');
+	if (this->checkMonth(memomonth) == False)
+		throw ("inputfile month is fail");
+	std::getline(date, memoday, '-');
+	if (this->checkDay(memoday, memoyear, memomonth) == False)
+		throw ("inputfile day is fail");
+	memoyear.append(memomonth);
+	memoyear.append(memoday);
+	std::istringstream answer(memoyear);
+	answer >> num;
+	return (num);
+}
+
+queue	BERICH::devideInputfileDateValue(std::string str)
+{
+	queue				que;
+	std::istringstream	datevalue(str);
+	std::string 		memo;
+
+	while(std::getline(datevalue, memo, ','))
+	{
+		memo.erase(remove(memo.begin(), memo.end(), ' '), memo.end());
+		que.push(memo);
+	}
+	if (que.size() != 2)
+		throw (str.insert(0, "Error: bad input ").c_str());
+	return (que);
 }

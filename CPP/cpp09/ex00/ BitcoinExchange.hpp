@@ -30,6 +30,10 @@ class BERICH
 		bool			checkMonth(std::string str);
 		bool			checkDay(std::string str, std::string year, std::string month);
 		bool			firstcheckProperInputfile(std::string str);
+		int				devideDateInputfile(std::string str);
+		queue			devideInputfileDateValue(std::string str);
+		double			devideInputfileValue(std::string str);
+		void			btcPrint(int date, double value);
 	public:
 		BERICH(char *str);
 		~BERICH();
