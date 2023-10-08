@@ -34,6 +34,8 @@ class PM
 	public:
 		PM(int argc, char **argv);
 		~PM();
+		PM(const PM& obj);
+		PM	&operator=(const PM& obj);
 		void	checkIfYouCanStart();
 		void	printVector();
 		void	printList();

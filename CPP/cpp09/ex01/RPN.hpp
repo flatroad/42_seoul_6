@@ -8,7 +8,7 @@ class RPN
 	private:
 
 	public:
-		RPN(std::string str);
+		RPN(const char *s);
 		~RPN();
 		
 

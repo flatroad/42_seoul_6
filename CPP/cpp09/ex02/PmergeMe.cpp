@@ -11,6 +11,25 @@ PM::~PM()
 	std::cout << "exit" << std::endl;
 }	
 
+
+PM::PM(const PM& obj)
+{
+	operator=(obj);
+}
+
+PM	&PM::operator=(const PM& obj)
+{
+	if (this != &obj)
+	{
+		this->argv_ = obj.argv_;
+		this->argc_ = obj.argc_;
+		this->count_ = obj.count_;
+		this->v_ = obj.v_;
+		this->lst_ = obj.lst_;
+	}
+	return (*this);
+}
+
 void	PM::checkIfYouCanStart()
 {
 	char	**argv = ++this->argv_;
@@ -126,7 +145,7 @@ double	PM::fordJohnsonVector()
 	this->v_ = ans_vec;
 	clock_t	end_t = clock();
 	double	calc_time = static_cast<double>(end_t - start_t) / CLOCKS_PER_SEC;
-	std::cout << calc_time * 1000000.0 << std::endl;
+	std::cout << calc_time * 1000000.0 << " μs" << std::endl;
 	return (1.1);
 }
 
@@ -169,7 +188,7 @@ double	PM::fordJohnsonList()
 	this->lst_ = ans_lst;
 	clock_t	end_t = clock();
 	double	calc_time = static_cast<double>(end_t - start_t) / CLOCKS_PER_SEC;
-	std::cout << calc_time * 1000000.0 << std::endl;
+	std::cout << calc_time * 1000000.0 << " μs" << std::endl;
 	return (1.1);
 }
 

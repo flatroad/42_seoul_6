@@ -15,7 +15,7 @@
 typedef	std::map<int, double>	map;
 typedef std::queue<std::string>	queue;
 
-class BERICH
+class BitcoinExchange
 {
 	private:
 		std::ifstream	input_file_;
@@ -35,14 +35,15 @@ class BERICH
 		double			devideInputfileValue(std::string str);
 		void			btcPrint(int date, double value);
 	public:
-		BERICH(char *str);
-		~BERICH();
+		BitcoinExchange(char *str);
+		~BitcoinExchange();
+		BitcoinExchange(const BitcoinExchange& obj);
+		BitcoinExchange &operator=(const BitcoinExchange& obj);
 		void			checkOpenFile();
 		void			checkProperDatabase(std::ifstream &file);
 		void			checkProperInputfile(std::ifstream &file);
 		std::ifstream	&getInputFile();
 		std::ifstream	&getDateBase();
 };
-
 
 #endif

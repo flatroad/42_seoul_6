@@ -5,7 +5,7 @@ void	test(int argc, char **argv);
 int	main(int argc, char **argv)
 {
 	test(argc, argv);
-	system("leaks a.out");
+	system("leaks PmergeMe");
 	return (0);
 }
 

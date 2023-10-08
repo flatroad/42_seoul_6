@@ -1,13 +1,24 @@
-#include " BitcoinExchange.hpp"
+#include "BitcoinExchange.hpp"
 
-BERICH::BERICH(char *str):input_file_(str),data_base_(Database){}
+BitcoinExchange::BitcoinExchange(char *str):input_file_(str),data_base_(Database){}
 
-BERICH::~BERICH()
+BitcoinExchange::~BitcoinExchange()
 {
 	std::cout << "exit" << std::endl;
 }
 
-void	BERICH::checkOpenFile()
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& obj)
+{
+	operator=(obj);
+}
+
+BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange& obj)
+{
+	(void)obj;
+	return (*this);
+}
+
+void	BitcoinExchange::checkOpenFile()
 {
 	if (this->input_file_.is_open() == False)
 		throw ("worng inputfile");
@@ -15,17 +26,17 @@ void	BERICH::checkOpenFile()
 		throw ("worng data_base_");
 }
 
-std::ifstream	&BERICH::getInputFile()
+std::ifstream	&BitcoinExchange::getInputFile()
 {
 	return (this->input_file_);
 }
 
-std::ifstream	&BERICH::getDateBase()
+std::ifstream	&BitcoinExchange::getDateBase()
 {
 	return (this->data_base_);
 }
 
-bool	BERICH::checkYear(std::string str)
+bool	BitcoinExchange::checkYear(std::string str)
 {
 	std::istringstream	str_num(str);
 	int	year;
@@ -41,7 +52,7 @@ bool	BERICH::checkYear(std::string str)
 	return (True);
 }
 
-bool	BERICH::checkMonth(std::string str)
+bool	BitcoinExchange::checkMonth(std::string str)
 {
 	std::istringstream	str_num(str);
 	int	month;
@@ -57,7 +68,7 @@ bool	BERICH::checkMonth(std::string str)
 	return (True);
 }
 
-bool	BERICH::checkDay(std::string str, std::string s_year, std::string s_month)
+bool	BitcoinExchange::checkDay(std::string str, std::string s_year, std::string s_month)
 {
 	std::istringstream	str_year(s_year);
 	int year;
@@ -102,7 +113,7 @@ bool	BERICH::checkDay(std::string str, std::string s_year, std::string s_month)
 
 /// -------------------------------------------- database -------------------------------------------------------
 
-void	BERICH::checkProperDatabase(std::ifstream &file)
+void	BitcoinExchange::checkProperDatabase(std::ifstream &file)
 {
 	queue				que;
 	std::string			one_line;
@@ -121,7 +132,7 @@ void	BERICH::checkProperDatabase(std::ifstream &file)
 	}
 }
 
-double BERICH::devideDatebaseValue(std::string str)
+double BitcoinExchange::devideDatebaseValue(std::string str)
 {
 	std::istringstream	str_num(str);
 	double	value;
@@ -137,7 +148,7 @@ double BERICH::devideDatebaseValue(std::string str)
 	return (value);
 }
 
-int		BERICH::devideDatebaseDate(std::string str)
+int		BitcoinExchange::devideDatebaseDate(std::string str)
 {
 	std::istringstream	date(str);
 	std::string			memoyear;
@@ -161,7 +172,7 @@ int		BERICH::devideDatebaseDate(std::string str)
 	return (num);
 }
 
-queue	BERICH::devideDatebaseDateValue(std::string str)
+queue	BitcoinExchange::devideDatebaseDateValue(std::string str)
 {
 	queue				que;
 	std::istringstream	datevalue(str);
@@ -177,7 +188,7 @@ queue	BERICH::devideDatebaseDateValue(std::string str)
 	return (que);
 }
 
-bool	BERICH::firstcheckProperDatabase(std::string str)
+bool	BitcoinExchange::firstcheckProperDatabase(std::string str)
 {
 	std::istringstream	origin(str);
 	std::string 		memo;
@@ -204,7 +215,7 @@ bool	BERICH::firstcheckProperDatabase(std::string str)
 /// -------------------------------------------- inputfile -------------------------------------------------------
 
 
-void	BERICH::checkProperInputfile(std::ifstream &file)
+void	BitcoinExchange::checkProperInputfile(std::ifstream &file)
 {
 	std::string	one_line;
 
@@ -230,7 +241,7 @@ void	BERICH::checkProperInputfile(std::ifstream &file)
 	}
 }
 
-void	BERICH::btcPrint(int date, double value)
+void	BitcoinExchange::btcPrint(int date, double value)
 {
 	std::map<int, double>::iterator	it;
 
@@ -252,7 +263,7 @@ void	BERICH::btcPrint(int date, double value)
 	std::cout << " => " << value << " = " << value * (*it).second << std::endl;
 }
 
-bool	BERICH::firstcheckProperInputfile(std::string str)
+bool	BitcoinExchange::firstcheckProperInputfile(std::string str)
 {
 	std::istringstream	origin(str);
 	std::string 		memo;
@@ -276,7 +287,7 @@ bool	BERICH::firstcheckProperInputfile(std::string str)
 	return (False);
 }
 
-double BERICH::devideInputfileValue(std::string str)
+double BitcoinExchange::devideInputfileValue(std::string str)
 {
 	std::istringstream	str_num(str);
 	double	value;
@@ -292,7 +303,7 @@ double BERICH::devideInputfileValue(std::string str)
 	return (value);
 }
 
-int		BERICH::devideDateInputfile(std::string str)
+int		BitcoinExchange::devideDateInputfile(std::string str)
 {
 	std::istringstream	date(str);
 	std::string			memoyear;
@@ -316,7 +327,7 @@ int		BERICH::devideDateInputfile(std::string str)
 	return (num);
 }
 
-queue	BERICH::devideInputfileDateValue(std::string str)
+queue	BitcoinExchange::devideInputfileDateValue(std::string str)
 {
 	queue				que;
 	std::istringstream	datevalue(str);
