@@ -5,7 +5,7 @@
 
 int main()
 {
-	std::string s = "12 ";
+	std::string s = "+12";
 	std::istringstream	istr(s);
 	double	num;
 	istr >> num;
