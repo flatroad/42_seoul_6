@@ -101,9 +101,61 @@ void	PM::makeList()
 	this->lst_ = lst;
 }
 
-static bool sortFirst(pair &a, pair &b)
+void	PM::mergeDiviveVector(std::vector<pair> &vec, int left, int right)
 {
-	return (a.first < b.first);
+	if (left < right)
+	{
+		int mid = left + ((right - left) / 2);
+		this->mergeDiviveVector(vec, left, mid);
+		this->mergeDiviveVector(vec, mid + 1, right);
+
+		mergeVector(vec, left, mid, right);
+	}
+}
+
+void	PM::mergeVector(std::vector<pair> &vec, int left, int mid, int right)
+{
+	int	leftIdx = mid - left + 1;
+	int	rightIdx = right - mid;
+
+	std::vector<pair>	leftArea(leftIdx);
+	std::vector<pair>	rightArea(rightIdx);
+
+	for (int i = 0; i < leftIdx; i++)
+		leftArea[i] = vec[left + i];
+	for (int i = 0; i < rightIdx; i++)
+		rightArea[i] = vec[mid + i + 1];
+
+	int idx = left;
+	left = 0;
+	right = 0;
+	while (left < leftIdx && right < rightIdx)
+	{
+		if (leftArea[left].first <= rightArea[right].first)
+		{
+			vec[idx] = leftArea[left];
+			left++;
+		}
+		else
+		{
+			vec[idx] = rightArea[right];
+			right++;
+		}
+		idx++;
+	}
+
+	while (left < leftIdx)
+	{
+		vec[idx] = leftArea[left];
+		idx++;
+		left++;
+	}
+	while (right < rightIdx)
+	{
+		vec[idx] = rightArea[right];
+		idx++;
+		right++;
+	}
 }
 
 double	PM::fordJohnsonVector()
@@ -132,7 +184,7 @@ double	PM::fordJohnsonVector()
 			(*it).second = memo;
 		}
 	}
-	std::sort(vec.begin(), vec.end(), sortFirst);
+	this->mergeDiviveVector(vec, 0, vec.size() - 1);
 	vector::iterator	that;
 	for (it = vec.begin(); it != vec.end(); it++)
 	{
@@ -147,6 +199,61 @@ double	PM::fordJohnsonVector()
 	double	calc_time = static_cast<double>(end_t - start_t) / CLOCKS_PER_SEC;
 	std::cout << calc_time * 1000000.0 << " μs" << std::endl;
 	return (1.1);
+}
+
+void	PM::mergeDiviveList(std::list<pair> &lst)
+{
+	if (lst.size() <= 1)
+		return ;
+	
+	std::list<pair>::iterator midIt = lst.begin();
+	std::advance(midIt, lst.size() / 2);
+
+	std::list<pair> leftList(lst.begin(), midIt);
+	std::list<pair> rightList(midIt, lst.end());
+
+	mergeDiviveList(leftList);
+	mergeDiviveList(rightList);
+
+	mergeList(lst.begin(), midIt, lst.end());
+}
+
+void	PM::mergeList(std::list<pair>::iterator leftIt, std::list<pair>::iterator midIt, std::list<pair>::iterator rightIt)
+{
+	std::list<pair> leftList(leftIt, midIt);
+	std::list<pair> rightList(midIt, rightIt);
+
+	std::list<pair>::iterator it = leftIt;
+	leftIt = leftList.begin();
+	rightIt = rightList.begin();
+
+	while (leftIt != leftList.end() && rightIt != rightList.end())
+	{
+		if ((*leftIt).first <= (*rightIt).first)
+		{
+			(*it) =	(*leftIt);
+			leftIt++;
+		}
+		else
+		{
+			(*it) = (*rightIt);
+			rightIt++;
+		}
+		it++;
+	}
+
+	while (leftIt != leftList.end())
+	{
+		(*it) = (*leftIt);
+		it++;
+		leftIt++;
+	}
+	while (rightIt != rightList.end())
+	{
+		(*it) = (*rightIt);
+		it++;
+		rightIt++;
+	}
 }
 
 double	PM::fordJohnsonList()
@@ -175,7 +282,7 @@ double	PM::fordJohnsonList()
 			(*it).second = memo;
 		}
 	}
-	lst.sort(sortFirst);
+	this->mergeDiviveList(lst);
 	list::iterator	that;
 	for (it = lst.begin(); it != lst.end(); it++)
 	{

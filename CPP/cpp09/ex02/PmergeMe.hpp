@@ -31,6 +31,10 @@ class PM
 		bool	checkIsNumber(string s);
 		int		convertInt(string s);
 		void	makeList();
+		void	mergeDiviveVector(std::vector<pair> &vec, int left, int right);
+		void	mergeVector(std::vector<pair> &vec, int left, int mid, int right);
+		void	mergeDiviveList(std::list<pair> &lst);
+		void	mergeList(std::list<pair>::iterator leftIt, std::list<pair>::iterator midIt, std::list<pair>::iterator rightIt);
 	public:
 		PM(int argc, char **argv);
 		~PM();
