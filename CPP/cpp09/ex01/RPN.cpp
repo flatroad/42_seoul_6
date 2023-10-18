@@ -27,6 +27,10 @@ RPN	&RPN::operator=(const RPN& obj)
 {
 	if (this != &obj)
 	{
+		ptrFunc[0] = &RPN::plus;
+		ptrFunc[1] = &RPN::minus;
+		ptrFunc[2] = &RPN::mul;
+		ptrFunc[3] = &RPN::div;
 		this->deq = obj.deq;
 		this->stk = obj.stk;
 	}
