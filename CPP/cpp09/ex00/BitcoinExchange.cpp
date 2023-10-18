@@ -2,10 +2,7 @@
 
 BitcoinExchange::BitcoinExchange(char *str):input_file_(str),data_base_(Database){}
 
-BitcoinExchange::~BitcoinExchange()
-{
-	std::cout << "exit" << std::endl;
-}
+BitcoinExchange::~BitcoinExchange(){}
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& obj)
 {
@@ -38,6 +35,8 @@ std::ifstream	&BitcoinExchange::getDateBase()
 
 bool	BitcoinExchange::checkYear(std::string str)
 {
+	if (str.c_str()[0] == ' ')
+		return (False);
 	std::istringstream	str_num(str);
 	int	year;
 	str_num >> year;
@@ -54,6 +53,8 @@ bool	BitcoinExchange::checkYear(std::string str)
 
 bool	BitcoinExchange::checkMonth(std::string str)
 {
+	if (str.c_str()[0] == ' ')
+		return (False);
 	std::istringstream	str_num(str);
 	int	month;
 	str_num >> month;
@@ -70,6 +71,8 @@ bool	BitcoinExchange::checkMonth(std::string str)
 
 bool	BitcoinExchange::checkDay(std::string str, std::string s_year, std::string s_month)
 {
+	if (str.c_str()[0] == ' ')
+		return (False);
 	std::istringstream	str_year(s_year);
 	int year;
 	str_year >> year;
@@ -92,7 +95,7 @@ bool	BitcoinExchange::checkDay(std::string str, std::string s_year, std::string 
 	}
 	else if (month == 2)
 	{
-		if (year % 4 != 0)
+		if (year % 4 == 0)
 		{
 			if (day > 29)
 				return (False);
@@ -177,11 +180,16 @@ queue	BitcoinExchange::devideDatebaseDateValue(std::string str)
 	queue				que;
 	std::istringstream	datevalue(str);
 	std::string 		memo;
+	std::string			new_memo;
 
 	while(std::getline(datevalue, memo, ','))
 	{
-		memo.erase(remove(memo.begin(), memo.end(), ' '), memo.end());
-		que.push(memo);
+		int n = memo.find_first_not_of(" ");
+		int m = memo.find_last_not_of(" ");
+		if (n == -1 || m  == -1)
+			throw ("empty database date or value");
+		new_memo = memo.substr(n, m - n + 1);
+		que.push(new_memo);
 	}
 	if (que.size() != 2)
 		throw ("lack -> database date or value");
@@ -192,12 +200,17 @@ bool	BitcoinExchange::firstcheckProperDatabase(std::string str)
 {
 	std::istringstream	origin(str);
 	std::string 		memo;
+	std::string			new_memo;
 	queue				que;
 
 	while(std::getline(origin, memo, ','))
 	{
-		memo.erase(remove(memo.begin(), memo.end(), ' '), memo.end());
-		que.push(memo);
+		int n = memo.find_first_not_of(" ");
+		int m = memo.find_last_not_of(" ");
+		if (n == -1 || m  == -1)
+			throw ("empty firstdatabase date or value");
+		new_memo = memo.substr(n, m - n + 1);
+		que.push(new_memo);
 	}
 	if (que.size() != 2)
 		return (False);
@@ -267,12 +280,17 @@ bool	BitcoinExchange::firstcheckProperInputfile(std::string str)
 {
 	std::istringstream	origin(str);
 	std::string 		memo;
+	std::string			new_memo;
 	queue				que;
 
 	while(std::getline(origin, memo, '|'))
 	{
-		memo.erase(remove(memo.begin(), memo.end(), ' '), memo.end());
-		que.push(memo);
+		int n = memo.find_first_not_of(" ");
+		int m = memo.find_last_not_of(" ");
+		if (n == -1 || m  == -1)
+			throw ("empty firstinputdate date or value");
+		new_memo = memo.substr(n, m - n + 1);
+		que.push(new_memo);
 	}
 	if (que.size() != 2)
 		return (False);
@@ -332,11 +350,16 @@ queue	BitcoinExchange::devideInputfileDateValue(std::string str)
 	queue				que;
 	std::istringstream	datevalue(str);
 	std::string 		memo;
+	std::string			new_memo;
 
 	while(std::getline(datevalue, memo, '|'))
 	{
-		memo.erase(remove(memo.begin(), memo.end(), ' '), memo.end());
-		que.push(memo);
+		int n = memo.find_first_not_of(" ");
+		int m = memo.find_last_not_of(" ");
+		if (n == -1 || m  == -1)
+			throw ("empty inputdate date or value");
+		new_memo = memo.substr(n, m - n + 1);
+		que.push(new_memo);
 	}
 	if (que.size() != 2)
 		throw (str.insert(0, "Error: bad input ").c_str());

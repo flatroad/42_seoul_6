@@ -22,7 +22,6 @@ class RPN
 		void	div(int first, int second);
 		stack	stk;
 		deque	deq;
-		void	checkInt(std::string s);
 		void	modifyStk(int idx);
 		int		checkSystem(std::string s);
 		int		checkFirstStkFactor(std::string s);
